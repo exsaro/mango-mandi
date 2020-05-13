@@ -1,16 +1,20 @@
+<?php
+    session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
     <title>Document</title>
 </head>
 <body>
     <header class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
         <div class="container">
-            <a href="" class="navbar-brand">Company Name</a>
+            <a href="" class="navbar-brand"><?php echo $_SESSION['company_name']; ?></a>
         </div>
     </header>
     <div class="container">
