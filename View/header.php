@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/datatables.css">
+    <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <title>Document</title>
 </head>

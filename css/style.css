@@ -42,3 +42,11 @@ label.error{
     background: #e95420;
     color: #fff;
 }
+.dataTables_filter{
+    text-align: right;
+}
+.dataTables_filter .form-control{
+    width: auto;
+    display: inline-block;
+    margin-left: 15px;
+}
