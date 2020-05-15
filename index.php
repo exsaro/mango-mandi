@@ -23,6 +23,7 @@
 
         if($userName == $select['user_name'] && $password == $select['user_password'])
         { 
+            //Login Success
             include "Common/Common.php";
             $commonData = new Common();
             $_SESSION['company_id']     = $select['company_id']; 
@@ -30,8 +31,8 @@
             $_SESSION['user_name']      = $select['user_name']; 
             $_SESSION['company_name']   = $commonData->getCompanyName($select['company_id']); 
             header("Location:View/UserList.php");
-
         }else{
+            //Login Failed
             $loginError = true;
         }
     }
