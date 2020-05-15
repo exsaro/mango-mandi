@@ -50,3 +50,6 @@ label.error{
     display: inline-block;
     margin-left: 15px;
 }
+.table td.text-right,.table th.text-right{
+    width: 100px;
+}

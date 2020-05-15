@@ -14,7 +14,10 @@
         pageName == 'user.php' || 
         pageName == 'addCompany.php' || 
         pageName == 'addItem.php' || 
-        pageName == 'addFarmer.php'){
+        pageName == 'addFarmer.php' ||
+        pageName == 'addCustomer.php' ||
+        pageName == 'addTransaction.php' ||
+        pageName == 'addUser.php'){
         $('#master-nav a').removeClass('active');
         $('#master-nav').show();
         $('#master-nav a[href="'+pageName+'"]').addClass('active');
@@ -25,7 +28,7 @@
 })();
 
 
-$("#addCompany, #addItem, #addFarmer").validate();
+$("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser").validate();
 
 $(document).ready( function () {
     $('#data-table').DataTable({

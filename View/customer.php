@@ -2,13 +2,13 @@
     <div class="container-fluid">
         <div class="row">
             <?php include 'sidebar.php';?>
-            <div class="col-md-9 mt-5 ml-5">
+            <div class="col-md-10 mt-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h1>Welcome Customer</h1>
-                    <a href="addFarmer.php" class="btn btn-primary">Add Customer</a>
+                    <a href="addCustomer.php" class="btn btn-primary">Add Customer</a>
                 </div>
                 
-
+                <div class="table-responsive-sm">
                 <table class="table table-hover" id="data-table">
                     <thead>
                         <tr>
@@ -16,6 +16,7 @@
                             <th>Customer Code</th>
                             <th>Name</th>
                             <th>Email</th>
+                            <th>Phone no.</th>
                             <th>Bank Acc. No</th>
                             <th>Bank IFSC</th>
                             <th>Address</th>
@@ -31,6 +32,7 @@
                             <td>45845ADRF45</td>
                             <td>Saravanan</td>
                             <td>exsat.kumar@gmail.com</td>
+                            <td>9840938651</td>
                             <td>098765412358412</td>
                             <td>IDIB0004587</td>
                             <td>No: 10, 2nd Avenue, AGS Colony 3rd phase, Mugalivakkam</td>
@@ -49,6 +51,7 @@
                             <td>45845ADRF45</td>
                             <td>Saravanan</td>
                             <td>exsat.kumar@gmail.com</td>
+                            <td>9840938651</td>
                             <td>098765412358412</td>
                             <td>IDIB0004587</td>
                             <td>No: 10, 2nd Avenue, AGS Colony 3rd phase, Mugalivakkam</td>
@@ -67,6 +70,7 @@
                             <td>45845ADRF45</td>
                             <td>Saravanan</td>
                             <td>exsat.kumar@gmail.com</td>
+                            <td>9840938651</td>
                             <td>098765412358412</td>
                             <td>IDIB0004587</td>
                             <td>No: 10, 2nd Avenue, AGS Colony 3rd phase, Mugalivakkam</td>
@@ -85,6 +89,7 @@
                             <td>45845ADRF45</td>
                             <td>Saravanan</td>
                             <td>exsat.kumar@gmail.com</td>
+                            <td>9840938651</td>
                             <td>098765412358412</td>
                             <td>IDIB0004587</td>
                             <td>No: 10, 2nd Avenue, AGS Colony 3rd phase, Mugalivakkam</td>
@@ -100,6 +105,7 @@
                         </tr>
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
