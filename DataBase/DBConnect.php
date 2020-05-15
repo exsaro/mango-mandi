@@ -1,6 +1,6 @@
 <?php
 
-   require_once "./Libraries/Config.php";
+   require_once "../Libraries/Config.php";
    
    class DBConnect
    {

@@ -3,16 +3,16 @@
         <div class="user-img mb-3">
             <span class="material-icons">person</span>
         </div>
-        <h4>Admin</h4>
+        <h4><?php echo $_SESSION['user_name']; ?></h4>
     </div>
     <nav>
         <ul id="master-nav">
-            <li><a href="company.php">Company Master</a></li>
-            <li><a href="item.php">Item Master</a></li>
-            <li><a href="farmer.php">Farmer Master</a></li>
-            <li><a href="customer.php">Customer Master</a></li>
-            <li><a href="transaction.php">Transaction Master</a></li>
-            <li><a href="user.php">User Master</a></li>
+            <li><a href="company.php"><?php echo $lang['company_master']; ?></a></li>
+            <li><a href="item.php"><?php echo $lang['item_master']; ?></a></li>
+            <li><a href="farmer.php"><?php echo $lang['farmer_master']; ?></a></li>
+            <li><a href="customer.php"><?php echo $lang['customer_master']; ?></a></li>
+            <li><a href="transaction.php"><?php echo $lang['transaction_master']; ?></a></li>
+            <li><a href="user.php"><?php echo $lang['user_master']; ?></a></li>
         </ul>
     </nav>
 </div>

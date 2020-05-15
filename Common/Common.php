@@ -1,6 +1,5 @@
 <?php
    
-
    class Common
    {
       private $connected ="";
@@ -17,4 +16,5 @@
          return $select['company_name'];
       }
    }
+
 ?>
