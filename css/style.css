@@ -5,3 +5,40 @@ label.error{
     color: red;
     font-size: 12px;
 }
+.sidebar{
+    background: #e9ecef;
+    min-height: calc(100vh - 56px);
+}
+.user-img{
+    width: 110px;
+    height: 110px;
+    background: #e95420;
+    margin: auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-img .material-icons{
+    font-size: 70px;
+    color: #fff;
+}
+.sidebar nav ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: none;
+}
+.sidebar nav li{
+    margin-bottom: 1px;
+}
+.sidebar nav a{
+    padding: 10px 20px;
+    background: #AEA79F;
+    color: #fff;
+    display: block;
+}
+.sidebar nav a:hover, .sidebar nav a.active{
+    background: #e95420;
+    color: #fff;
+}

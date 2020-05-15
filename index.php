@@ -30,7 +30,7 @@
             $_SESSION['user_id']        = $select['user_id']; 
             $_SESSION['user_name']      = $select['user_name']; 
             $_SESSION['company_name']   = $commonData->getCompanyName($select['company_id']); 
-            header("Location:View/UserList.php");
+            header("Location:View/dashboard.php");
         }else{
             //Login Failed
             $loginError = true;
