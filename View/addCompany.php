@@ -4,12 +4,14 @@
     $title      = 'add_company';
     $editData   = [];
     $submitType = 'store';
+
     if(isset($_GET['id'])){
-        $title  = 'edit_company';
+        $title      = 'edit_company';
         $companyListData = $commonModel->getData('company_master','edit',$_GET['id'],'company_id');
-        $editData = isset($companyListData[0]) ?  $companyListData[0] : [] ;
+        $editData   = isset($companyListData[0]) ?  $companyListData[0] : [] ;
         $submitType = 'update';
     }
+    
     $id          = isset($editData['company_id'])       ? $editData['company_id']      : '';
     $companyName = isset($editData['company_name'])     ? $editData['company_name']      : '';
     $address     = isset($editData['company_address'])  ? $editData['company_address']   : '';
@@ -17,7 +19,7 @@
     $state       = isset($editData['state'])  ? $editData['state']   : 'Tamil Nadu';  
     $country     = isset($editData['country'])  ? $editData['country']   : 'India';  
     $pincode     = isset($editData['pincode'])  ? $editData['pincode']   : '';  
-    $status      = isset($editData['status']) && $editData['status'] == 'A'? 'A': '';  
+    $status      = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';  
 ?>
 
 <div class="container-fluid">
@@ -40,7 +42,7 @@
                                 <div class="d-flex align-items-center mb-2">
                                     <label class="mb-0" for=""><?php echo $lang['company_name'];?></label>
                                     <div class="custom-control custom-switch ml-4">
-                                            <input type="checkbox" name="status" class="custom-control-input" id="customSwitch1" value='<?php echo $status; ?>' checked='<?php $status=='A'?true:false; ?>'>
+                                            <input type="checkbox" name="status" class="custom-control-input" id="customSwitch1" value='A'  <?php echo $status=='A'? 'checked' :''; ?> >
                                             <label class="custom-control-label" for="customSwitch1"><?php echo $lang['status'];?></label>
                                         </div>
                                     </div>
