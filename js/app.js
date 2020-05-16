@@ -18,19 +18,34 @@
         pageName == 'addCustomer.php' ||
         pageName == 'addTransaction.php' ||
         pageName == 'addUser.php'){
-        $('#master-nav a').removeClass('active');
+        $('.sidebar nav ul').hide();
+        $('.sidebar nav a').removeClass('active');
         $('#master-nav').show();
         $('#master-nav a[href="'+pageName+'"]').addClass('active');
+    }else if(
+        pageName == 'voucherTransaction.php' ||
+        pageName == 'purchase.php' ||
+        pageName == 'sales.php' ||
+        pageName == 'farmer-payment.php' ||
+        pageName == 'customer-payment.php'){
+        $('.sidebar nav ul').hide();
+        $('.sidebar nav a').removeClass('active');
+        $('#transac-nav').show();
+        $('#transac-nav a[href="'+pageName+'"]').addClass('active');
     }
 
-    // console.log(pageName)
+    console.log(pageName)
 
 })();
+
+
 
 
 $("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser").validate();
 
 $(document).ready( function () {
+    
+
     $('#data-table').DataTable({
         lengthChange: false
     });

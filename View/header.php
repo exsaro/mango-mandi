@@ -58,3 +58,8 @@
         </nav>
     </div>
 </header>
+<div class="msg-alert">
+<div class="alert alert-dismissible alert-success">
+  You have successfully Updated the Record.</a>.
+</div>
+</div>

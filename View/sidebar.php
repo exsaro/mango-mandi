@@ -14,5 +14,12 @@
             <li><a href="transaction.php"><?php echo $lang['transaction_master']; ?></a></li>
             <li><a href="user.php"><?php echo $lang['user_master']; ?></a></li>
         </ul>
+        <ul id="transac-nav">
+            <li><a href="voucherTransaction.php">Voucher Transaction</a></li>
+            <li><a href="purchase.php">Product Receipt/Purchase</a></li>
+            <li><a href="sales.php">Sales</a></li>
+            <li><a href="farmer-payment.php">Farmer Payment Entry</a></li>
+            <li><a href="customer-payment.php">Customer Payment Receive Entry</a></li>
+        </ul>
     </nav>
 </div>
