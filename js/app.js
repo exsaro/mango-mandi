@@ -23,7 +23,7 @@
         $('#master-nav a[href="'+pageName+'"]').addClass('active');
     }
 
-    console.log(pageName)
+    // console.log(pageName)
 
 })();
 

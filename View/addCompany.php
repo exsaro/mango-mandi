@@ -46,27 +46,27 @@
                                             <label class="custom-control-label" for="customSwitch1"><?php echo $lang['status'];?></label>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="company_name" placeholder="Name" value='<?php echo $companyName; ?>' required>
+                                    <input type="text" class="form-control" name="company_name" placeholder="Name" value='<?php echo $companyName; ?>' required minlength=3 maxlength=100>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['address'];?></label>
-                                <textarea class="form-control" name="company_address" id="exampleTextarea" rows="3" autocomplete="off" spellcheck="false" required><?php echo $address; ?></textarea>
+                                <textarea class="form-control" name="company_address" id="exampleTextarea" rows="3" autocomplete="off" spellcheck="false" required minlength=5><?php echo $address; ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['city'];?></label>
-                                <input type="text" class="form-control" name="city" placeholder="City" value='<?php echo $city; ?>' required>
+                                <input type="text" class="form-control" name="city" placeholder="City" value='<?php echo $city; ?>' required minlength=3 maxlength=50>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['state'];?></label>
-                                <input type="text" class="form-control" name="state" placeholder="State" value='<?php echo $state; ?>' required>
+                                <input type="text" class="form-control" name="state" placeholder="State" value='<?php echo $state; ?>' required minlength=3 maxlength=50>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['country'];?></label>
-                                <input type="text" class="form-control" name="country" placeholder="Country" value='<?php echo $country; ?>' required>
+                                <input type="text" class="form-control" name="country" placeholder="Country" value='<?php echo $country; ?>' required minlength=3 maxlength=50>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['pincode'];?></label>
-                                <input type="text" class="form-control" name="pincode" placeholder="Pincode" value='<?php echo $pincode; ?>' required>
+                                <input type="text" class="form-control" name="pincode" placeholder="Pincode" value='<?php echo $pincode; ?>' required minlength=3 maxlength=10>
                             </div>
                             
                             <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary"><?php echo $lang['submit'];?></button></div>
