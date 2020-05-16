@@ -34,7 +34,7 @@
         $('#transac-nav a[href="'+pageName+'"]').addClass('active');
     }
 
-    console.log(pageName)
+    // console.log(pageName)
 
 })();
 
@@ -45,7 +45,10 @@ $("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser").
 
 $(document).ready( function () {
 
-    
+    // Display Message
+    setTimeout(function(){  
+        $('.msg-alert').removeClass('d-block');
+    }, 2000);
 
     $('#data-table').DataTable({
         lengthChange: false

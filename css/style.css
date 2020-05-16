@@ -59,4 +59,5 @@ label.error{
     width: 450px;
     left: 50%;
     margin-left: -225px;
+    display: none;
 }

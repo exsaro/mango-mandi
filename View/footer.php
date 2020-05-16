@@ -1,7 +1,12 @@
-    
+<?php  
+    if(isset($_SESSION['message'])){
+        unset($_SESSION['message']);
+        unset($_SESSION['alert']);
+        $display        ='d-none';
+        $displayMessage = '';
+    }
 
-
-
+?> 
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
     <script src="../js/jquery/popper.min.js"></script>
     <script src="../js/jquery/bootstrap.min.js"></script>

@@ -1,10 +1,18 @@
 <?php
     session_start();
-     //Common Language
-     include "../Language/Lang.php";
-     $language   = new Lang();
-     $lang       = $language->getLanguage();
+    //Common Language
+    include "../Language/Lang.php";
+    $language   = new Lang();
+    $lang       = $language->getLanguage();
 
+    $display        ='d-none';
+    $displayMessage = '';
+    $showStatus     = '';
+    if(isset($_SESSION['message'])){
+        $displayMessage = $_SESSION['message'];
+        $showStatus     = $_SESSION['alert'];
+        $display        ='d-block';
+    }
     if(isset($_SESSION['user_id'])){
         // DB Related Data Getting
         include '../Model/CommonModel.php';
@@ -58,8 +66,8 @@
         </nav>
     </div>
 </header>
-<div class="msg-alert">
-<div class="alert alert-dismissible alert-success">
-  You have successfully Updated the Record.</a>.
-</div>
+<div class="msg-alert <?php echo $display; ?>" >
+    <div class="alert alert-dismissible <?php echo $showStatus; ?>">
+        <?php echo $displayMessage; ?>
+    </div>
 </div>
