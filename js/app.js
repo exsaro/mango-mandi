@@ -44,6 +44,7 @@
 $("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser").validate();
 
 $(document).ready( function () {
+
     
 
     $('#data-table').DataTable({
