@@ -28,7 +28,7 @@
             
             $getData = [];
 
-            if($executeQuery->num_rows > 0)
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
             {
                 while($row = mysqli_fetch_assoc($executeQuery)){
                     $getData[] = $row ;

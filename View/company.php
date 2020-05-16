@@ -1,7 +1,6 @@
 <?php 
     include 'header.php';
     $companyListData = $commonModel->getData('company_master','list','','');
-
     $i = 1;
 ?>
     <div class="container-fluid">

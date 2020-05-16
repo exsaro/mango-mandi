@@ -10,7 +10,7 @@
                     <h1>Add User</h1>
                     <a href="user.php" class="btn btn-secondary">Back</a>
                 </div>
-                <form action="" id="addUser">
+                <form action="" id="addUser" autocomplete="off">
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -26,7 +26,7 @@
                                 
                                 <div class="form-group">
                                     <label for="">Password</label>
-                                    <input type="password" class="form-control" name="password" placeholder="v" required>
+                                    <input type="password" class="form-control" name="password" placeholder="Password" autocomplete="new-password" required>
                                 </div>
                                 
                                 <div class="form-group text-right"><button class="btn btn-primary">Submit</button></div>

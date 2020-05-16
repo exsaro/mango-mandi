@@ -51,7 +51,7 @@ label.error{
     margin-left: 15px;
 }
 .table td.text-right,.table th.text-right{
-    width: 100px;
+    width: 150px;
 }
 .msg-alert{
     position: fixed;
