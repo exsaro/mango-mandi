@@ -2,9 +2,9 @@
     include 'header.php';
     $userListData = $commonModel->getData('user_master','list','','');
     $userTypeData = $commonModel->getData('user_type_master','list','','');
-    $userTpe=[];
+    $userType=[];
     foreach($userTypeData as $key => $value ){
-        $userTpe[$value['user_type_id']] = $value['user_type_name'];
+        $userType[$value['user_type_id']] = $value['user_type_name'];
     }
 
     $i = 1;
@@ -14,8 +14,8 @@
             <?php include 'sidebar.php';?>
             <div class="col-md-9 mt-5 ml-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1>Welcome User</h1>
-                    <?php if($_SESSION['user_type_id'] == 1){ ?> <a href="addUser.php" class="btn btn-primary">Add User</a><?php } ?>
+                    <h1>User Master</h1>
+                    <a href="addUser.php" class="btn btn-primary">Add User</a>
                 </div>
                 
 
@@ -23,7 +23,7 @@
                     <thead>
                         <tr>
                             <th>S NO</th>
-                            <th>Username</th>
+                            <th>User Name</th>
                             <th>Password</th>
                             <th>User Type</th>
                             <th class="text-right">Action</th>
@@ -35,7 +35,7 @@
                                 <td><?php echo $i; ?></td>
                                 <td><?php echo $value['user_name']; ?></td>
                                 <td><?php echo $value['user_password']; ?></td>
-                                <td><?php echo $userTpe[$value['user_type_id']] ; ?></td>
+                                <td><?php echo $userType[$value['user_type_id']] ; ?></td>
                                 <td class="text-right">
                                     <ul class="nav justify-content-end">
                                         <li class="mr-3"><a title='<?php echo $lang['edit']; ?>' href='addUser.php?id=<?php echo $value['user_id'] ?>'><span class="material-icons">edit</span></a></li>

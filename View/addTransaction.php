@@ -7,15 +7,15 @@
 
     if(isset($_GET['id'])){
         $title      = 'Edit Transaction';
-        $farmerEditData = $commonModel->getData('transaction_master','edit',$_GET['id'],'transaction_id');
-        $editData   = isset($farmerEditData[0]) ?  $farmerEditData[0] : [] ;
+        $transactionEditData = $commonModel->getData('transaction_master','edit',$_GET['id'],'transaction_id');
+        $editData   = isset($transactionEditData[0]) ?  $transactionEditData[0] : [] ;
         $submitType = 'update';
     }
     
-    $id          = isset($editData['transaction_id'])       ? $editData['transaction_id']      : '';
-    $transactionCode  = isset($editData['transaction_code'])     ? $editData['transaction_code']      : '';
-    $transactionName  = isset($editData['transaction_name'])  ? $editData['transaction_name']   : '';
-    $status      = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';
+    $id                 = isset($editData['transaction_id'])       ? $editData['transaction_id']      : '';
+    $transactionCode    = isset($editData['transaction_code'])     ? $editData['transaction_code']      : '';
+    $transactionName    = isset($editData['transaction_name'])  ? $editData['transaction_name']   : '';
+    $status             = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';
 ?>
     <div class="container-fluid">
         <div class="row">
@@ -25,7 +25,7 @@
                 
                     <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1>Add Transaction</h1>
+                    <h1><?php echo $title; ?></h1>
                     <a href="transaction.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/TransactionMaster.php" method="post" id="addTransaction">

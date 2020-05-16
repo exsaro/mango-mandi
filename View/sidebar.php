@@ -7,12 +7,12 @@
     </div>
     <nav>
         <ul id="master-nav">
-            <li><a href="company.php"><?php echo $lang['company_master']; ?></a></li>
+            <?php if($_SESSION['user_type_id'] == 1) {?><li><a href="company.php"><?php echo $lang['company_master']; ?></a></li><?php } ?>
             <li><a href="item.php"><?php echo $lang['item_master']; ?></a></li>
             <li><a href="farmer.php"><?php echo $lang['farmer_master']; ?></a></li>
             <li><a href="customer.php"><?php echo $lang['customer_master']; ?></a></li>
             <li><a href="transaction.php"><?php echo $lang['transaction_master']; ?></a></li>
-            <li><a href="user.php"><?php echo $lang['user_master']; ?></a></li>
+            <?php  if($_SESSION['user_type_id'] == 1) { ?><li><a href="user.php"><?php echo $lang['user_master']; ?></a></li><?php } ?>
         </ul>
         <ul id="transac-nav">
             <li><a href="voucherTransaction.php">Voucher Transaction</a></li>

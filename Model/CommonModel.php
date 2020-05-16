@@ -16,7 +16,7 @@
             
             $sql = "SELECT * FROM ".$tableName." WHERE status != 'D'";
             
-            if($_SESSION['user_type_id'] != 1){
+            if($tableName != 'user_type_master'){
                 $sql .= " AND company_id ='". $_SESSION['company_id']."'";
             }
 
