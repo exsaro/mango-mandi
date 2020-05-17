@@ -41,7 +41,7 @@
 
 
 
-$("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser").validate();
+$("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser,#adminCompany").validate();
 
 $(document).ready( function () {
 

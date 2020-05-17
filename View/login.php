@@ -1,6 +1,6 @@
 <?php  
     session_start(); 
-    if(isset($_SESSION['user_id'])){
+    if(isset($_SESSION['company_id'])){
         header("Location:./dashboard.php");
     }
     //Language File Added
@@ -28,13 +28,18 @@
             //Login Success
             include "../Common/Common.php";
             $commonData = new Common();
-            $_SESSION['company_id']     = $select['company_id']; 
             $_SESSION['user_id']        = $select['user_id']; 
             $_SESSION['user_type_id']   = $select['user_type_id']; 
             $_SESSION['user_name']      = $select['user_name']; 
-            $_SESSION['company_name']   = $commonData->getCompanyName($select['company_id']); 
-            // header("Location:./dashboard.php");
-            header("Location:./chooseCompany.php");
+
+            if($_SESSION['user_type_id'] == 2){
+                $_SESSION['company_id']     = $select['company_id']; 
+                $_SESSION['company_name']   = $commonData->getCompanyName($select['company_id']); 
+                header("Location:./dashboard.php");
+            }
+            else{
+                header("Location:./chooseCompany.php");
+            }
         }else{
             //Login Failed
             $loginError = true;

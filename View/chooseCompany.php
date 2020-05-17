@@ -1,3 +1,41 @@
+<?php 
+    session_start();
+    if(isset($_SESSION['user_id'])){
+      //DB Connection
+      require "../DataBase/DBConnect.php";
+      $dbConnection       = new DBConnect();
+      $connected    = $dbConnection->dbConnect();
+      $sql = "SELECT * FROM  company_master WHERE status != 'D'";
+      $executeQuery   = mysqli_query($connected ,$sql); 
+      $getData = [];
+
+      if($executeQuery != '' && $executeQuery->num_rows > 0)
+      {
+          while($row = mysqli_fetch_assoc($executeQuery)){
+              $getData[] = $row ;
+          }
+      } 
+    }
+    //Choose Company
+    if(isset($_POST['selectCompany']))
+    {
+      if(isset($_POST['company']) && $_POST['company'] != ''){
+          //Login Success
+          include "../Common/Common.php";
+          $commonData = new Common();
+
+          $_SESSION['company_id']     = $_POST['company']; 
+          
+          $_SESSION['company_name']   = $commonData->getCompanyName($_POST['company']); 
+          
+          header("Location:../View/dashboard.php");
+      }else{
+          header("Location:./chooseCompany.php");
+      }
+    }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,22 +56,20 @@
         <h5 class="modal-title" id="exampleModalLabel">Choose Company</h5>
         </button>
       </div>
-      <form action="">
-      <div class="modal-body">
-        
-            <div class="form-group">
-                <select class="custom-select">
-                <option selected="">Select Company</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                </select>
-            </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Submit</button>
-      </div>
+      <form action="chooseCompany.php" method="post" id="adminCompany">
+        <div class="modal-body">
+          <div class="form-group">
+              <select class="custom-select" name="company" required>
+              <option value="">Select Company</option>
+              <?php foreach($getData as $key => $value ){ ?> 
+                <option value='<?php echo $value['company_id']; ?>' ><?php echo $value['company_name']; ?> </option>
+              <?php } ?>
+              </select>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" name="selectCompany" class="btn btn-primary">Submit</button>
+        </div>
       </form>
     </div>
   </div>
@@ -41,12 +77,8 @@
 
 
 <div class="modal-backdrop fade show"></div>
-    <!-- Jquery  -->
-    <script src="../js/jquery/jquery-3.3.1.min.js"></script>
-    <!-- Validation Plug-in -->
-    <script src="../js/Validation/jquery.validate.min.js"></script>
-    <!--External Js  -->
-    <script src="../js/script/login.js"></script>
-    
+
+<?php include 'footer.php';?>
+
 </body>
 </html>

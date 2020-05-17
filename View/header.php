@@ -13,10 +13,16 @@
         $showStatus     = $_SESSION['alert'];
         $display        ='d-block';
     }
-    if(isset($_SESSION['user_id'])){
+    if(isset($_SESSION['company_id'])){
         // DB Related Data Getting
         include '../Model/CommonModel.php';
         $commonModel   = new CommonModel();
+
+        //Get Page Name
+        if(isset($_SESSION['user_type_id']) && $_SESSION['user_type_id'] == 1)
+            $pageName   = 'company.php';
+        else
+            $pageName   = 'item.php';
 
         // Logout
         if(isset($_POST['logout'])){
@@ -47,7 +53,7 @@
         <nav class="nav">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-2 active">
-                    <a class="nav-link d-flex align-items-center" href="company.php">
+                    <a class="nav-link d-flex align-items-center" href="<?php echo  $pageName; ?>">
                     <span class="material-icons mr-1">store</span><?php echo $lang['master']; ?></a>
                 </li>
                 <li class="nav-item mr-2 active">

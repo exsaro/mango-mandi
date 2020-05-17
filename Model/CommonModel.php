@@ -1,5 +1,4 @@
 <?php
-
     class CommonModel
     {
         private $connected ="";
@@ -51,7 +50,14 @@
             session_destroy();
             header("Location:../index.php");
         }
+
+        // Choose Company
+        // public function chooseCompany($selectData){
+     
+            
+        // }
     }
+
    //Delete Call
    if(isset($_REQUEST['dId']))
    {
@@ -67,4 +73,6 @@
       $pageName = $config[$table.'_p'];
       header("Location:../view/".$pageName.".php");
    }
+
+    
 ?>
