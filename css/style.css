@@ -61,3 +61,13 @@ label.error{
     margin-left: -225px;
     display: none;
 }
+.dataTables_paginate .pagination{
+    justify-content: flex-end;
+}
+.dataTables_length > label{
+    display: inline-flex;
+    align-items: center;
+}
+.dataTables_length .custom-select{
+    margin: 0 10px;
+}

@@ -34,7 +34,12 @@
             "edit_company"        => "Edit Company",
             "back"         => "Back",
             "status" => "status",
-            "submit" => "Submit"
+            "submit" => "Submit",
+            "voucher_transaction"   => "Voucher Transaction",
+            "product_receipt"=>"Product Receipt/Purchase",
+            "sales"=>"Sales",
+            "farmer_payment_entry"=>"Farmer Payment Entry",
+            "customer_payment_receive_entry"=>"Customer Payment Receive Entry"
 
          ];
 

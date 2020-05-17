@@ -1,7 +1,7 @@
 <div class="col-md-2 sidebar py-5 px-0">
     <div class="user text-center mb-5">
         <div class="user-img mb-3">
-            <span class="material-icons">person</span>
+            <a href="dashboard.php"><span class="material-icons">person</span></a>
         </div>
         <h4><?php echo $_SESSION['user_name']; ?></h4>
     </div>
@@ -15,11 +15,11 @@
             <?php  if($_SESSION['user_type_id'] == 1) { ?><li><a href="user.php"><?php echo $lang['user_master']; ?></a></li><?php } ?>
         </ul>
         <ul id="transac-nav">
-            <li><a href="voucherTransaction.php">Voucher Transaction</a></li>
-            <li><a href="purchase.php">Product Receipt/Purchase</a></li>
-            <li><a href="sales.php">Sales</a></li>
-            <li><a href="farmer-payment.php">Farmer Payment Entry</a></li>
-            <li><a href="customer-payment.php">Customer Payment Receive Entry</a></li>
+            <li><a href="voucherTransaction.php"><?php echo $lang['voucher_transaction']; ?></a></li>
+            <li><a href="purchase.php"><?php echo $lang['product_receipt']; ?></a></li>
+            <li><a href="sales.php"><?php echo $lang['sales']; ?></a></li>
+            <li><a href="farmerPayment.php"><?php echo $lang['farmer_payment_entry']; ?></a></li>
+            <li><a href="customerPayment.php"><?php echo $lang['customer_payment_receive_entry']; ?></a></li>
         </ul>
     </nav>
 </div>

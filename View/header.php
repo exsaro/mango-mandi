@@ -41,9 +41,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="../css/datatables.css">
+    
     <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker-standalone.css">
+    
     <link rel="stylesheet" href="../css/style.css">
+
+    
     <title>Document</title>
 </head>
 <body>
@@ -57,11 +62,11 @@
                     <span class="material-icons mr-1">store</span><?php echo $lang['master']; ?></a>
                 </li>
                 <li class="nav-item mr-2 active">
-                    <a class="nav-link d-flex align-items-center" href="transaction.php">
+                    <a class="nav-link d-flex align-items-center" href="voucherTransaction.php">
                     <span class="material-icons">attach_money</span><?php echo $lang['transaction']; ?></a>
                 </li>
                 <li class="nav-item mr-2 active">
-                    <a class="nav-link d-flex align-items-center" href="#"><span class="material-icons mr-1">assignment</span><?php echo $lang['report']; ?></a>
+                    <a class="nav-link d-flex align-items-center" data-toggle="modal" href="#reportModal"><span class="material-icons mr-1">assignment</span><?php echo $lang['report']; ?></a>
                 </li>
                 <li class="nav-item active mr-2">
                     <form action="header.php" method="post" >
