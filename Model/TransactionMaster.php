@@ -24,7 +24,6 @@
                 $_SESSION['message']        = 'You have successfully added the record'; 
             }
             $storeCompanyData = mysqli_query( $this->connected, $sql);
-
             if($storeCompanyData){
                 $_SESSION['alert']          = 'alert-success';
             }else{

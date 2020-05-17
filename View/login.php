@@ -33,7 +33,8 @@
             $_SESSION['user_type_id']   = $select['user_type_id']; 
             $_SESSION['user_name']      = $select['user_name']; 
             $_SESSION['company_name']   = $commonData->getCompanyName($select['company_id']); 
-            header("Location:./dashboard.php");
+            // header("Location:./dashboard.php");
+            header("Location:./chooseCompany.php");
         }else{
             //Login Failed
             $loginError = true;
@@ -88,7 +89,7 @@
                         </form>
                     </div>
                 </div>
-                <div class="mt-4 text-center"><a href="register.html" class="btn btn-dark w-50">Register</a></div>
+                
                 
             </div>
             
