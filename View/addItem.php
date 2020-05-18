@@ -31,7 +31,7 @@
                     <a href="item.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/ProductMaster.php" method="post" id="addItem">
-                    <input type="hidden" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" name="editId" id="editId" value='<?php echo $id; ?>' />
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -42,12 +42,12 @@
                                                 <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="product_code" placeholder="Item Code" required minlength=3 maxlength=100 value='<?php echo $productName; ?>' >
+                                        <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Item Code" required minlength=3 maxlength=100 value='<?php echo $productName; ?>' >
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="">Item Name</label>
-                                    <input type="text" class="form-control" name="product_name" placeholder="Item Name" required minlength=3 maxlength=100 value='<?php echo $productCode; ?>' >
+                                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Item Name" required minlength=3 maxlength=100 value='<?php echo $productCode; ?>' >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Unit of measurement</label>
@@ -55,7 +55,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">(₹) Amount</label>
-                                    <input type="text" class="form-control" name="price" placeholder="Rate" required minlength=1 maxlength=25 value='<?php echo $price; ?>' >
+                                    <input type="text" class="form-control" name="price" id="price" placeholder="Amount" required minlength=1 maxlength=15 value='<?php echo $price; ?>' >
                                     <small id="" class="form-text text-muted">Add the Rate per Kilogram</small>
                                 </div>
                                 <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button></div>

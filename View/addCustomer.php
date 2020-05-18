@@ -39,7 +39,7 @@
                     <a href="customer.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/CustomerMaster.php" method="post" id="addCustomer">
-                    <input type="hidden" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -50,7 +50,7 @@
                                                 <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="customer_code" placeholder="Customer Code" required minlength=3 maxlength=100 value='<?php echo $customerCode; ?>' >
+                                        <input type="text" class="form-control" id="customer_code" name="customer_code" placeholder="Customer Code" required minlength=3 maxlength=100 value='<?php echo $customerCode; ?>' >
                                 </div>
                                 
                                 <div class="form-group">

@@ -35,7 +35,7 @@
                     <a href="farmer.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/FarmerMaster.php" method="post" id="addFarmer">
-                    <input type="hidden" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -47,12 +47,12 @@
                                             <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="farmer_code" placeholder="Farmer Code" required minlength=3 maxlength=100 value='<?php echo $farmerCode; ?>' >
+                                        <input type="text" class="form-control" id="farmer_code" name="farmer_code" placeholder="Farmer Code" required minlength=3 maxlength=100 value='<?php echo $farmerCode; ?>' >
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="">Farmer Name</label>
-                                    <input type="text" class="form-control" name="farmer_name" placeholder="Farmer Name" required minlength=3 maxlength=100 value='<?php echo $farmerName; ?>' >
+                                    <input type="text" class="form-control" id="farmer_name" name="farmer_name" placeholder="Farmer Name" required minlength=3 maxlength=100 value='<?php echo $farmerName; ?>' >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Village</label>

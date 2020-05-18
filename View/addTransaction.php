@@ -29,7 +29,7 @@
                     <a href="transaction.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/TransactionMaster.php" method="post" id="addTransaction">
-                    <input type="hidden" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -40,7 +40,7 @@
                                                 <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="transaction_code" placeholder="Transaction Code" required minlength=3 maxlength=100 value='<?php echo $transactionCode; ?>'>
+                                        <input type="text" class="form-control" id="transaction_code" name="transaction_code" placeholder="Transaction Code" required minlength=3 maxlength=100 value='<?php echo $transactionCode; ?>'>
                                 </div>
                                 
                                 <div class="form-group">

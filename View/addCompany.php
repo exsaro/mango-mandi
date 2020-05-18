@@ -34,9 +34,9 @@
                 <a href="company.php" class="btn btn-secondary"><?php echo $lang['back'];?></a>
             </div>
             <form action="../Model/CompanyMaster.php" method="post" id="addCompany">
+                <input type="hidden" name="editId" id="editId" value='<?php echo $id; ?>' />
                 <div class="card">
                     <div class="card-body">
-                        <input type="hidden" name="editId" value='<?php echo $id; ?>' />
                     
                             <div class="form-group">
                                 <div class="d-flex align-items-center mb-2">
@@ -46,7 +46,7 @@
                                             <label class="custom-control-label" for="customSwitch1"><?php echo $lang['status'];?></label>
                                         </div>
                                     </div>
-                                    <input type="text" class="form-control" name="company_name" placeholder="Name" value='<?php echo $companyName; ?>' required minlength=3 maxlength=100>
+                                    <input type="text" class="form-control" name="company_name" id="company_name" placeholder="Name" value='<?php echo $companyName; ?>' required minlength=3 maxlength=100>
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['address'];?></label>
