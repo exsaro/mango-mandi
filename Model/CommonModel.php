@@ -51,28 +51,48 @@
             header("Location:../index.php");
         }
 
-        // Choose Company
-        // public function chooseCompany($selectData){
-     
-            
-        // }
+        // Check Unique Validation
+        public function  checkUniqueValidation($checkData){
+    
+            $sql = "SELECT * FROM ".$checkData['tableName']." WHERE ".$checkData['checkColumn']."='".$checkData['checkColumnValue']."'";
+            if($checkData['companyId'] == 'yes'){
+                $sql .= " AND company_id = '".$checkData['companyIdValue']."'";
+            }
+            if($checkData['editColumnValue'] != ''){
+                $sql .= " AND ".$checkData['editColumn']." != '".$checkData['editColumnValue']."'";
+            }
+            $executeQuery  = mysqli_query($this->connected,$sql);
+
+            if($executeQuery->num_rows > 0){
+                echo 'false';
+            }else{
+                echo 'true';
+            }
+
+        }
     }
 
-   //Delete Call
-   if(isset($_REQUEST['dId']))
-   {
-     //Common config
-     include "../Language/Lang.php";
-     $configData   = new Lang();
-     $config       = $configData->getConfigData();
-     
-      $id           = $_GET['dId'];
-      $table        = $_GET['tb'];
-      $delete       = new CommonModel();
-      $delete->delete($config[$table],$config[$table.'_c'],$id);
-      $pageName = $config[$table.'_p'];
-      header("Location:../view/".$pageName.".php");
-   }
 
+   //Delete Call
+    if(isset($_REQUEST['dId']))
+    {
+        //Common config
+        include "../Language/Lang.php";
+        $configData   = new Lang();
+        $config       = $configData->getConfigData();
+        $commonObj       = new CommonModel();
+        
+        $id           = $_GET['dId'];
+        $table        = $_GET['tb'];
+        $commonObj->delete($config[$table],$config[$table.'_c'],$id);
+        $pageName = $config[$table.'_p'];
+        header("Location:../view/".$pageName.".php");
+    }
+
+    //common unique validation
+    if(isset($_REQUEST['validation'])){
+        $commonObj       = new CommonModel();
+        $commonObj->checkUniqueValidation($_POST);
+    }
     
 ?>

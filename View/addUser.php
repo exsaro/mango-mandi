@@ -27,8 +27,8 @@
                     <h1><?php echo $title; ?></h1>
                     <a href="user.php" class="btn btn-secondary">Back</a>
                 </div>
-                <form action="../Model/UserMaster.php" method="post" autocomplete="off">
-                    <input type="hidden" name="editId" value='<?php echo $id; ?>' />
+                <form action="../Model/UserMaster.php" method="post" autocomplete="off" id="addUser">
+                    <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
                     <div class="card">
                     <div class="card-body">
                                 <div class="form-group">
@@ -39,7 +39,7 @@
                                             <label class="custom-control-label" for="customSwitch1">Status</label>
                                         </div>
                                         </div>
-                                        <input type="text" class="form-control" name="user_name" placeholder="Username" minlength=3 maxlength=100  value='<?php echo $userName; ?>' required>
+                                        <input type="text" class="form-control" id="user_name" name="user_name" placeholder="Username" minlength=3 maxlength=100  value='<?php echo $userName; ?>' required>
                                 </div>
                                 
                                 <div class="form-group">

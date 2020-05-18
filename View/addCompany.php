@@ -66,7 +66,7 @@
                             </div>
                             <div class="form-group">
                                 <label for=""><?php echo $lang['pincode'];?></label>
-                                <input type="text" class="form-control" name="pincode" placeholder="Pincode" value='<?php echo $pincode; ?>' required minlength=3 maxlength=10>
+                                <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode" value='<?php echo $pincode; ?>' required minlength=3 maxlength=10>
                             </div>
                             
                             <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary"><?php echo $lang['submit'];?></button></div>

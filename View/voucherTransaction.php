@@ -17,7 +17,7 @@
                             <th>Voucher No</th>
                             <th>Farmer Name</th>
                             <th>Transaction Title</th>
-                            <th>Amount</th>
+                            <th>(₹) Amount</th>
                             <th>Description</th>
                             <th class="text-right">Action</th>
                         </tr>

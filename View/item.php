@@ -13,8 +13,6 @@
                 <a href="addItem.php" class="btn btn-primary">Add Item</a>
             </div>
             <?php include 'itemList.php'; ?>
-
-            
         </div>
     </div>
 </div>

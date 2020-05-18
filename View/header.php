@@ -76,6 +76,7 @@
             </ul>
         </nav>
     </div>
+    <input type="hidden" id="companyId" name="companyId" value='<?php echo $_SESSION['company_id']; ?>' />
 </header>
 <div class="msg-alert <?php echo $display; ?>" >
     <div class="alert alert-dismissible <?php echo $showStatus; ?>">

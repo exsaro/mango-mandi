@@ -54,7 +54,7 @@
                                     <input type="text" class="form-control" name="unit_of_measurement" placeholder="Unit of measurement" required minlength=1 maxlength=10 value='<?php echo $unitOfMeasurement; ?>' >
                                 </div>
                                 <div class="form-group">
-                                    <label for="">Rate</label>
+                                    <label for="">(₹) Amount</label>
                                     <input type="text" class="form-control" name="price" placeholder="Rate" required minlength=1 maxlength=25 value='<?php echo $price; ?>' >
                                     <small id="" class="form-text text-muted">Add the Rate per Kilogram</small>
                                 </div>

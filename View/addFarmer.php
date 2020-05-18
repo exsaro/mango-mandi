@@ -47,12 +47,12 @@
                                             <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" name="farmer_code" placeholder="Item Code" required minlength=3 maxlength=100 value='<?php echo $farmerCode; ?>' >
+                                        <input type="text" class="form-control" name="farmer_code" placeholder="Farmer Code" required minlength=3 maxlength=100 value='<?php echo $farmerCode; ?>' >
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="">Farmer Name</label>
-                                    <input type="text" class="form-control" name="farmer_name" placeholder="Name" required minlength=3 maxlength=100 value='<?php echo $farmerName; ?>' >
+                                    <input type="text" class="form-control" name="farmer_name" placeholder="Farmer Name" required minlength=3 maxlength=100 value='<?php echo $farmerName; ?>' >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Village</label>

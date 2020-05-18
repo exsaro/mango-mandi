@@ -19,7 +19,7 @@
                             <th>Customer Name</th>
                             <th>Item Name</th>
                             <th>(kg) Qty</th>
-                            <th>(₹) Rate</th>
+                            <th>(₹) Amount</th>
                             <th class="text-right">Action</th>
                         </tr>
                     </thead>

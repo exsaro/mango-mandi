@@ -86,4 +86,46 @@ $(document).ready( function () {
     $('#data-table').DataTable({
         pageLength: 10
     });
+
+
+    //User Validation
+    if($("#addUser").length)
+    {
+        $.extend($.validator.messages, 
+        { 
+            remote:"User name already exists",
+        }); 
+
+        $('#user_name').rules("add", {
+            remote : {
+                url : '../Model/CommonModel.php',
+                type : 'post',
+                data: {
+                    validation:'uniqueValidation',
+                    tableName: 'user_master',
+                    companyId: 'yes',
+                    companyIdValue:  function() {
+                        return $( "#companyId" ).val();
+                    },
+                    checkColumn:'user_name',
+                    editColumn:'user_id',
+                    checkColumnValue: function() {
+                        return $( "#user_name" ).val();
+                    },
+                    editColumnValue: function() {
+                        return $( "#editId" ).val();
+                    }
+                }
+            }
+        });
+    }
+    if($("#addCompany").length)
+    {
+        $('#pincode').rules("add", {
+            number: true
+        });
+    }
+
 } );
+
+

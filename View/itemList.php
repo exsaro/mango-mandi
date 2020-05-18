@@ -5,7 +5,7 @@
                         <th>Item Name</th>
                         <th>Item Code</th>
                         <th>Unit of measurement</th>
-                        <th>Rate (per kg)</th>
+                        <th>(₹) Amount</th>
                         <th class="text-right">Action</th>
                     </tr>
                 </thead>
