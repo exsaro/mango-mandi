@@ -41,7 +41,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/themes/bootstrap1.min.css">
     <link rel="stylesheet" href="../css/style.css">
     <title>Document</title>
 </head>
@@ -59,7 +59,7 @@
       <form action="chooseCompany.php" method="post" id="adminCompany">
         <div class="modal-body">
           <div class="form-group">
-              <select class="custom-select" name="company" required>
+              <select class="custom-select" name="company" onchange="changeTheme(event)" required>
               <option value="">Select Company</option>
               <?php foreach($getData as $key => $value ){ ?> 
                 <option value='<?php echo $value['company_id']; ?>' ><?php echo $value['company_name']; ?> </option>

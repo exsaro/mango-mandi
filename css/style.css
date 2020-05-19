@@ -6,13 +6,11 @@ label.error{
     font-size: 12px;
 }
 .sidebar{
-    background: #e9ecef;
     min-height: calc(100vh - 56px);
 }
 .user-img{
     width: 110px;
     height: 110px;
-    background: #e95420;
     margin: auto;
     border-radius: 50%;
     display: flex;
@@ -34,12 +32,13 @@ label.error{
 }
 .sidebar nav a{
     padding: 10px 20px;
-    background: #AEA79F;
+    background: var(--primary);
     color: #fff;
     display: block;
 }
 .sidebar nav a:hover, .sidebar nav a.active{
-    background: #e95420;
+    background: var(--dark);
+    
     color: #fff;
 }
 .dataTables_filter{
@@ -70,4 +69,76 @@ label.error{
 }
 .dataTables_length .custom-select{
     margin: 0 10px;
+}
+.change-theme{
+    position: fixed;
+    right: -5px;
+    top: 40%;
+}
+.change-theme .icn{
+    border: solid 1px;
+    display: flex;
+    align-items: center;
+    width: 40px;
+    height: 40px;
+    justify-content: center;
+    border-radius: 5px 0 0 5px;
+}
+.change-theme .icn:hover{
+    text-decoration: none;
+}
+.choose{
+    width: 108px;
+    height: 136px;
+    border: solid 1px;
+    padding: 10px;
+    display: none;
+}
+.choose ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+}
+.choose li a{
+    width: 25px;
+    height: 25px;
+    display: block;
+    text-indent: -999em;
+    margin-bottom: 5px;
+    margin-right: 5px;
+}
+.choose li:nth-child(3n) a {
+    margin-right: 0;
+ }
+.choose li.bootstrap1 a{
+    background: #E95420;
+}
+.choose li.bootstrap2 a{
+    background: #2FA4E7;
+}
+.choose li.bootstrap3 a{
+    background: #2780E3;
+}
+.choose li.bootstrap4 a{
+    background: #78C2AD;
+}
+.choose li.bootstrap5 a{
+    background: #127ba3;
+}
+.choose li.bootstrap6 a{
+    background: #2196F3;
+}
+.choose li.bootstrap7 a{
+    background: #2C3E50;
+}
+.choose li.bootstrap8 a{
+    background: #EB6864;
+}
+.choose li.bootstrap9 a{
+    background: #593196;
+}
+.choose li.bootstrap10 a{
+    background: #008cba;
 }

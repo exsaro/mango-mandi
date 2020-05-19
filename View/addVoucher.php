@@ -38,22 +38,38 @@
                             
                         </div>
                         <div class="form-group">
-                            <label for="">Voucher Title</label>
-                            <select class="custom-select" required>
-                                <option value="">Please select</option>
-                                <option value="1">Saravaan1</option>
-                                <option value="2">Saravaan2</option>
-                                <option value="3">Saravaan3</option>
-                            </select>
+                            <div class="card mb-2">
+                                <div class="card-body alert-secondary">
+                                    <div class="row">
+                                        <div class="col">
+                                            <label for="">Voucher Title</label>
+                                            <select class="custom-select" required>
+                                                <option value="">Please select</option>
+                                                <option value="1">Saravaan1</option>
+                                                <option value="2">Saravaan2</option>
+                                                <option value="3">Saravaan3</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <label for="">(₹) Amount</label>
+                                            <input type="text" class="form-control" name="voucher_amount" placeholder="Amount" required />
+                                        </div>
+                                        <div class="col">
+                                            <label for="">Description</label>
+                                            <input type="text" class="form-control" name="voucher_amount" placeholder="Amount" required />
+                                        </div>
+                                    </div>        
+                                </div>
+                            </div>
+                            <p class="text-right fz12">
+                                <a href="">Add</a> | <a href="">Remove</a>
+                            </p>
                         </div>
-                        <div class="form-group">
-                            <label for="">Amount</label>
-                            <input type="number" min="0" class="form-control" name="voucher_amount" placeholder="Amount" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="">Description</label>
-                            <textarea class="form-control" id="" name="voucher_desc" rows="3" autocomplete="off" spellcheck="false"></textarea>
-                        </div>
+                        
+
+                        
+
+                        
                                 
                         <div class="form-group text-right"><button type="submit" name='voucher_submit' class="btn btn-primary">Submit</button></div>
                                 

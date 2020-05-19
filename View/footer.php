@@ -51,6 +51,24 @@
 </div>
 
 
+<div class="change-theme">
+    <a id="change-theme" class="icn" href=""><span class="material-icons">settings</span></a>
+    <div class="choose">
+        <ul>
+            <li class="bootstrap1"><a href="#"><span>theme1</span></a></li>
+            <li class="bootstrap2"><a href="#"><span>theme2</span></a></li>
+            <li class="bootstrap3"><a href="#"><span>theme3</span></a></li>
+            <li class="bootstrap4"><a href="#"><span>theme4</span></a></li>
+            <li class="bootstrap5"><a href="#"><span>theme5</span></a></li>
+            <li class="bootstrap6"><a href="#"><span>theme6</span></a></li>
+            <li class="bootstrap7"><a href="#"><span>theme7</span></a></li>
+            <li class="bootstrap8"><a href="#"><span>theme8</span></a></li>
+            <li class="bootstrap9"><a href="#"><span>theme9</span></a></li>
+            <li class="bootstrap10"><a href="#"><span>theme10</span></a></li>
+        </ul>
+    </div>
+</div>
+
 
 
 
