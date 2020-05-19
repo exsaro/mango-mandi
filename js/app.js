@@ -39,6 +39,10 @@
         $('#transac-nav a[href="'+pageName+'"]').addClass('active');
     }
 
+
+    if(localStorage.getItem("themeName")){   
+        $('#change_theme').attr('href','../css/themes/'+localStorage.getItem("themeName")+'.min.css');
+    }
     // console.log(pageName)
 
 })();
@@ -56,7 +60,12 @@ $(document).ready( function () {
     $('.choose li').click(function(e){
         e.preventDefault();
         var nam = $(this).attr('class');
-        $('#change_theme').attr('href','../css/themes/'+nam+'.min.css');
+        if(localStorage.getItem("themeName")){
+            localStorage.removeItem("themeName");
+        }
+        localStorage.setItem("themeName", nam);
+
+        $('#change_theme').attr('href','../css/themes/'+localStorage.getItem("themeName")+'.min.css');
         $(this).parents('.choose').hide();
         $(this).parents('.choose').siblings('#change-theme').show();
     })
