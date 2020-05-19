@@ -354,21 +354,22 @@ $(document).ready( function () {
 /*  Voucher Transcation Details Start*/
 
     function addTranscation(index){
+        
         var checkLength = parseInt($('#checklength').val());
         checkLength++;
         $('#checklength').val(checkLength);
-        var CloneDiv = $('#voucherCloneDiv').html().replace(/XXX/g,checkLength);
+        var CloneDiv = $('#voucherCloneDiv').html().replace(/XXX/g,checkLength).replace(/YYY/g,'');
         $('#voucherTranscationDiv').append(CloneDiv);
+        var length = $('.identifyCls').length -1;
         $('.identifyCls').each(function(idx){
-            $('#addInx_'+idx).hide();
-            $('#removeInx_'+idx).hide();
-            if(checkLength == idx){
-                console.log(1);
-                $('#addInx_'+idx).show();
+            var findInx = $(this).data('size');
+            $('#addInx_'+findInx).hide();
+            $('#removeInx_'+findInx).hide();
+            if( length == idx){
+                $('#addInx_'+findInx).show();
             }else{
-                $('#removeInx_'+idx).show(); 
-            } 
-
+                $('#removeInx_'+findInx).show(); 
+            }
         })
     }
 

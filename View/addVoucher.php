@@ -77,9 +77,9 @@
                                     else
                                         $addClsBtn = 'display:none;';
                             ?>
-                                <input type="hidden" value="<?php echo $value['transaction_name']; ?>"  id="transactionName_<?php echo $key; ?>" name="transaction_detail[<?php echo $key; ?>][transaction_name]" />
 
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
+                                    <input type="hidden" value="<?php echo $value['transaction_name']; ?>"  id="transactionName_<?php echo $key; ?>" name="transaction_detail[<?php echo $key; ?>][transaction_name]" />
 
                                     <div class="card mb-2">
                                         <div class="card-body alert-secondary">
@@ -127,10 +127,13 @@
 </div>
 
 
+
+<?php include 'footer.php';?>
+
 <!-- Clone Div -->
 <input type="hidden" id="checklength" value='<?php echo $checkIteration; ?>'>
 <div id="voucherCloneDiv" class="d-none">
-    <div class="form-group identifyCls" id="identifyDiv_XXX" data-size="XXX">
+    <div class="form-group identifyClsYYY" id="identifyDiv_XXX" data-size="XXX">
     <input type="hidden"  id="transactionName_XXX" name="transaction_detail[XXX][transaction_name]" />
 
         <div class="card mb-2">
@@ -162,4 +165,3 @@
         </p>
     </div>
 </div>
-<?php include 'footer.php';?>
