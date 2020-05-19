@@ -1,4 +1,9 @@
-<?php include 'header.php';?>
+<?php 
+    include 'header.php';
+    //Get List 
+    $voucherListData = $commonModel->getVoucherListData();
+    $i = 1;
+?>
     <div class="container-fluid">
         <div class="row">
             <?php include 'sidebar.php';?>
@@ -16,6 +21,7 @@
                             <th>Voucher Date</th>
                             <th>Voucher No</th>
                             <th>Farmer Name</th>
+                            <th>Farmer Code</th>
                             <th>Transaction Title</th>
                             <th>(₹) Amount</th>
                             <th>Description</th>
@@ -23,66 +29,51 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>10/06/2020</td>
-                            <td>654654654ASDASD</td>
-                            <td>Saravanan</td>
-                            <td>Tractor Charges</td>
-                            <td>3500</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                            <td class="text-right">
-                                <ul class="nav justify-content-end">
-                                    <li class="mr-3"><a title='Edit' href=''><span class="material-icons">edit</span></a></li>
-                                    <li><a id="delete" href='#delete' data-toggle="modal" title='Delete' ><span class="material-icons">delete</span></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                        <td>1</td>
-                            <td>10/06/2020</td>
-                            <td>654654654ASDASD</td>
-                            <td>Saravanan</td>
-                            <td>Tractor Charges</td>
-                            <td>3500</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                            <td class="text-right">
-                                <ul class="nav justify-content-end">
-                                    <li class="mr-3"><a title='Edit' href=''><span class="material-icons">edit</span></a></li>
-                                    <li><a id="delete" href='#delete' data-toggle="modal" title='Delete' ><span class="material-icons">delete</span></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                        <td>1</td>
-                            <td>10/06/2020</td>
-                            <td>654654654ASDASD</td>
-                            <td>Saravanan</td>
-                            <td>Tractor Charges</td>
-                            <td>3500</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                            <td class="text-right">
-                                <ul class="nav justify-content-end">
-                                    <li class="mr-3"><a title='Edit' href=''><span class="material-icons">edit</span></a></li>
-                                    <li><a id="delete" href='#delete' data-toggle="modal" title='Delete' ><span class="material-icons">delete</span></a></li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                        <td>1</td>
-                            <td>10/06/2020</td>
-                            <td>654654654ASDASD</td>
-                            <td>Saravanan</td>
-                            <td>Tractor Charges</td>
-                            <td>3500</td>
-                            <td>Lorem ipsum dolor sit amet consectetur adipisicing elit.</td>
-                            <td class="text-right">
-                                <ul class="nav justify-content-end">
-                                    <li class="mr-3"><a title='Edit' href=''><span class="material-icons">edit</span></a></li>
-                                    <li><a id="delete" href='#delete' data-toggle="modal" title='Delete' ><span class="material-icons">delete</span></a></li>
-                                </ul>
-                            </td>
-                        </tr>
+                        <?php 
+                            foreach($voucherListData as $key => $value) {
+
+                                $transcationDetail = json_decode($voucherListData[$key]['transaction_detail'],true); 
+                                foreach($transcationDetail as $tKey => $tValue) {  ?>
+                                    <tr>
+                                        <td><?php echo $i; ?></td>
+                                        <td><?php echo $value['voucher_date']; ?></td>
+                                        <td><?php echo $value['voucher_no']; ?></td>
+                                        <td><?php echo $value['farmer_name']; ?></td>
+                                        <td><?php echo $value['farmer_code']; ?></td>
+                                        <td><?php echo $tValue['transaction_name']; ?></td>
+                                        <td><?php echo $tValue['amount']; ?></td>
+                                        <td><?php echo $tValue['description']; ?></td>
+                                        <td class="text-right">
+                                            <ul class="nav justify-content-end">
+                                                <li class="mr-3"><a title='<?php echo $lang['edit']; ?>' href='addVoucher.php?id=<?php echo $value['voucher_transaction_detail_id'] ?>'><span class="material-icons">edit</span></a></li>
+                                                <li><a id="delete" href='#delete<?php echo $i ?>' data-toggle="modal" title='<?php echo $lang['delete'] ?>' ><span class="material-icons">delete</span></a></li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <!-- Modal -->
+                                    <div class="modal fade" id='delete<?php echo $i ?>' tabindex="-1" role="dialog" aria-labelledby="delete1ModalModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="delete1ModalModalLabel">Delete</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Do you want to Delete the Record.
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                                                <a href="../Model/CommonModel.php?dId=<?php echo $value['voucher_transaction_detail_id'] ?>&tb=v_t_d" class="btn btn-primary">Delete</a>
+                                            </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                        <?php 
+                        $i++;
+                                } 
+                            } ?>
                     </tbody>
                 </table>
             </div>

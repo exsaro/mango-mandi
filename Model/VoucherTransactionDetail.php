@@ -14,17 +14,22 @@
 
         //Store and update Company Data
         public function storeData($storeData){
-            $status = isset($storeData['status']) ? 'A' : 'IA' ;
+            $status = 'A' ;
             $urlId  = '';
-            if(isset($storeData['transaction_name']) && $storeData['transaction_name'] != '' && isset($storeData['transaction_code']) && $storeData['transaction_code'] != ''){
-            
+            if(isset($storeData['voucher_date']) && $storeData['voucher_date'] != '' && isset($storeData['voucher_no']) && $storeData['voucher_no'] != ''  && isset($storeData['farmer_id']) && $storeData['farmer_id'] != ''  && isset($storeData['transaction_detail']) && $storeData['transaction_detail'] != ''){
+                 
+                $transcationDetail = json_encode($storeData['transaction_detail']);
+                
+                $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
-                    $sql ="update transaction_master set transaction_code='".$storeData['transaction_code']."',transaction_name='".$storeData['transaction_name']."', status='".$status."' where transaction_id='".$storeData['editId']."' ";
+                    $sql ="update voucher_transaction_detail set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."',transaction_detail='".$transcationDetail."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_transaction_detail_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into transaction_master(company_id,transaction_name,transaction_code,status) values('".$_SESSION['company_id']."','".$storeData['transaction_name']."', '".$storeData['transaction_code']."','$status')";
+                    $sql = "insert into voucher_transaction_detail(company_id,farmer_id,voucher_date,voucher_no,transaction_detail,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','".$transcationDetail."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
+// print_r($sql);
+// exit;
                 $storeCompanyData = mysqli_query( $this->connected, $sql);
                 if($storeCompanyData){
                     $_SESSION['alert']          = 'alert-success';
@@ -33,14 +38,14 @@
                     $_SESSION['alert']          = 'alert-danger';
                 }
 
-                header("Location:../View/transaction.php");       
+                header("Location:../View/voucherTransaction.php");       
             }else{
                 if($storeData['editId'] != ""){
                     $urlId  = '?id='.$storeData['editId'];
                 }
                 $_SESSION['message']        = 'Please enter all required fields!';
                 $_SESSION['alert']          = 'alert-danger';
-                header("Location:../View/addTransaction.php".$urlId);  
+                header("Location:../View/addVoucher.php".$urlId);  
             }
         }
     }

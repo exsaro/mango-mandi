@@ -70,6 +70,22 @@
             }
 
         }
+
+        // Get Voucher List Data
+        public function getVoucherListData(){
+            
+            $sql = "SELECT * FROM voucher_transaction_detail as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
     }
 
 

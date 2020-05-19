@@ -288,6 +288,36 @@ $(document).ready( function () {
         });
     }
 
+    //Voucher Validation
+    if($("#addVoucher").length)
+    {
+        $('#voucher_no').rules("add", {
+            remote : {
+                url : '../Model/CommonModel.php',
+                type : 'post',
+                data: {
+                    validation:'uniqueValidation',
+                    tableName: 'voucher_transaction_detail',
+                    companyId: 'yes',
+                    companyIdValue:  function() {
+                        return $( "#companyId" ).val();
+                    },
+                    checkColumn:'voucher_no',
+                    editColumn:'voucher_transaction_detail_id',
+                    checkColumnValue: function() {
+                        return $( "#voucher_no" ).val();
+                    },
+                    editColumnValue: function() {
+                        return $( "#editId" ).val();
+                    }
+                }
+            },
+            messages: {
+                remote: "Transaction code already exists"
+            }
+        });
+    }
+
     //Transaction Validation
     if($("#addTransaction").length)
     {
@@ -321,3 +351,38 @@ $(document).ready( function () {
 } );
 
 
+/*  Voucher Transcation Details Start*/
+
+    function addTranscation(index){
+        var checkLength = parseInt($('#checklength').val());
+        checkLength++;
+        $('#checklength').val(checkLength);
+        var CloneDiv = $('#voucherCloneDiv').html().replace(/XXX/g,checkLength);
+        $('#voucherTranscationDiv').append(CloneDiv);
+        $('.identifyCls').each(function(idx){
+            $('#addInx_'+idx).hide();
+            $('#removeInx_'+idx).hide();
+            if(checkLength == idx){
+                console.log(1);
+                $('#addInx_'+idx).show();
+            }else{
+                $('#removeInx_'+idx).show(); 
+            } 
+
+        })
+    }
+
+    function removeTranscation(index){
+        $("#identifyDiv_"+index).remove();
+    }
+
+
+    function setTrancationName(index){
+        var textData = $('#transcationId_'+index+' option:selected').text();
+        var textName = textData.split(' - ')[0];
+        $('#transactionName_'+index).val(textName);
+        console.log(index);
+        console.log( $('#transactionName_'+index));
+        console.log(textName);
+    }
+/*  Voucher Transcation Details End*/
