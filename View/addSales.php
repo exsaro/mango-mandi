@@ -35,35 +35,46 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Select Farmer</label>
-                            <select name="select_farmer" class="custom-select" required>
-                                <option value="">Please select</option>
-                                <option value="1">Saravaan1</option>
-                                <option value="2">Saravaan2</option>
-                                <option value="3">Saravaan3</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="">Select Item</label>
-                            <select name="select_item" class="custom-select" required>
-                                <option value="">Please select</option>
-                                <option value="1">Saravaan1</option>
-                                <option value="2">Saravaan2</option>
-                                <option value="3">Saravaan3</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Qty</label>
-                                    <input type="number" min="0" class="form-control" name="qty" placeholder="Qty" required />
+                        <div class="card">
+                            <div class="card-body alert-secondary">
+                                <div class="row mb-3">
+                                    <div class="col">
+                                        <label for="">Select Farmer</label>
+                                        <select name="select_farmer" class="custom-select" required>
+                                            <option value="">Please select</option>
+                                            <option value="1">Saravaan1</option>
+                                            <option value="2">Saravaan2</option>
+                                            <option value="3">Saravaan3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Select Item</label>
+                                        <select name="select_item" class="custom-select" required>
+                                            <option value="">Please select</option>
+                                            <option value="1">Saravaan1</option>
+                                            <option value="2">Saravaan2</option>
+                                            <option value="3">Saravaan3</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label for="">Rate (₹)</label>
-                                    <input type="number" min="0" class="form-control" name="rate" placeholder="Rate" required />
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="">Qty</label>
+                                        <input type="number" min="0" class="form-control" name="qty" placeholder="Qty" required />
+                                    </div>
+                                    <div class="col">
+                                        <label for="">Rate (₹)</label>
+                                        <input type="number" min="0" class="form-control" name="rate" placeholder="Rate" required />
+                                    </div>
                                 </div>
-                            </div>    
+                            </div>
                         </div>
+                        <p class="text-right fz12">
+                            <a style="" class="addClass" href="javascript:void(0);" >Add </a> 
+                            <a style="" class="removeClass" href="javascript:void(0);">  Remove</a>
+                        </p>
+                        </div>
+                        
                         
                                 
                         <div class="form-group text-right"><button type="submit" name='voucher_submit' class="btn btn-primary">Submit</button></div>

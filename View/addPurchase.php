@@ -35,13 +35,23 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="">Select Item</label>
-                            <select name="select_item" class="custom-select" required>
-                                <option value="">Please select</option>
-                                <option value="1">Saravaan1</option>
-                                <option value="2">Saravaan2</option>
-                                <option value="3">Saravaan3</option>
-                            </select>
+                        <div class="card mb-2">
+                            <div class="card-body alert-secondary">
+                                
+                                    <label for="">Select Item</label>
+                                    <select name="select_item" class="custom-select" required>
+                                        <option value="">Please select</option>
+                                        <option value="1">Saravaan1</option>
+                                        <option value="2">Saravaan2</option>
+                                        <option value="3">Saravaan3</option>
+                                    </select>
+                                
+                            </div>
+                        </div>
+                        <p class="text-right fz12">
+                            <a style="" class="addClass" href="javascript:void(0);" >Add </a> 
+                            <a style="" class="removeClass" href="javascript:void(0);">  Remove</a>
+                        </p>
                         </div>
                                 
                         <div class="form-group text-right"><button type="submit" name='voucher_submit' class="btn btn-primary">Submit</button></div>
