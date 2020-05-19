@@ -1,6 +1,6 @@
-<div class="col-md-2 sidebar py-5 px-0">
+<div class="col-md-2 sidebar bg-light py-5 px-0">
     <div class="user text-center mb-5">
-        <div class="user-img mb-3">
+        <div class="user-img bg-primary mb-3">
             <a href="dashboard.php"><span class="material-icons">person</span></a>
         </div>
         <h4><?php echo $_SESSION['user_name']; ?></h4>

@@ -44,11 +44,22 @@
 })();
 
 
-
-
 $("#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser,#adminCompany, #addVoucher,#addPurchase, #addPayment, #printReport").validate();
 
 $(document).ready( function () {
+
+    $('#change-theme').click(function(e){
+        e.preventDefault();
+        $(this).hide();
+        $(this).next('.choose').show();
+    })
+    $('.choose li').click(function(e){
+        e.preventDefault();
+        var nam = $(this).attr('class');
+        $('#change_theme').attr('href','../css/themes/'+nam+'.min.css');
+        $(this).parents('.choose').hide();
+        $(this).parents('.choose').siblings('#change-theme').show();
+    })
 
     $('#reportModal').on('show.bs.modal', function (event) {
         $(this).find('.custom-select,.form-control').val('');
