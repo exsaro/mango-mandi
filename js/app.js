@@ -111,250 +111,60 @@ $(document).ready( function () {
     //User Validation
     if($("#addUser").length)
     {
-        $.extend($.validator.messages, 
-        { 
-            remote:"User name already exists",
-        }); 
-
-        $('#user_name').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'user_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'user_name',
-                    editColumn:'user_id',
-                    checkColumnValue: function() {
-                        return $( "#user_name" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            }
-        });
+        uniqueValidation('user_name','user_master','yes','user_id','User name already exists');
     }
 
     //Company Validation
     if($("#addCompany").length)
     {
+        uniqueValidation('company_name','company_master','no','company_id','Company name already exists');
+
         $('#pincode').rules("add", {
-            number: true
+            number: true,
+            messages: {
+                number: "Please enter valid pincode"
+            }
         });
-        $.extend($.validator.messages, 
-            { 
-                remote:"Company name already exists",
-            });     
-    
-            $('#company_name').rules("add", {
-                remote : {
-                    url : '../Model/CommonModel.php',
-                    type : 'post',
-                    data: {
-                        validation:'uniqueValidation',
-                        tableName: 'company_master',
-                        companyId: 'no',
-                        checkColumn:'company_name',
-                        editColumn:'company_id',
-                        checkColumnValue: function() {
-                            return $( "#company_name" ).val();
-                        },
-                        editColumnValue: function() {
-                            return $( "#editId" ).val();
-                        }
-                    }
-                }
-            });
     }
 
     //Item Validation
     if($("#addItem").length)
     {
         $('#price').rules("add", {
-            number: true
-        });
-        $.extend($.validator.messages, 
-        { 
-            number:"Please enter a valid amount"
-        });     
-
-        $('#product_name').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'product_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'product_name',
-                    editColumn:'product_id',
-                    checkColumnValue: function() {
-                        return $( "#product_name" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
+            number: true,
             messages: {
-                remote: "Item name already exists"
+                number: "Please enter valid amount"
             }
-        });
+        });   
 
+        uniqueValidation('product_name','product_master','yes','product_id','Item name already exists');
 
-        $('#product_code').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'product_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'product_code',
-                    editColumn:'product_id',
-                    checkColumnValue: function() {
-                        return $( "#product_code" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
-            messages: {
-                remote: "Item code already exists"
-            }
-        });
+        uniqueValidation('product_code','product_master','yes','product_id','Item code already exists');
+
     }
     
     //Farmer Validation
     if($("#addFarmer").length)
     {
-        $('#farmer_code').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'farmer_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'farmer_code',
-                    editColumn:'farmer_id',
-                    checkColumnValue: function() {
-                        return $( "#farmer_code" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
-            messages: {
-                remote: "Farmer code already exists"
-            }
-        });
+        uniqueValidation('farmer_code','farmer_master','yes','farmer_id','Farmer code already exists');
     }
 
     //Customer Validation
     if($("#addCustomer").length)
     {
-        $('#customer_code').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'customer_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'customer_code',
-                    editColumn:'customer_id',
-                    checkColumnValue: function() {
-                        return $( "#customer_code" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
-            messages: {
-                remote: "Customer code already exists"
-            }
-        });
+        uniqueValidation('customer_code','customer_master','yes','customer_id','Customer code already exists');
     }
 
     //Voucher Validation
     if($("#addVoucher").length)
     {
-        $('#voucher_no').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'voucher_transaction_detail',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'voucher_no',
-                    editColumn:'voucher_transaction_detail_id',
-                    checkColumnValue: function() {
-                        return $( "#voucher_no" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
-            messages: {
-                remote: "Transaction code already exists"
-            }
-        });
+        uniqueValidation('voucher_no','voucher_transaction_detail','yes','voucher_transaction_detail_id','Voucher number already exists');
     }
 
     //Transaction Validation
     if($("#addTransaction").length)
     {
-        $('#transaction_code').rules("add", {
-            remote : {
-                url : '../Model/CommonModel.php',
-                type : 'post',
-                data: {
-                    validation:'uniqueValidation',
-                    tableName: 'transaction_master',
-                    companyId: 'yes',
-                    companyIdValue:  function() {
-                        return $( "#companyId" ).val();
-                    },
-                    checkColumn:'transaction_code',
-                    editColumn:'transaction_id',
-                    checkColumnValue: function() {
-                        return $( "#transaction_code" ).val();
-                    },
-                    editColumnValue: function() {
-                        return $( "#editId" ).val();
-                    }
-                }
-            },
-            messages: {
-                remote: "Transaction code already exists"
-            }
-        });
+        uniqueValidation('transaction_code','transaction_master','yes','transaction_id','Transaction code already exists');
     }
 
 } );
@@ -396,3 +206,34 @@ $(document).ready( function () {
         console.log(textName);
     }
 /*  Voucher Transcation Details End*/
+
+/* Common Function Unique Validation Ajax Call  Start*/
+
+function uniqueValidation(filedName,tableName,companyIdcheck,editColumn,message){
+    $('#'+filedName).rules("add", {
+        remote : {
+            url : '../Model/CommonModel.php',
+            type : 'post',
+            data: {
+                validation:'uniqueValidation',
+                tableName: tableName,
+                companyId: companyIdcheck,
+                companyIdValue:  function() {
+                    return $( "#companyId" ).val();
+                },
+                checkColumn : filedName,
+                editColumn  : editColumn,
+                checkColumnValue: function() {
+                    return $( "#"+filedName ).val();
+                },
+                editColumnValue: function() {
+                    return $( "#editId" ).val();
+                }
+            }
+        },
+        messages: {
+            remote: message
+        }
+    });
+}
+/* Unique Validation Ajax Call  End*/

@@ -42,12 +42,12 @@
                                                 <label class="custom-control-label" for="customSwitch1">Status</label>
                                             </div>
                                         </div>
-                                        <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Item Code" required minlength=3 maxlength=100 value='<?php echo $productName; ?>' >
+                                        <input type="text" class="form-control" id="product_code" name="product_code" placeholder="Item Code" required minlength=3 maxlength=100 value='<?php echo $productCode; ?>' >
                                 </div>
                                 
                                 <div class="form-group">
                                     <label for="">Item Name</label>
-                                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Item Name" required minlength=3 maxlength=100 value='<?php echo $productCode; ?>' >
+                                    <input type="text" class="form-control" id="product_name" name="product_name" placeholder="Item Name" required minlength=3 maxlength=100 value='<?php echo $productName; ?>' >
                                 </div>
                                 <div class="form-group">
                                     <label for="">Unit of measurement</label>

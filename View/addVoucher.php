@@ -150,7 +150,7 @@
                     </div>
                     <div class="col">
                         <label for="">(₹) Amount</label>
-                        <input type="text" class="form-control" placeholder="Amount" name="transaction_detail[XXX][amount]" required />
+                        <input type="number" class="form-control" placeholder="Amount" name="transaction_detail[XXX][amount]" required />
                     </div>
                     <div class="col">
                         <label for="">Description</label>
