@@ -15,14 +15,14 @@
             
             $sql = "SELECT * FROM ".$tableName." WHERE status != 'D'";
             
-            if($tableName != 'user_type_master'){
+            if($tableName != 'user_type_master' && $tableName !=  'voucher_transaction_group'){
                 $sql .= " AND company_id ='". $_SESSION['company_id']."'";
             }
 
             if($type == 'edit'){
                 $sql .= " AND ".$columName." = '". $id."'";
             }
-               
+
             $executeQuery   = mysqli_query($this->connected ,$sql); 
             
             $getData = [];

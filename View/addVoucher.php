@@ -8,14 +8,14 @@
     $transcationData[0]['transaction_id']    = '';
     $transcationData[0]['amount']            = '';
     $transcationData[0]['description']       = '';
-    $transcationData[0]['transaction_name']       = '';
     $farmerOptionData = $commonModel->getData('farmer_master','list','','');
     $transcationOptionData = $commonModel->getData('transaction_master','list','','');
-    
+    $amount = 0;
 
     if(isset($_GET['id'])){
         $title      = 'Edit Voucher';
         $voucherEditData = $commonModel->getData('voucher_transaction_detail','edit',$_GET['id'],'voucher_transaction_detail_id');
+        $voucherGroupData = $commonModel->getData('voucher_transaction_group','edit',$_GET['id'],'voucher_transaction_detail_id');
         $editData   = isset($voucherEditData[0]) ?  $voucherEditData[0] : [] ;
         $submitType = 'update';
     }
@@ -23,7 +23,7 @@
     $voucherNo      = isset($editData['voucher_no'])  ? $editData['voucher_no']   : '';
     $voucherDate    = isset($editData['voucher_date'])  ? $editData['voucher_date']   : '';
     $farmerId       = isset($editData['farmer_id'])  ? $editData['farmer_id']   : '';
-    $transcationDetails = isset($editData['transaction_detail'])   ? json_decode($editData['transaction_detail'],true) : $transcationData;
+    $transcationDetails = isset($voucherGroupData)   ? $voucherGroupData : $transcationData;
     $status      = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';
 ?>
 
@@ -71,22 +71,24 @@
                             <?php foreach($transcationDetails as $key => $value) { 
                                     $checkIteration = $key;
                                     $removeClsBtn   = '';
-                                    $addClsBtn      = '';
-                                    if(count($transcationDetails)-1 == $key )
+                                    $addClsBtn   = '';
+                                    if($checkIteration == 0 && count($transcationDetails) == 1 )
                                         $removeClsBtn = 'display:none;';
+                                    elseif(count($transcationDetails)-1 == $checkIteration )
+                                        $addClsBtn   = '';                                  
                                     else
-                                        $addClsBtn = 'display:none;';
+                                        $addClsBtn   = 'display:none;';                                  
+                                    $amount += $value['amount'];
                             ?>
 
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
-                                    <input type="hidden" value="<?php echo $value['transaction_name']; ?>"  id="transactionName_<?php echo $key; ?>" name="transaction_detail[<?php echo $key; ?>][transaction_name]" />
 
                                     <div class="card mb-2">
                                         <div class="card-body alert-secondary">
                                             <div class="row">
                                                 <div class="col">
                                                     <label for="">Voucher Title</label>
-                                                    <select class="custom-select" id="transcationId_<?php echo $key; ?>" name="transaction_detail[<?php echo $key; ?>][transaction_id]" onchange="setTrancationName(<?php echo $key; ?>)" required>
+                                                    <select class="custom-select" id="transcationId_<?php echo $key; ?>" name="transaction_detail[<?php echo $key; ?>][transaction_id]"   required>
                                                         <option value="">Select Transcation</option>
                                                         <?php foreach($transcationOptionData as $tKey => $tValue) { ?>
                                                             <option <?php echo ($value['transaction_id'] ==  $tValue['transaction_id'])?'selected':''; ?> value="<?php echo $tValue['transaction_id']; ?>" ><?php echo $tValue['transaction_name']." - " ; ?><?php echo $tValue['transaction_code']; ?></option>
@@ -95,7 +97,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <label for="">(₹) Amount</label>
-                                                    <input type="number" value="<?php echo $value['amount']; ?>" class="form-control" name="transaction_detail[<?php echo $key; ?>][amount]" placeholder="Amount" required minlength=1 maxlength=100 />
+                                                    <input type="number" value="<?php echo $value['amount']; ?>" onkeyup="calculateVoucher()" class="form-control calculateVoucher" name="transaction_detail[<?php echo $key; ?>][amount]"  placeholder="Amount" required minlength=1 maxlength=100 />
                                                 </div>
                                                 <div class="col">
                                                     <label for="">Description</label>
@@ -105,14 +107,14 @@
                                         </div>
                                     </div>
                                     <p class="text-right fz12">
-                                        <a style="<?php echo  $addClsBtn; ?>" class="addClass" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
+                                        <a style="<?php echo $addClsBtn; ?>" class="addClass" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
                                         <a style="<?php echo $removeClsBtn; ?>" class="removeClass" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
                                     </p>
                                 </div>
                             <?php } ?>
                         </div>
                         <!-- Add and Remove Transaction END-->
-
+                                  <p><span class="font-weight-bold">Total Amount : </span> <span id="calcTotalVoucher"><?php echo $amount; ?> </span></span></p>                              
 
                         <div class="form-group text-right">
                         <button  type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button>
@@ -134,14 +136,13 @@
 <input type="hidden" id="checklength" value='<?php echo $checkIteration; ?>'>
 <div id="voucherCloneDiv" class="d-none">
     <div class="form-group identifyClsYYY" id="identifyDiv_XXX" data-size="XXX">
-    <input type="hidden"  id="transactionName_XXX" name="transaction_detail[XXX][transaction_name]" />
 
         <div class="card mb-2">
             <div class="card-body alert-secondary">
                 <div class="row">
                     <div class="col">
                         <label for="">Voucher Title</label>
-                        <select class="custom-select" id="transcationId_XXX"  name="transaction_detail[XXX][transaction_id]" onchange="setTrancationName(XXX)"  required>
+                        <select class="custom-select" id="transcationId_XXX"  name="transaction_detail[XXX][transaction_id]"  required>
                         <option value="">Select Transcation</option>
                             <?php foreach($transcationOptionData as $tKey => $tValue) { ?>
                                 <option value="<?php echo $tValue['transaction_id']; ?>" ><?php echo $tValue['transaction_name']." - " ; ?><?php echo $tValue['transaction_code']; ?></option>
@@ -150,11 +151,11 @@
                     </div>
                     <div class="col">
                         <label for="">(₹) Amount</label>
-                        <input type="number" class="form-control" placeholder="Amount" name="transaction_detail[XXX][amount]" required />
+                        <input type="number" class="form-control calculateVoucherYYY" placeholder="Amount" name="transaction_detail[XXX][amount]"  onkeyup="calculateVoucher()" required  minlength=1 maxlength=100 />
                     </div>
                     <div class="col">
                         <label for="">Description</label>
-                        <input type="text" class="form-control" placeholder="Description" name="transaction_detail[XXX][description]" required />
+                        <input type="text" class="form-control" placeholder="Description" name="transaction_detail[XXX][description]" required   minlength=3 maxlength=100/>
                     </div>
                 </div>        
             </div>

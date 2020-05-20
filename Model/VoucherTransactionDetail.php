@@ -18,20 +18,38 @@
             $urlId  = '';
             if(isset($storeData['voucher_date']) && $storeData['voucher_date'] != '' && isset($storeData['voucher_no']) && $storeData['voucher_no'] != ''  && isset($storeData['farmer_id']) && $storeData['farmer_id'] != ''  && isset($storeData['transaction_detail']) && $storeData['transaction_detail'] != ''){
                  
-                $transcationDetail = json_encode($storeData['transaction_detail']);
-                
                 $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
-                    $sql ="update voucher_transaction_detail set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."',transaction_detail='".$transcationDetail."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_transaction_detail_id='".$storeData['editId']."' ";
+                    $sql ="update voucher_transaction_detail set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_transaction_detail_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into voucher_transaction_detail(company_id,farmer_id,voucher_date,voucher_no,transaction_detail,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','".$transcationDetail."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                    $sql = "insert into voucher_transaction_detail(company_id,farmer_id,voucher_date,voucher_no,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
-// print_r($sql);
-// exit;
                 $storeCompanyData = mysqli_query( $this->connected, $sql);
+
                 if($storeCompanyData){
+                    $transcationDetail = $storeData['transaction_detail'];
+
+                    if($storeData['editId'] == "")
+                        $voucher_transaction_detail_id  = mysqli_insert_id($this->connected);
+                    else
+                        $voucher_transaction_detail_id  = $storeData['editId'];
+
+                    $deleteSql = "DELETE FROM voucher_transaction_group WHERE voucher_transaction_detail_id = '".$voucher_transaction_detail_id."'";
+                    $deleteData = mysqli_query( $this->connected, $deleteSql);
+                    
+                    $multiRowInsert = "insert into voucher_transaction_group(voucher_transaction_detail_id,transaction_id,amount,description,status ) values";
+                    $count = 1;
+                    foreach($transcationDetail as $key => $value){
+                        $multiRowInsert .= "('".$voucher_transaction_detail_id."','".$value['transaction_id']."', '".$value['amount']."', '".$value['description']."','A')";
+                        if(count($transcationDetail) != $count)
+                            $multiRowInsert .= " , ";
+                            $count++;
+                    }
+
+                   mysqli_query($this->connected, $multiRowInsert);
+
                     $_SESSION['alert']          = 'alert-success';
                 }else{
                     $_SESSION['message']        = 'Something went wrong!';

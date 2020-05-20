@@ -182,11 +182,10 @@ $(document).ready( function () {
         var length = $('.identifyCls').length -1;
         $('.identifyCls').each(function(idx){
             var findInx = $(this).data('size');
-            $('#addInx_'+findInx).hide();
-            $('#removeInx_'+findInx).hide();
+            $('.addClass').hide();
+            $('.removeClass').show();
             if( length == idx){
                 $('#addInx_'+findInx).show();
-            }else{
                 $('#removeInx_'+findInx).show(); 
             }
         })
@@ -194,16 +193,35 @@ $(document).ready( function () {
 
     function removeTranscation(index){
         $("#identifyDiv_"+index).remove();
+        var length = $('.identifyCls').length -1;
+        $('.identifyCls').each(function(idx){
+            var findInx = $(this).data('size');
+
+            if(length > 0){
+                $('.removeClass').show();
+            }
+            $('.addClass').hide();
+
+            if( length == idx){
+                if(length > 0){
+                    $('#removeInx_'+findInx).show(); 
+                }else{
+                    $('#removeInx_'+findInx).hide(); 
+                }
+                $('#addInx_'+findInx).show();
+            }
+        })
+        calculateVoucher();
     }
 
 
-    function setTrancationName(index){
-        var textData = $('#transcationId_'+index+' option:selected').text();
-        var textName = textData.split(' - ')[0];
-        $('#transactionName_'+index).val(textName);
-        console.log(index);
-        console.log( $('#transactionName_'+index));
-        console.log(textName);
+    function calculateVoucher() {
+        var totalAmount = 0;
+        $('.identifyCls').each(function(idx){
+            var findInx = $(this).data('size');
+            totalAmount += parseFloat($('input[name="transaction_detail['+findInx+'][amount]"]').val());
+        });
+        $('#calcTotalVoucher').html(totalAmount);
     }
 /*  Voucher Transcation Details End*/
 
