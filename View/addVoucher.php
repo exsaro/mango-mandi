@@ -77,8 +77,9 @@
                                     elseif(count($transcationDetails)-1 == $checkIteration )
                                         $addClsBtn   = '';                                  
                                     else
-                                        $addClsBtn   = 'display:none;';                                  
-                                    $amount += $value['amount'];
+                                        $addClsBtn   = 'display:none;';  
+                                                                        
+                                    $amount += $value['amount'] != '' ? $value['amount'] : 0;
                             ?>
 
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
@@ -107,8 +108,8 @@
                                         </div>
                                     </div>
                                     <p class="text-right fz12">
-                                        <a style="<?php echo $addClsBtn; ?>" class="addClass" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
-                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
+                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
+                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
                                     </p>
                                 </div>
                             <?php } ?>
@@ -161,8 +162,8 @@
             </div>
         </div>
         <p class="text-right fz12">
-            <a class="addClass" id="addInx_XXX" href="javascript:void(0);" onclick="addTranscation(0)">Add</a> 
-            <a class="removeClass" id="removeInx_XXX" href="javascript:void(0);" onclick="removeTranscation(XXX)">Remove</a>
+            <a class="addClass badge badge-success" id="addInx_XXX" href="javascript:void(0);" onclick="addTranscation(0)">Add</a> 
+            <a class="removeClass badge badge-danger" id="removeInx_XXX" href="javascript:void(0);" onclick="removeTranscation(XXX)">Remove</a>
         </p>
     </div>
 </div>
