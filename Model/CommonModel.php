@@ -15,12 +15,16 @@
             
             $sql = "SELECT * FROM ".$tableName." WHERE status != 'D'";
             
-            if($tableName != 'user_type_master' && $tableName !=  'voucher_transaction_group'){
+            if($tableName != 'user_type_master' && $tableName !=  'voucher_transaction_group' && $tableName != 'purchase_master_group'){
                 $sql .= " AND company_id ='". $_SESSION['company_id']."'";
             }
 
             if($type == 'edit'){
                 $sql .= " AND ".$columName." = '". $id."'";
+            }
+
+            if($tableName == 'user_master'){
+                $sql .= " AND user_type_id != '".  $_SESSION['user_type_id']."'";
             }
 
             $executeQuery   = mysqli_query($this->connected ,$sql); 
@@ -75,6 +79,20 @@
         public function getVoucherListData(){
             
             $sql = "SELECT * FROM voucher_transaction_detail as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
+
+        public function getPurchaseListData(){
+            $sql = "SELECT * FROM purchase_master as pm INNER JOIN farmer_master as fm ON pm.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND pm.status != 'D' AND pm.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 

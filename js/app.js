@@ -167,6 +167,9 @@ $(document).ready( function () {
         uniqueValidation('transaction_code','transaction_master','yes','transaction_id','Transaction code already exists');
     }
 
+    if($("#addPurchase").length){
+        uniqueValidation('receipt_number','purchase_master','yes','purchase_master_id','Receipt code already exists');
+    }
 } );
 
 
@@ -177,8 +180,8 @@ $(document).ready( function () {
         var checkLength = parseInt($('#checklength').val());
         checkLength++;
         $('#checklength').val(checkLength);
-        var CloneDiv = $('#voucherCloneDiv').html().replace(/XXX/g,checkLength).replace(/YYY/g,'');
-        $('#voucherTranscationDiv').append(CloneDiv);
+        var CloneDiv = $('#cloneDiv').html().replace(/XXX/g,checkLength).replace(/YYY/g,'');
+        $('#originalDiv').append(CloneDiv);
         var length = $('.identifyCls').length -1;
         $('.identifyCls').each(function(idx){
             var findInx = $(this).data('size');

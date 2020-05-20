@@ -44,7 +44,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Voucher No</label>
-                            <input type="text" class="form-control" name="voucher_no" id="voucher_no"  placeholder="Voucher No" value="<?php echo  $voucherNo; ?>" required />
+                            <input type="text" class="form-control" name="voucher_no" id="voucher_no"  placeholder="Voucher No" value="<?php echo  $voucherNo; ?>" required  minlength=3 maxlength=100 />
                         </div>
                         <div class="form-group">
                             <label for="">Voucher Date</label>
@@ -67,7 +67,7 @@
 
 
                         <!-- Add and Remove Transaction START-->
-                        <div id="voucherTranscationDiv">
+                        <div id="originalDiv">
                             <?php foreach($transcationDetails as $key => $value) { 
                                     $checkIteration = $key;
                                     $removeClsBtn   = '';
@@ -134,7 +134,7 @@
 
 <!-- Clone Div -->
 <input type="hidden" id="checklength" value='<?php echo $checkIteration; ?>'>
-<div id="voucherCloneDiv" class="d-none">
+<div id="cloneDiv" class="d-none">
     <div class="form-group identifyClsYYY" id="identifyDiv_XXX" data-size="XXX">
 
         <div class="card mb-2">
