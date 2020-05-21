@@ -35,7 +35,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                        <div class="card">
+                        <div class="card mb-2">
                             <div class="card-body alert-secondary">
                                 <div class="row mb-3">
                                     <div class="col">
@@ -70,10 +70,60 @@
                             </div>
                         </div>
                         <p class="text-right fz12">
-                            <a style="" class="addClass" href="javascript:void(0);" >Add </a> 
-                            <a style="" class="removeClass" href="javascript:void(0);">  Remove</a>
+                            <a style="" class="addClass badge badge-success" href="javascript:void(0);" >Add </a> 
+                            <a style="" class="removeClass badge badge-danger" href="javascript:void(0);">  Remove</a>
                         </p>
                         </div>
+
+                        <div class="form-group">
+                            <div class="card border-primary">
+								<div class="card-header">Other Detection</div>
+								<div class="card-body">
+									<div class="row mb-3">
+										<div class="col-md-3">
+											<label for="">Vehicle No</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">H.C</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">M.C</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Colli.</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3">
+											<label for="">Packing</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Lorry Adv.</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Other expenses</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+									</div>
+								</div>
+								<div class="card-footer text-right">
+									<span>Total Detection: </span><strong>₹ 1500/-</strong>
+								</div>
+                            </div>
+                        </div>
+
+						<div class="my-5">
+							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ 14500/-</strong></p>
+						</div>
+
+
+
                         
                         
                                 

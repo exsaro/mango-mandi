@@ -114,7 +114,10 @@
                             <?php } ?>
                         </div>
                         <!-- Add and Remove Transaction END-->
-                                  <p><span class="font-weight-bold">Total Amount : </span> <span id="calcTotalVoucher"><?php echo $amount; ?> </span></span></p>                              
+
+                        <div class="my-5">
+							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="calcTotalVoucher"><?php echo $amount; ?></span>/-</strong></p>
+						</div>                      
 
                         <div class="form-group text-right">
                         <button  type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button>

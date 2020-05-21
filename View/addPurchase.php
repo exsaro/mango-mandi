@@ -97,6 +97,53 @@
                         </div>
 
                         <!-- Add and Remove purchase END-->
+
+                        <div class="form-group">
+                            <div class="card border-primary">
+								<div class="card-header">Other Detection</div>
+								<div class="card-body">
+									<div class="row mb-3">
+										<div class="col-md-3">
+											<label for="">Vehicle No</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Tractor/Auto</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Commission</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">E.C.</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-3">
+											<label for="">Rent</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Unloading</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+										<div class="col-md-3">
+											<label for="">Advanced</label>
+											<input type="text" class="form-control" id="" name="" />
+										</div>
+									</div>
+								</div>
+								<div class="card-footer text-right">
+									<span>Total Detection: </span><strong>₹ 1500/-</strong>
+								</div>
+                            </div>
+                        </div>
+
+						<div class="my-5">
+							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ 14500/-</strong></p>
+						</div>
       
                         <div class="form-group text-right">
                             <button  type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button>
