@@ -209,11 +209,12 @@ $(document).ready(function () {
             "Transaction code already exists"
         );
     }
-<<<<<<< HEAD
-
     if($("#addPurchase").length){
-        uniqueValidation('receipt_number','purchase_master','yes','purchase_master_id','Receipt code already exists');
+        uniqueValidation('receipt_number','purchase_master','yes','purchase_master_id','Receipt No. already exists');
     }
+
+
+    
 } );
 
 
@@ -237,32 +238,8 @@ $(document).ready(function () {
             }
         })
     }
-=======
-});
 
-/*  Voucher Transcation Details Start*/
 
-function addTranscation(index) {
-    var checkLength = parseInt($("#checklength").val());
-    checkLength++;
-    $("#checklength").val(checkLength);
-    var CloneDiv = $("#voucherCloneDiv")
-        .html()
-        .replace(/XXX/g, checkLength)
-        .replace(/YYY/g, "");
-    $("#voucherTranscationDiv").append(CloneDiv);
-    var length = $(".identifyCls").length - 1;
-    $(".identifyCls").each(function (idx) {
-        var findInx = $(this).data("size");
-        $(".addClass").hide();
-        $(".removeClass").show();
-        if (length == idx) {
-            $("#addInx_" + findInx).show();
-            $("#removeInx_" + findInx).show();
-        }
-    });
-}
->>>>>>> cc8a0635bff3be30a8decdcd8cfc98538ca82ead
 
 function removeTranscation(index) {
     $("#identifyDiv_" + index).remove();

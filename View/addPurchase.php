@@ -41,7 +41,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Purchase No</label>
-                            <input type="text" class="form-control" name="receipt_number" placeholder="purchase No" value="<?php echo  $purchaseNo; ?>"  required minlength=3 maxlength=100/>
+                            <input type="text" class="form-control" id="receipt_number" name="receipt_number" placeholder="purchase No" value="<?php echo  $purchaseNo; ?>"  required minlength=3 maxlength=100/>
                         </div>
                         <div class="form-group">
                             <label for="">Purchase Date</label>
@@ -89,8 +89,8 @@
                                         </div>
                                     </div>
                                     <p class="text-right fz12">
-                                        <a style="<?php echo $addClsBtn; ?>" class="addClass" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
-                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
+                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
+                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
                                     </p>
                                 </div>
                             <?php } ?>
@@ -134,8 +134,8 @@
             </div>
         </div>
         <p class="text-right fz12">
-            <a class="addClass" id="addInx_XXX" href="javascript:void(0);" onclick="addTranscation(0)">Add</a> 
-            <a class="removeClass" id="removeInx_XXX" href="javascript:void(0);" onclick="removeTranscation(XXX)">Remove</a>
+            <a class="addClass badge badge-success" id="addInx_XXX" href="javascript:void(0);" onclick="addTranscation(0)">Add</a> 
+            <a class="removeClass badge badge-danger" id="removeInx_XXX" href="javascript:void(0);" onclick="removeTranscation(XXX)">Remove</a>
         </p>
     </div>
 </div>
