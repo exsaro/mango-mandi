@@ -326,6 +326,25 @@ function calculateTotalSale() {
     totalSalesAmount = parseFloat(sTotal) + parseFloat(tsTotal) ;
     $("#totalAmount").html(totalSalesAmount.toFixed(2));
 }
+
+function getProductAmount(sInx){
+    var productId = $('#productId_'+sInx).val();;
+    var postJson = {};
+    postJson['salesAmount'] = 'salesAmount';
+    postJson['table']  = 'product_master';
+    postJson['field']  = 'price';
+    postJson['column_name']  = 'product_id';
+    postJson['column_value']  = productId;
+    postJson['company_id'] = $("#companyId").val();
+    $.post("../Model/CommonModel.php",postJson,
+    function(data,status){
+        if(status == 'success'){
+            $('input[name="sales_details[' + sInx + '][amount]"]').val(JSON.parse(data)['amount']);
+            calculateSales();
+        }
+    });
+}
+
 /*  Sales Addition Details End*/
 
 

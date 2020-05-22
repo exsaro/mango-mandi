@@ -110,7 +110,7 @@
                                                 </div>
                                                 <div class="col">
                                                     <label for="">Select Item</label>
-                                                    <select  name="sales_details[<?php echo $key; ?>][product_id]"  class="custom-select" required>
+                                                    <select  name="sales_details[<?php echo $key; ?>][product_id]"  class="custom-select"  id="productId_<?php echo $key; ?>"onchange="getProductAmount(<?php echo $key; ?>)" required>
                                                         <option value="">Select Item</option>
                                                         <?php foreach($salesOptionData as $sKey => $sValue) { ?>
                                                             <option <?php echo ($value['product_id'] ==  $sValue['product_id'])?'selected':''; ?> value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>
@@ -228,7 +228,7 @@
                 </div>
                 <div class="col">
                     <label for="">Select Item</label>
-                    <select  name="sales_details[XXX][product_id]"  class="custom-select" required>
+                    <select  name="sales_details[XXX][product_id]" id="productId_XXX" onchange="getProductAmount(XXX)"class="custom-select" required>
                         <option value="">Select Item</option>
                         <?php foreach($salesOptionData as $sKey => $sValue) { ?>
                             <option  value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>

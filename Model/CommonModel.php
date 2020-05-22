@@ -130,6 +130,11 @@
             }
             return $getData;
         }
+        public function getAmount($getRequest){
+            $sql =  "SELECT ".$getRequest['field']." FROM ".$getRequest['table']. " WHERE company_id = '".$getRequest['company_id']."' AND ".$getRequest['column_name']." = '".$getRequest['column_value']."' AND status='A'";
+            $executeQuery  = mysqli_query($this->connected,$sql);
+             return mysqli_fetch_assoc($executeQuery)[$getRequest['field']];
+         }
     }
 
 
@@ -154,5 +159,12 @@
         $commonObj       = new CommonModel();
         $commonObj->checkUniqueValidation($_POST);
     }
-    
+
+    //Get Product Amount
+    if(isset($_REQUEST['salesAmount'])){
+        $commonObj       = new CommonModel();
+        $amount = $commonObj->getAmount($_POST);
+        $returnData['amount'] = $amount;
+        echo json_encode($returnData);
+    }
 ?>
