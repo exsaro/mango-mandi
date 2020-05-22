@@ -192,9 +192,9 @@ $(document).ready(function () {
     if ($("#addVoucher").length) {
         uniqueValidation(
             "voucher_no",
-            "voucher_transaction_detail",
+            "voucher",
             "yes",
-            "voucher_transaction_detail_id",
+            "voucher_id",
             "Voucher number already exists"
         );
     }
@@ -210,7 +210,7 @@ $(document).ready(function () {
         );
     }
     if($("#addPurchase").length){
-        uniqueValidation('receipt_number','purchase_master','yes','purchase_master_id','Receipt No. already exists');
+        uniqueValidation('receipt_number','purchase','yes','purchase_id','Receipt No. already exists');
     }
 
 
@@ -274,6 +274,25 @@ function calculateVoucher() {
     $("#calcTotalVoucher").html(totalAmount);
 }
 /*  Voucher Transcation Details End*/
+
+/*  Purchase Reduction Details Start*/
+
+    $(".calcReduction").keyup(function () {
+        var totalReduction  = 0;
+        var tractorAuto     = $('#tractor_auto').val()!=''? $('#tractor_auto').val():0;
+        var commission     = $('#commission').val()!=''? $('#commission').val():0;
+        var eC     = $('#e_c').val()!=''? $('#e_c').val():0;
+        var rent     = $('#rent').val()!=''? $('#rent').val():0;
+        var unloading     = $('#unloading').val()!=''? $('#unloading').val():0;
+        var advanced     = $('#advanced').val()!=''? $('#advanced').val():0;
+        totalReduction      = parseFloat(tractorAuto)+parseFloat(commission)+parseFloat(eC)+parseFloat(rent)+parseFloat(unloading)+parseFloat(advanced);
+        $("#calcTotalReduction").html(totalReduction.toFixed(2));
+    });
+/*  Purchase Reduction Details End*/
+
+
+
+
 
 /* Common Function Unique Validation Ajax Call  Start*/
 

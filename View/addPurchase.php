@@ -1,5 +1,8 @@
 <?php 
     include 'header.php';
+    $purchaseNumberFormat1        = $commonModel->getAutoDate();
+    $purchaseNumberFormat2        = $commonModel->getFinalRow('purchase','auto_increment_number','auto_increment_number_id');
+    $purchaseNumberFormat         = $purchaseNumberFormat1.$purchaseNumberFormat2;
     $checkIteration = 0;
     $title      = 'Add Purchase';
     $editData   = [];
@@ -11,17 +14,26 @@
 
     if(isset($_GET['id'])){
         $title      = 'Edit Purchase';
-        $purchaseEditData = $commonModel->getData('purchase_master','edit',$_GET['id'],'purchase_master_id');
-        $purchaseGroupData = $commonModel->getData('purchase_master_group','edit',$_GET['id'],'purchase_master_id');
+        $purchaseEditData = $commonModel->getData('purchase','edit',$_GET['id'],'purchase_id');
+        $purchaseGroupData = $commonModel->getData('purchase_detail','edit',$_GET['id'],'purchase_id');
         $editData   = isset($purchaseEditData[0]) ?  $purchaseEditData[0] : [] ;
         $submitType = 'update';
     }
-    $id             = isset($editData['purchase_master_id'])    ? $editData['purchase_master_id'] : '';
-    $purchaseNo      = isset($editData['receipt_number'])  ? $editData['receipt_number']   : '';
+    $id             = isset($editData['purchase_id'])    ? $editData['purchase_id'] : '';
+    $purchaseNo      = isset($editData['receipt_number'])  ? $editData['receipt_number']   : $purchaseNumberFormat;
     $purchaseDate    = isset($editData['receipt_date'])  ? $editData['receipt_date']   : '';
     $farmerId       = isset($editData['farmer_id'])  ? $editData['farmer_id']   : '';
+    $vehicleNo       = isset($editData['vehicle_no'])  ? $editData['vehicle_no']   : '';
+    $tractorAuto       = isset($editData['tractor_auto'])  ? $editData['tractor_auto']   : '';
+    $commission       = isset($editData['commission'])  ? $editData['commission']   : '';
+    $eC       = isset($editData['e_c'])  ? $editData['e_c']   : '';
+    $rent       = isset($editData['rent'])  ? $editData['rent']   : '';
+    $unloading       = isset($editData['unloading'])  ? $editData['unloading']   : '';
+    $advanced       = isset($editData['advanced'])  ? $editData['advanced']   : '';
     $status         = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';
     $purchaseDetails = isset($purchaseGroupData)   ? $purchaseGroupData : $purchaseData;
+    $totalDetection = ($tractorAuto!=''?$tractorAuto:0)+($commission!=''?$commission:0)+($eC!=''?$eC:0)+($rent!=''?$rent:0)+($unloading!=''?$unloading:0)+($advanced!=''?$advanced:0);
+    $totalDetection = sprintf("%.2f", $totalDetection);
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -31,11 +43,12 @@
                 
                     <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1>Add Purchase</h1>
+                    <h1><?php echo $title; ?></h1>
                     <a href="purchase.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form action="../Model/PurchaseDetail.php"  method="post" id="addPurchase">
                     <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="autoIncNumber" name="autoIncNumber" value='<?php echo $purchaseNumberFormat2; ?>' />
                     
                     <div class="card">
                     <div class="card-body">
@@ -105,45 +118,42 @@
 									<div class="row mb-3">
 										<div class="col-md-3">
 											<label for="">Vehicle No</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="text" class="form-control" id="" name="vehicle_no" value="<?php echo  $vehicleNo; ?>" />
 										</div>
 										<div class="col-md-3">
 											<label for="">Tractor/Auto</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="tractor_auto"  name="tractor_auto" value="<?php echo  $tractorAuto; ?>" />
 										</div>
 										<div class="col-md-3">
 											<label for="">Commission</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="commission"  name="commission" value="<?php echo  $commission; ?>" />
 										</div>
 										<div class="col-md-3">
 											<label for="">E.C.</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="e_c"  name="e_c" value="<?php echo  $eC; ?>" />
 										</div>
 									</div>
 									<div class="row">
 										<div class="col-md-3">
 											<label for="">Rent</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="rent"  name="rent" value="<?php echo  $rent; ?>" />
 										</div>
 										<div class="col-md-3">
 											<label for="">Unloading</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="unloading"  name="unloading" value="<?php echo  $unloading; ?>" />
 										</div>
 										<div class="col-md-3">
 											<label for="">Advanced</label>
-											<input type="text" class="form-control" id="" name="" />
+											<input type="number" class="form-control calcReduction" id="advanced"  name="advanced" value="<?php echo  $advanced; ?>" />
 										</div>
 									</div>
 								</div>
 								<div class="card-footer text-right">
-									<span>Total Detection: </span><strong>₹ 1500/-</strong>
+									<span>Total Detection: </span><strong>₹ <span id="calcTotalReduction"><?php echo  $totalDetection; ?></span>/-</strong>
 								</div>
                             </div>
                         </div>
 
-						<div class="my-5">
-							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ 14500/-</strong></p>
-						</div>
       
                         <div class="form-group text-right">
                             <button  type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button>
@@ -186,3 +196,11 @@
         </p>
     </div>
 </div>
+
+vehicle_no
+tractor_auto
+commission
+e_c
+rent
+unloading
+advanced    

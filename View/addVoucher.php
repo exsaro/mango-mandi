@@ -1,5 +1,8 @@
 <?php 
     include 'header.php';
+    $voucherNumberFormat1        = $commonModel->getAutoDate();
+    $voucherNumberFormat2        = $commonModel->getFinalRow('voucher','auto_increment_number','auto_increment_number_id');
+    $voucherNumberFormat         = $voucherNumberFormat1.$voucherNumberFormat2;
     $checkIteration = 0;
     $title      = 'Add Voucher';
     $editData   = [];
@@ -14,13 +17,13 @@
 
     if(isset($_GET['id'])){
         $title      = 'Edit Voucher';
-        $voucherEditData = $commonModel->getData('voucher_transaction_detail','edit',$_GET['id'],'voucher_transaction_detail_id');
-        $voucherGroupData = $commonModel->getData('voucher_transaction_group','edit',$_GET['id'],'voucher_transaction_detail_id');
+        $voucherEditData = $commonModel->getData('voucher','edit',$_GET['id'],'voucher_id');
+        $voucherGroupData = $commonModel->getData('voucher_detail','edit',$_GET['id'],'voucher_id');
         $editData   = isset($voucherEditData[0]) ?  $voucherEditData[0] : [] ;
         $submitType = 'update';
     }
-    $id             = isset($editData['voucher_transaction_detail_id'])    ? $editData['voucher_transaction_detail_id']      : '';
-    $voucherNo      = isset($editData['voucher_no'])  ? $editData['voucher_no']   : '';
+    $id             = isset($editData['voucher_id'])    ? $editData['voucher_id']      : '';
+    $voucherNo      = isset($editData['voucher_no'])  ? $editData['voucher_no']   : $voucherNumberFormat;
     $voucherDate    = isset($editData['voucher_date'])  ? $editData['voucher_date']   : '';
     $farmerId       = isset($editData['farmer_id'])  ? $editData['farmer_id']   : '';
     $transcationDetails = isset($voucherGroupData)   ? $voucherGroupData : $transcationData;
@@ -40,6 +43,7 @@
             <form action="../Model/VoucherTransactionDetail.php" method="post" id="addVoucher">
                 
                     <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="autoIncNumber" name="autoIncNumber" value='<?php echo $voucherNumberFormat2; ?>' />
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">

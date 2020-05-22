@@ -36,7 +36,7 @@
                                     <td><?php echo $value['farmer_code']; ?></td>
                                     <td class="text-right">
                                         <ul class="nav justify-content-end">
-                                            <li class="mr-3"><a title='<?php echo $lang['edit']; ?>' href='addVoucher.php?id=<?php echo $value['voucher_transaction_detail_id'] ?>'><span class="material-icons">edit</span></a></li>
+                                            <li class="mr-3"><a title='<?php echo $lang['edit']; ?>' href='addVoucher.php?id=<?php echo $value['voucher_id'] ?>'><span class="material-icons">edit</span></a></li>
                                             <li><a id="delete" href='#delete<?php echo $i ?>' data-toggle="modal" title='<?php echo $lang['delete'] ?>' ><span class="material-icons">delete</span></a></li>
                                         </ul>
                                     </td>
@@ -56,7 +56,7 @@
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                            <a href="../Model/CommonModel.php?dId=<?php echo $value['voucher_transaction_detail_id'] ?>&tb=v_t_d" class="btn btn-primary">Delete</a>
+                                            <a href="../Model/CommonModel.php?dId=<?php echo $value['voucher_id'] ?>&tb=v_t_d" class="btn btn-primary">Delete</a>
                                         </div>
                                         </div>
                                     </div>

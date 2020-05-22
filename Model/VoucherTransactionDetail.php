@@ -20,10 +20,10 @@
                  
                 $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
-                    $sql ="update voucher_transaction_detail set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_transaction_detail_id='".$storeData['editId']."' ";
+                    $sql ="update voucher set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into voucher_transaction_detail(company_id,farmer_id,voucher_date,voucher_no,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                    $sql = "insert into voucher(company_id,farmer_id,voucher_date,voucher_no,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
                 $storeCompanyData = mysqli_query( $this->connected, $sql);
@@ -31,18 +31,23 @@
                 if($storeCompanyData){
                     $transcationDetail = $storeData['transaction_detail'];
 
-                    if($storeData['editId'] == "")
-                        $voucher_transaction_detail_id  = mysqli_insert_id($this->connected);
-                    else
-                        $voucher_transaction_detail_id  = $storeData['editId'];
-
-                    $deleteSql = "DELETE FROM voucher_transaction_group WHERE voucher_transaction_detail_id = '".$voucher_transaction_detail_id."'";
+                    if($storeData['editId'] == ""){
+                        $voucher_id  = mysqli_insert_id($this->connected);
+                        $autoNumber  = $storeData['autoIncNumber']+1;
+                        
+                        $sql ="update auto_increment_number set voucher='".$autoNumber."' where company_id='".$_SESSION['company_id']."' ";
+                        
+                        mysqli_query( $this->connected, $sql);
+                    }else{
+                        $voucher_id  = $storeData['editId'];
+                    }
+                    $deleteSql = "DELETE FROM voucher_detail WHERE voucher_id = '".$voucher_id."'";
                     $deleteData = mysqli_query( $this->connected, $deleteSql);
                     
-                    $multiRowInsert = "insert into voucher_transaction_group(voucher_transaction_detail_id,transaction_id,amount,description,status ) values";
+                    $multiRowInsert = "insert into voucher_detail(voucher_id,transaction_id,amount,description,status ) values";
                     $count = 1;
                     foreach($transcationDetail as $key => $value){
-                        $multiRowInsert .= "('".$voucher_transaction_detail_id."','".$value['transaction_id']."', '".$value['amount']."', '".$value['description']."','A')";
+                        $multiRowInsert .= "('".$voucher_id."','".$value['transaction_id']."', '".$value['amount']."', '".$value['description']."','A')";
                         if(count($transcationDetail) != $count)
                             $multiRowInsert .= " , ";
                             $count++;

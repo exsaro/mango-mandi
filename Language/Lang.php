@@ -57,8 +57,8 @@
             'cu_m'         => 'customer_master',
             't_m'          => 'transaction_master',
             'u_m'          => 'user_master',
-            'v_t_d'        => 'voucher_transaction_detail',
-            'pu_m'         => 'purchase_master',
+            'v_t_d'        => 'voucher',
+            'pu_m'         => 'purchase',
 
             //Column Name
             'c_m_c'        => 'company_id',
@@ -67,8 +67,8 @@
             'cu_m_c'       => 'customer_id',
             't_m_c'        => 'transaction_id',
             'u_m_c'        => 'user_id',
-            'v_t_d_c'      => 'voucher_transaction_detail_id',
-            'pu_m_c'       => 'purchase_master_id',
+            'v_t_d_c'      => 'voucher_id',
+            'pu_m_c'       => 'purchase_id',
 
             // Page Name
             'c_m_p'        => 'company',

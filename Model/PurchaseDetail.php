@@ -11,7 +11,7 @@
             $dbConnection       = new DBConnect();
             $this->connected    = $dbConnection->dbConnect();
         }
-
+        
         //Store and update Company Data
         public function storeData($storeData){
             $status = 'A' ;
@@ -20,10 +20,10 @@
                  
                 $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
-                    $sql ="update purchase_master set farmer_id='".$storeData['farmer_id']."',receipt_number='".$storeData['receipt_number']."',receipt_date='".$storeData['receipt_date']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where purchase_master_id='".$storeData['editId']."' ";
+                    $sql ="update purchase set farmer_id='".$storeData['farmer_id']."',receipt_number='".$storeData['receipt_number']."',receipt_date='".$storeData['receipt_date']."',vehicle_no='".$storeData['vehicle_no']."',tractor_auto='".$storeData['tractor_auto']."',commission='".$storeData['commission']."',e_c='".$storeData['e_c']."',rent='".$storeData['rent']."',unloading='".$storeData['unloading']."',advanced='".$storeData['advanced']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where purchase_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into purchase_master(company_id,farmer_id,receipt_number,receipt_date,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['receipt_number']."', '".$storeData['receipt_date']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                    $sql = "insert into purchase(company_id,farmer_id,receipt_number,receipt_date,vehicle_no,tractor_auto,commission,e_c,rent,unloading,advanced,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['receipt_number']."', '".$storeData['receipt_date']."','".$storeData['vehicle_no']."','".$storeData['tractor_auto']."','".$storeData['commission']."','".$storeData['e_c']."','".$storeData['rent']."','".$storeData['unloading']."','".$storeData['advanced']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
                 $storePurchaseData = mysqli_query( $this->connected, $sql);
@@ -31,18 +31,24 @@
                 if($storePurchaseData){
                     $purchaseDetails = $storeData['purchase_details'];
 
-                    if($storeData['editId'] == "")
-                        $purchase_master_id  = mysqli_insert_id($this->connected);
-                    else
-                        $purchase_master_id  = $storeData['editId'];
+                    if($storeData['editId'] == ""){
+                        $purchase_id  = mysqli_insert_id($this->connected);
+                        $autoNumber  = $storeData['autoIncNumber']+1;
+                        
+                        $sql ="update auto_increment_number set purchase='".$autoNumber."' where company_id='".$_SESSION['company_id']."' ";
+                        
+                        mysqli_query( $this->connected, $sql);
+                    }else{
+                        $purchase_id  = $storeData['editId'];
+                    }
 
-                    $deleteSql = "DELETE FROM purchase_master_group WHERE purchase_master_id = '".$purchase_master_id."'";
+                    $deleteSql = "DELETE FROM purchase_detail WHERE purchase_id = '".$purchase_id."'";
                     $deleteData = mysqli_query( $this->connected, $deleteSql);
                     
-                    $multiRowInsert = "insert into purchase_master_group(purchase_master_id,product_id,status ) values";
+                    $multiRowInsert = "insert into purchase_detail(purchase_id,product_id,status ) values";
                     $count = 1;
                     foreach($purchaseDetails as $key => $value){
-                        $multiRowInsert .= "('".$purchase_master_id."','".$value['product_id']."','A')";
+                        $multiRowInsert .= "('".$purchase_id."','".$value['product_id']."','A')";
                         if(count($purchaseDetails) != $count)
                             $multiRowInsert .= " , ";
                             $count++;

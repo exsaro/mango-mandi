@@ -15,7 +15,7 @@
             
             $sql = "SELECT * FROM ".$tableName." WHERE status != 'D'";
             
-            if($tableName != 'user_type_master' && $tableName !=  'voucher_transaction_group' && $tableName != 'purchase_master_group'){
+            if($tableName != 'user_type_master' && $tableName !=  'voucher_detail' && $tableName != 'purchase_detail'){
                 $sql .= " AND company_id ='". $_SESSION['company_id']."'";
             }
 
@@ -78,7 +78,7 @@
         // Get Voucher List Data
         public function getVoucherListData(){
             
-            $sql = "SELECT * FROM voucher_transaction_detail as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
+            $sql = "SELECT * FROM voucher as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 
@@ -92,7 +92,7 @@
         }
 
         public function getPurchaseListData(){
-            $sql = "SELECT * FROM purchase_master as pm INNER JOIN farmer_master as fm ON pm.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND pm.status != 'D' AND pm.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
+            $sql = "SELECT * FROM purchase as pm INNER JOIN farmer_master as fm ON pm.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND pm.status != 'D' AND pm.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 
@@ -103,6 +103,18 @@
                 }
             }
             return $getData;
+        }
+
+        public function getFinalRow($fields,$tableName,$id){
+           $sql =  "SELECT ".$fields." FROM ".$tableName. " WHERE company_id = '".$_SESSION['company_id']."' ORDER BY ".$id." DESC LIMIT 1";
+           $executeQuery  = mysqli_query($this->connected,$sql);
+       
+            return mysqli_fetch_assoc($executeQuery)[$fields];
+        }
+        public function getAutoDate(){
+            $getDate            = getdate();
+            $autoNumberFormat = strtoupper($getDate['month']).str_split($getDate['year'],2)[1];
+            return $autoNumberFormat;
         }
     }
 
