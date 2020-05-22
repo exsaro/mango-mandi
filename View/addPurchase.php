@@ -2,7 +2,7 @@
     include 'header.php';
     $purchaseNumberFormat1        = $commonModel->getAutoDate();
     $purchaseNumberFormat2        = $commonModel->getFinalRow('purchase','auto_increment_number','auto_increment_number_id');
-    $purchaseNumberFormat         = $purchaseNumberFormat1.$purchaseNumberFormat2;
+    $purchaseNumberFormat         = 'P'.$purchaseNumberFormat1.$purchaseNumberFormat2;
     $checkIteration = 0;
     $title      = 'Add Purchase';
     $editData   = [];

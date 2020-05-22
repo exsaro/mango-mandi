@@ -59,6 +59,7 @@
             'u_m'          => 'user_master',
             'v_t_d'        => 'voucher',
             'pu_m'         => 'purchase',
+            's_t'          => 'sales',
 
             //Column Name
             'c_m_c'        => 'company_id',
@@ -69,6 +70,7 @@
             'u_m_c'        => 'user_id',
             'v_t_d_c'      => 'voucher_id',
             'pu_m_c'       => 'purchase_id',
+            's_t_c'        => 'sales_id',
 
             // Page Name
             'c_m_p'        => 'company',
@@ -78,7 +80,9 @@
             't_m_p'        => 'transaction',
             'u_m_p'        => 'user',
             'v_t_d_p'      => 'voucherTransaction',
-            'pu_m_p'       => 'purchase'
+            'pu_m_p'       => 'purchase',
+            's_t_p'        => 'sales'
+
 
          ];
 

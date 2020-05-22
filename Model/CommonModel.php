@@ -15,7 +15,7 @@
             
             $sql = "SELECT * FROM ".$tableName." WHERE status != 'D'";
             
-            if($tableName != 'user_type_master' && $tableName !=  'voucher_detail' && $tableName != 'purchase_detail'){
+            if($tableName != 'user_type_master' && $tableName !=  'voucher_detail' && $tableName != 'purchase_detail'  && $tableName != 'sales_detail'){
                 $sql .= " AND company_id ='". $_SESSION['company_id']."'";
             }
 
@@ -115,6 +115,20 @@
             $getDate            = getdate();
             $autoNumberFormat = strtoupper($getDate['month']).str_split($getDate['year'],2)[1];
             return $autoNumberFormat;
+        }
+
+        public function getSalesListData(){
+            $sql = "SELECT * FROM sales as s INNER JOIN customer_master as cm ON s.customer_id = cm.customer_id WHERE cm.status != 'D' AND s.status != 'D' AND s.company_id = '".$_SESSION['company_id']."' AND cm.company_id = '".$_SESSION['company_id']."'";
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
         }
     }
 

@@ -51,7 +51,7 @@
 })();
 
 $(
-    "#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser,#adminCompany, #addVoucher,#addPurchase, #addPayment, #printReport"
+    "#addCompany, #addItem, #addFarmer, #addCustomer, #addTransaction, #addUser,#adminCompany, #addVoucher,#addPurchase, #addPayment, #printReport ,#addSales"
 ).validate();
 
 $(document).ready(function () {
@@ -213,6 +213,10 @@ $(document).ready(function () {
         uniqueValidation('receipt_number','purchase','yes','purchase_id','Receipt No. already exists');
     }
 
+    if($("#addSales").length){
+        uniqueValidation('billing_number','sales','yes','sales_id','Billing No. already exists');
+    }
+
 
     
 } );
@@ -275,8 +279,8 @@ function calculateVoucher() {
 }
 /*  Voucher Transcation Details End*/
 
-/*  Purchase Reduction Details Start*/
 
+/*  Purchase Reduction Details Start*/
     $(".calcReduction").keyup(function () {
         var totalReduction  = 0;
         var tractorAuto     = $('#tractor_auto').val()!=''? $('#tractor_auto').val():0;
@@ -291,6 +295,38 @@ function calculateVoucher() {
 /*  Purchase Reduction Details End*/
 
 
+/*  Sales Addition Details Start*/
+$(".totalAddition").keyup(function () {
+    var totalAddition  = 0;
+    var hC     = $('#h_c').val()!=''? $('#h_c').val():0;
+    var mC     = $('#m_c').val()!=''? $('#m_c').val():0;
+    var colli     = $('#colli').val()!=''? $('#colli').val():0;
+    var packing     = $('#packing').val()!=''? $('#packing').val():0;
+    var lorryAdvance     = $('#lorry_advance').val()!=''? $('#lorry_advance').val():0;
+    var otherExpenses     = $('#other_expenses').val()!=''? $('#other_expenses').val():0;
+    totalAddition      = parseFloat(hC)+parseFloat(mC)+parseFloat(colli)+parseFloat(packing)+parseFloat(lorryAdvance)+parseFloat(otherExpenses);
+    $("#salesTotalAddition").html(totalAddition.toFixed(2));
+    calculateTotalSale();
+})
+function calculateSales() {
+    var totalAmount = 0;
+    $(".identifyCls").each(function (idx) {
+        var findInx = $(this).data("size");
+        var totVal = $('input[name="sales_details[' + findInx + '][amount]"]').val() != '' ? $('input[name="sales_details[' + findInx + '][amount]"]').val() : 0;
+        totalAmount += parseFloat(totVal);
+});
+    $("#totalSales").html(totalAmount.toFixed(2));
+    calculateTotalSale();
+}
+
+function calculateTotalSale() {
+    var totalSalesAmount  = 0;
+    var sTotal = $("#salesTotalAddition").text() != '' ? $("#salesTotalAddition").text() :0;
+    var tsTotal = $("#totalSales").text() != '' ? $("#totalSales").text() :0;
+    totalSalesAmount = parseFloat(sTotal) + parseFloat(tsTotal) ;
+    $("#totalAmount").html(totalSalesAmount.toFixed(2));
+}
+/*  Sales Addition Details End*/
 
 
 

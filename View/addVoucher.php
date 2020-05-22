@@ -2,7 +2,7 @@
     include 'header.php';
     $voucherNumberFormat1        = $commonModel->getAutoDate();
     $voucherNumberFormat2        = $commonModel->getFinalRow('voucher','auto_increment_number','auto_increment_number_id');
-    $voucherNumberFormat         = $voucherNumberFormat1.$voucherNumberFormat2;
+    $voucherNumberFormat         = 'V'.$voucherNumberFormat1.$voucherNumberFormat2;
     $checkIteration = 0;
     $title      = 'Add Voucher';
     $editData   = [];
