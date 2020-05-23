@@ -98,8 +98,11 @@
                                     elseif(count($salesDetails)-1 == $checkIteration )
                                         $addClsBtn   = '';                                  
                                     else
-                                        $addClsBtn   = 'display:none;';        
-                                        $totalsales +=$value['amount'] != '' ?$value['amount']:0;                    
+                                        $addClsBtn   = 'display:none;';
+                                    
+                                    $qty    = $value['quantity']!=''&&$value['quantity'] != 0?$value['quantity']:1 ;
+                                    $totalItemAmt   = $qty*$value['amount'];
+                                    $totalsales +=$totalItemAmt;                    
                             ?>
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
                                     <div class="card mb-2">
@@ -135,6 +138,9 @@
                                                     <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>" name="autoIncNumber" value='<?php echo $value['amount']; ?>' />
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div class="card-footer text-right">
+                                            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_<?php echo $key; ?>"><?php echo $value['quantity']*$value['amount']; ?></span>/-</strong>
                                         </div>
                                     </div>
                                     <p class="text-right fz12">
@@ -258,6 +264,9 @@
                     <input type="hidden" id="hiddenSellAmnt_XXX" name="autoIncNumber" value='' />
                 </div>
             </div>
+        </div>
+        <div class="card-footer text-right">
+            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_XXX">0</span>/-</strong>
         </div>
     </div>
         <p class="text-right fz12">

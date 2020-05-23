@@ -313,7 +313,14 @@ function calculateSales() {
     $(".identifyCls").each(function (idx) {
         var findInx = $(this).data("size");
         var totVal = $('input[name="sales_details[' + findInx + '][amount]"]').val() != '' ? $('input[name="sales_details[' + findInx + '][amount]"]').val() : 0;
-        totalAmount += parseFloat(totVal);
+        $("#hiddenSellAmnt_"+findInx).val(totVal);
+        var quantity    = $('input[name="sales_details[' + findInx + '][quantity]"]').val() != '' ? $('input[name="sales_details[' + findInx + '][quantity]"]').val() : 0;
+        var hiddenAmount = $("#hiddenSellAmnt_"+findInx).val() != '' ? $("#hiddenSellAmnt_"+findInx).val() : 0;
+        if(parseInt(quantity) > 0){
+            hiddenAmount = parseFloat(hiddenAmount) * parseInt(quantity);
+        }
+        $("#totalSellAmnt_"+findInx).text(hiddenAmount);
+        totalAmount += parseFloat(hiddenAmount);
 });
     $("#totalSales").html(totalAmount.toFixed(2));
     calculateTotalSale();
@@ -340,9 +347,21 @@ function getProductAmount(sInx){
     function(data,status){
         if(status == 'success'){
             $('input[name="sales_details[' + sInx + '][amount]"]').val(JSON.parse(data)['amount']);
+            $("#hiddenSellAmnt_"+sInx).val(JSON.parse(data)['amount']);
             calculateSales();
         }
     });
+}
+
+function updatedSaleAmnt(indx){
+    var quantity    = $('input[name="sales_details[' + indx + '][quantity]"]').val() != '' ? $('input[name="sales_details[' + indx + '][quantity]"]').val() : 0;
+
+    if(quantity == 0){
+        var saleAmount  = $("#hiddenSellAmnt_"+indx).val() != '' ? $("#hiddenSellAmnt_"+indx).val() :0;
+        $("#sellAmnt_"+indx).val(saleAmount);
+    }
+
+    calculateSales();
 }
 
 /*  Sales Addition Details End*/
