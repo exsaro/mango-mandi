@@ -101,7 +101,8 @@
                                         $addClsBtn   = 'display:none;';
                                     
                                     $qty    = $value['quantity']!=''&&$value['quantity'] != 0?$value['quantity']:1 ;
-                                    $totalItemAmt   = $qty*$value['amount'];
+                                    $salAmt =$value['amount']!=''?$value['amount']:0;
+                                    $totalItemAmt   = $qty*$salAmt;
                                     $totalsales +=$totalItemAmt;                    
                             ?>
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
@@ -140,7 +141,7 @@
                                             </div>
                                         </div>
                                         <div class="card-footer text-right">
-                                            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_<?php echo $key; ?>"><?php echo $value['quantity']*$value['amount']; ?></span>/-</strong>
+                                            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_<?php echo $key; ?>"><?php echo $totalItemAmt; ?></span>/-</strong>
                                         </div>
                                     </div>
                                     <p class="text-right fz12">

@@ -266,6 +266,7 @@ function removeTranscation(index) {
         }
     });
     calculateVoucher();
+    calculateSales();
 }
 
 function calculateVoucher() {
