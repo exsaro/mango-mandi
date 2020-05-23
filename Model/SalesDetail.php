@@ -17,7 +17,14 @@
             $status = 'A' ;
             $urlId  = '';
             if(isset($storeData['billing_number']) && $storeData['billing_number'] != '' && isset($storeData['billing_date']) && $storeData['billing_date'] != ''  && isset($storeData['customer_id']) && $storeData['customer_id'] != ''  && isset($storeData['sales_details']) && $storeData['sales_details'] != ''){
-                 
+                
+                $storeData['h_c'] = $storeData['h_c'] !=''?$storeData['h_c']:0;
+                $storeData['m_c'] = $storeData['m_c'] !=''?$storeData['m_c']:0;
+                $storeData['colli'] = $storeData['colli'] !=''?$storeData['colli']:0;
+                $storeData['packing'] = $storeData['packing'] !=''?$storeData['packing']:0;
+                $storeData['lorry_advance'] = $storeData['lorry_advance'] !=''?$storeData['lorry_advance']:0;
+                $storeData['other_expenses'] = $storeData['other_expenses'] !=''?$storeData['other_expenses']:0;
+
                 $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
                     $sql ="update sales set customer_id='".$storeData['customer_id']."',billing_number='".$storeData['billing_number']."',billing_date='".$storeData['billing_date']."',vehicle_no='".$storeData['vehicle_no']."',h_c='".$storeData['h_c']."',m_c='".$storeData['m_c']."',colli='".$storeData['colli']."',packing='".$storeData['packing']."',lorry_advance='".$storeData['lorry_advance']."',other_expenses='".$storeData['other_expenses']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where sales_id='".$storeData['editId']."' ";
@@ -27,7 +34,7 @@
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
                 $storesalesData = mysqli_query( $this->connected, $sql);
-
+                
                 if($storesalesData){
                     $salesDetails = $storeData['sales_details'];
 
