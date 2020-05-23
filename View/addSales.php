@@ -52,6 +52,8 @@
                     <h1><?php echo $title; ?></h1>
                     <a href="sales.php" class="btn btn-secondary">Back</a>
                 </div>
+
+
                 <form action="../Model/SalesDetail.php" method="post" id="addSales">
                     <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
                     <input type="hidden" id="autoIncNumber" name="autoIncNumber" value='<?php echo $salesNumberFormat2; ?>' />
@@ -60,7 +62,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Billing No</label>
-                            <input type="text" class="form-control" id="billing_number" name="billing_number" value="<?php echo $salesNo; ?>" placeholder="Billing No" required />
+                            <input type="text" class="form-control" id="billing_number" name="billing_number" value="<?php echo $salesNo; ?>" placeholder="Billing No" required readonly />
                         </div>
                         <div class="form-group">
                             <label for="">Billing Date</label>
@@ -69,6 +71,8 @@
                             <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
                             </div>
                         </div>
+
+
                         <div class="form-group">
                             <label for="">Select Customer</label>
                             <select name="customer_id" class="custom-select" required>
@@ -80,6 +84,8 @@
                         </div>
 
 
+                        <div class="card mb-3 border-primary">
+                         <div class="card-body">
 
                         <div id="originalDiv">
                             <?php foreach($salesDetails as $key => $value) { 
@@ -121,11 +127,12 @@
                                             <div class="row">
                                                 <div class="col">
                                                     <label for="">Quantity</label>
-                                                    <input type="number" value="<?php echo $value['quantity']; ?>" min="1" class="form-control" name="sales_details[<?php echo $key; ?>][quantity]" placeholder="Quantity" required />
+                                                    <input type="number" value="<?php echo $value['quantity']; ?>" onkeyup="updatedSaleAmnt(<?php echo $key; ?>)" min="1" class="form-control" name="sales_details[<?php echo $key; ?>][quantity]" placeholder="Quantity" required />
                                                 </div>
                                                 <div class="col">
                                                     <label for="">Amount (₹)</label>
-                                                    <input type="number" onkeyup="calculateSales()" value="<?php echo $value['amount']; ?>"min="1" class="form-control" name="sales_details[<?php echo $key; ?>][amount]" placeholder="Amount" required />
+                                                    <input type="number" onkeyup="calculateSales()" id="sellAmnt_<?php echo $key; ?>" value="<?php echo $value['amount']; ?>"min="1" class="form-control" name="sales_details[<?php echo $key; ?>][amount]" placeholder="Amount" required />
+                                                    <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>" name="autoIncNumber" value='<?php echo $value['amount']; ?>' />
                                                 </div>
                                             </div>
                                         </div>
@@ -138,6 +145,12 @@
                             <?php } ?>
                         </div>
 
+
+</div>
+<div class="card-footer text-right">
+    <span>Total Sales: </span><strong>₹ <span id="totalSales"><?php echo  sprintf("%.2f", $totalsales); ?></span>/-</strong>
+</div>
+</div>
 
 
 
@@ -185,9 +198,7 @@
 								</div>
                             </div>
                         </div>
-                        <div class="text-right">
-                            <span>Total Sales: </span><strong>₹ <span id="totalSales"><?php echo  sprintf("%.2f", $totalsales); ?></span>/-</strong>
-                        </div>
+                        
 						<div class="my-5">
 							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$totalAddition); ?></span>/-</strong></p>
 						</div>
@@ -239,11 +250,12 @@
             <div class="row">
                 <div class="col">
                     <label for="">Quantity</label>
-                    <input type="number" value="" min="1" class="form-control" name="sales_details[XXX][quantity]" placeholder="Quantity" required />
+                    <input type="number" value="" min="1"  onkeyup="updatedSaleAmnt(XXX)" class="form-control" name="sales_details[XXX][quantity]" placeholder="Quantity" required />
                 </div>
                 <div class="col">
                     <label for="">Amount (₹)</label>
-                    <input type="number" value="" onkeyup="calculateSales()"  min="1" class="form-control" name="sales_details[XXX][amount]" placeholder="Amount" required />
+                    <input type="number" value="" id="sellAmnt_XXX" onkeyup="calculateSales()"  min="1" class="form-control" name="sales_details[XXX][amount]" placeholder="Amount" required />
+                    <input type="hidden" id="hiddenSellAmnt_XXX" name="autoIncNumber" value='' />
                 </div>
             </div>
         </div>

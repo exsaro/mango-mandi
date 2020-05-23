@@ -48,7 +48,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Voucher No</label>
-                            <input type="text" class="form-control" name="voucher_no" id="voucher_no"  placeholder="Voucher No" value="<?php echo  $voucherNo; ?>" required  minlength=3 maxlength=100 />
+                            <input type="text" class="form-control" name="voucher_no" id="voucher_no"  placeholder="Voucher No" value="<?php echo  $voucherNo; ?>" required  minlength=3 maxlength=100 readonly />
                         </div>
                         <div class="form-group">
                             <label for="">Voucher Date</label>

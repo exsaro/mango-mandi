@@ -54,7 +54,7 @@
                     <div class="card-body">
                         <div class="form-group">
                             <label for="">Purchase No</label>
-                            <input type="text" class="form-control" id="receipt_number" name="receipt_number" placeholder="purchase No" value="<?php echo  $purchaseNo; ?>"  required minlength=3 maxlength=100/>
+                            <input type="text" class="form-control" id="receipt_number" name="receipt_number" placeholder="purchase No" value="<?php echo  $purchaseNo; ?>" required minlength=3 maxlength=100 readonly />
                         </div>
                         <div class="form-group">
                             <label for="">Purchase Date</label>
