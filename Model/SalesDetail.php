@@ -34,7 +34,6 @@
                     if($storeData['editId'] == ""){
                         $sales_id  = mysqli_insert_id($this->connected);
                         $autoNumber  = $storeData['autoIncNumber']+1;
-                        
                         $sql ="update auto_increment_number set sales='".$autoNumber."' where company_id='".$_SESSION['company_id']."' ";
                         
                         mysqli_query( $this->connected, $sql);

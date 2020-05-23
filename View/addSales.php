@@ -136,7 +136,7 @@
                                                 <div class="col">
                                                     <label for="">Amount (₹)</label>
                                                     <input type="number" onkeyup="calculateSales()" id="sellAmnt_<?php echo $key; ?>" value="<?php echo $value['amount']; ?>"min="1" class="form-control" name="sales_details[<?php echo $key; ?>][amount]" placeholder="Amount" required />
-                                                    <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>" name="autoIncNumber" value='<?php echo $value['amount']; ?>' />
+                                                    <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>"   value='<?php echo $value['amount']; ?>' />
                                                 </div>
                                             </div>
                                         </div>
@@ -262,7 +262,7 @@
                 <div class="col">
                     <label for="">Amount (₹)</label>
                     <input type="number" value="" id="sellAmnt_XXX" onkeyup="calculateSales()"  min="1" class="form-control" name="sales_details[XXX][amount]" placeholder="Amount" required />
-                    <input type="hidden" id="hiddenSellAmnt_XXX" name="autoIncNumber" value='' />
+                    <input type="hidden" id="hiddenSellAmnt_XXX"  value='' />
                 </div>
             </div>
         </div>
