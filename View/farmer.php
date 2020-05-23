@@ -1,8 +1,4 @@
-<?php
-    include 'header.php';
-    $farmerListData = $commonModel->getData('farmer_master','list','','');
-    $i = 1;
-?>
+<?php include 'header.php'; ?>
     <div class="container-fluid">
         <div class="row">
             <?php include 'sidebar.php';?>

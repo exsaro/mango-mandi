@@ -1,3 +1,9 @@
+<?php
+  
+    $farmerListData = $commonModel->getData('farmer_master','list','','');
+    $i = 1;
+?>
+
 <table class="table table-hover" id="data-table">
                     <thead>
                         <tr>

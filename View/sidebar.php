@@ -5,6 +5,16 @@
         </div>
         <h4><?php echo $_SESSION['user_name']; ?></h4>
     </div>
+    <div class="my-5 p-3 bg-primary">
+        <div class="form-group mb-0">
+            <select class="custom-select">
+            <option value="">Change Company</option>
+            <option value="1">One</option>
+            <option value="2">Two</option>
+            <option value="3">Three</option>
+            </select>
+        </div>
+    </div>
     <nav>
         <ul id="master-nav">
             <?php if($_SESSION['user_type_id'] == 1) {?><li><a href="company.php"><?php echo $lang['company_master']; ?></a></li><?php } ?>

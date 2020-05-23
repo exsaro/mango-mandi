@@ -84,85 +84,6 @@
                         </div>
 
 
-                        <div class="card mb-3 border-primary">
-                         <div class="card-body">
-
-                        <div id="originalDiv">
-                            <?php foreach($salesDetails as $key => $value) { 
-                                
-                                    $checkIteration = $key;
-                                    $removeClsBtn   = '';
-                                    $addClsBtn   = '';
-                                    if($checkIteration == 0 && count($salesDetails) == 1 )
-                                        $removeClsBtn = 'display:none;';
-                                    elseif(count($salesDetails)-1 == $checkIteration )
-                                        $addClsBtn   = '';                                  
-                                    else
-                                        $addClsBtn   = 'display:none;';
-                                    
-                                    $qty    = $value['quantity']!=''&&$value['quantity'] != 0?$value['quantity']:1 ;
-                                    $salAmt =$value['amount']!=''?$value['amount']:0;
-                                    $totalItemAmt   = $qty*$salAmt;
-                                    $totalsales +=$totalItemAmt;                    
-                            ?>
-                                <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
-                                    <div class="card mb-2">
-                                        <div class="card-body alert-secondary">
-                                            <div class="row mb-3">
-                                                <div class="col">
-                                                    <label for="">Select Farmer</label>
-                                                    <select name="sales_details[<?php echo $key; ?>][farmer_id]" class="custom-select" required>
-                                                        <option value="">Select Farmer</option>
-                                                        <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
-                                                            <option <?php echo ($value['farmer_id'] ==  $fValue['farmer_id'])?'selected':''; ?> value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-                                                <div class="col">
-                                                    <label for="">Select Item</label>
-                                                    <select  name="sales_details[<?php echo $key; ?>][product_id]"  class="custom-select"  id="productId_<?php echo $key; ?>"onchange="getProductAmount(<?php echo $key; ?>)" required>
-                                                        <option value="">Select Item</option>
-                                                        <?php foreach($salesOptionData as $sKey => $sValue) { ?>
-                                                            <option <?php echo ($value['product_id'] ==  $sValue['product_id'])?'selected':''; ?> value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>
-                                                        <?php } ?>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <label for="">Quantity</label>
-                                                    <input type="number" value="<?php echo $value['quantity']; ?>" onkeyup="updatedSaleAmnt(<?php echo $key; ?>)" min="1" class="form-control" name="sales_details[<?php echo $key; ?>][quantity]" placeholder="Quantity" required />
-                                                </div>
-                                                <div class="col">
-                                                    <label for="">Amount (₹)</label>
-                                                    <input type="number" onkeyup="calculateSales()" id="sellAmnt_<?php echo $key; ?>" value="<?php echo $value['amount']; ?>"min="1" class="form-control" name="sales_details[<?php echo $key; ?>][amount]" placeholder="Amount" required />
-                                                    <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>"   value='<?php echo $value['amount']; ?>' />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card-footer text-right">
-                                            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_<?php echo $key; ?>"><?php echo $totalItemAmt; ?></span>/-</strong>
-                                        </div>
-                                    </div>
-                                    <p class="text-right fz12">
-                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
-                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
-                                    </p>
-                                </div>
-                            <?php } ?>
-                        </div>
-
-
-</div>
-<div class="card-footer text-right">
-    <span>Total Sales: </span><strong>₹ <span id="totalSales"><?php echo  sprintf("%.2f", $totalsales); ?></span>/-</strong>
-</div>
-</div>
-
-
-
-
-
                         <div class="form-group">
                             <div class="card border-primary">
 								<div class="card-header">Other Addition</div>
@@ -205,6 +126,89 @@
 								</div>
                             </div>
                         </div>
+
+
+                        <div class="card mb-3 border-primary">
+                         <div>
+
+                        <div id="originalDiv">
+                            <?php foreach($salesDetails as $key => $value) { 
+                                
+                                    $checkIteration = $key;
+                                    $removeClsBtn   = '';
+                                    $addClsBtn   = '';
+                                    if($checkIteration == 0 && count($salesDetails) == 1 )
+                                        $removeClsBtn = 'display:none;';
+                                    elseif(count($salesDetails)-1 == $checkIteration )
+                                        $addClsBtn   = '';                                  
+                                    else
+                                        $addClsBtn   = 'display:none;';
+                                    
+                                    $qty    = $value['quantity']!=''&&$value['quantity'] != 0?$value['quantity']:1 ;
+                                    $salAmt =$value['amount']!=''?$value['amount']:0;
+                                    $totalItemAmt   = $qty*$salAmt;
+                                    $totalsales +=$totalItemAmt;                    
+                            ?>
+                                <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
+                                    <div class="card mb-2">
+                                        <div class="card-body alert-secondary">
+                                            <div class="row mb-3">
+                                                <div class="col">
+                                                    <label for="">Select Farmer</label>
+                                                    <select name="sales_details[<?php echo $key; ?>][farmer_id]" class="custom-select" required>
+                                                        <option value="">Select Farmer</option>
+                                                        <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
+                                                            <option <?php echo ($value['farmer_id'] ==  $fValue['farmer_id'])?'selected':''; ?> value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                                <div class="col">
+                                                    <label for="">Select Item</label>
+                                                    <select  name="sales_details[<?php echo $key; ?>][product_id]"  class="custom-select"  id="productId_<?php echo $key; ?>"onchange="getProductAmount(<?php echo $key; ?>)" required>
+                                                        <option value="">Select Item</option>
+                                                        <?php foreach($salesOptionData as $sKey => $sValue) { ?>
+                                                            <option <?php echo ($value['product_id'] ==  $sValue['product_id'])?'selected':''; ?> value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>
+                                                        <?php } ?>
+                                                    </select>
+                                                </div>
+                                            
+                                                <div class="col">
+                                                    <label for="">Quantity</label>
+                                                    <input type="number" value="<?php echo $value['quantity']; ?>" onkeyup="updatedSaleAmnt(<?php echo $key; ?>)" min="1" class="form-control" name="sales_details[<?php echo $key; ?>][quantity]" placeholder="Quantity" required />
+                                                </div>
+                                                <div class="col">
+                                                    <label for="">Amount (₹)</label>
+                                                    <input type="number" onkeyup="calculateSales()" id="sellAmnt_<?php echo $key; ?>" value="<?php echo $value['amount']; ?>"min="1" class="form-control" name="sales_details[<?php echo $key; ?>][amount]" placeholder="Amount" required />
+                                                    <input type="hidden" id="hiddenSellAmnt_<?php echo $key; ?>"   value='<?php echo $value['amount']; ?>' />
+                                                </div>
+                                                <div class="col">
+                                                <label class="d-block" for="">Total Amount</label>
+                                                <label for=""><strong>₹ <span id="totalSellAmnt_<?php echo $key; ?>"><?php echo $totalItemAmt; ?></span>/-</strong></label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                    </div>
+                                    <p class="text-right fz12">
+                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
+                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
+                                    </p>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+
+</div>
+<div class="card-footer text-right">
+    <span>Total Sales: </span><strong>₹ <span id="totalSales"><?php echo  sprintf("%.2f", $totalsales); ?></span>/-</strong>
+</div>
+</div>
+
+
+
+
+
+                        
                         
 						<div class="my-5">
 							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$totalAddition); ?></span>/-</strong></p>
@@ -253,8 +257,7 @@
                         <?php } ?>
                     </select>
                 </div>
-            </div>
-            <div class="row">
+           
                 <div class="col">
                     <label for="">Quantity</label>
                     <input type="number" value="" min="1"  onkeyup="updatedSaleAmnt(XXX)" class="form-control" name="sales_details[XXX][quantity]" placeholder="Quantity" required />
@@ -264,11 +267,13 @@
                     <input type="number" value="" id="sellAmnt_XXX" onkeyup="calculateSales()"  min="1" class="form-control" name="sales_details[XXX][amount]" placeholder="Amount" required />
                     <input type="hidden" id="hiddenSellAmnt_XXX"  value='' />
                 </div>
+                <div class="col">
+                <label class="d-block" for="">Total Amount</label>
+                                                <label for=""><strong>₹ <span id="totalSellAmnt_XXX">0</span>/-</strong></label>
+                </div>
             </div>
         </div>
-        <div class="card-footer text-right">
-            <span>Total Item Amount: </span><strong>₹ <span id="totalSellAmnt_XXX">0</span>/-</strong>
-        </div>
+        
     </div>
         <p class="text-right fz12">
             <a class="addClass badge badge-success" id="addInx_XXX" href="javascript:void(0);" onclick="addTranscation(0)">Add</a> 

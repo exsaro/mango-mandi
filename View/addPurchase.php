@@ -73,44 +73,6 @@
                             </select>    
                         </div>
 
-                        <!-- Add and Remove purchase START-->
-
-                        <div id="originalDiv">
-                            <?php foreach($purchaseDetails as $key => $value) { 
-                                    $checkIteration = $key;
-                                    $removeClsBtn   = '';
-                                    $addClsBtn   = '';
-                                    if($checkIteration == 0 && count($purchaseDetails) == 1 )
-                                        $removeClsBtn = 'display:none;';
-                                    elseif(count($purchaseDetails)-1 == $checkIteration )
-                                        $addClsBtn   = '';                                  
-                                    else
-                                        $addClsBtn   = 'display:none;';                                  
-                            ?>
-
-                                <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
-
-                                    <div class="card mb-2">
-                                        <div class="card-body alert-secondary">
-                                            <label for="">Select Item</label>
-                                            <select class="custom-select" id="transcationId_<?php echo $key; ?>" name="purchase_details[<?php echo $key; ?>][product_id]"   required>
-                                                <option value="">Select Item</option>
-                                                <?php foreach($purchaseOptionData as $tKey => $pValue) { ?>
-                                                    <option <?php echo ($value['product_id'] ==  $pValue['product_id'])?'selected':''; ?> value="<?php echo $pValue['product_id']; ?>" ><?php echo $pValue['product_name']." - " ; ?><?php echo $pValue['product_code']; ?></option>
-                                                <?php } ?>
-                                            </select>                                            
-                                        </div>
-                                    </div>
-                                    <p class="text-right fz12">
-                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
-                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
-                                    </p>
-                                </div>
-                            <?php } ?>
-                        </div>
-
-                        <!-- Add and Remove purchase END-->
-
                         <div class="form-group">
                             <div class="card border-primary">
 								<div class="card-header">Other Detection</div>
@@ -153,6 +115,46 @@
 								</div>
                             </div>
                         </div>
+
+                        <!-- Add and Remove purchase START-->
+
+                        <div id="originalDiv">
+                            <?php foreach($purchaseDetails as $key => $value) { 
+                                    $checkIteration = $key;
+                                    $removeClsBtn   = '';
+                                    $addClsBtn   = '';
+                                    if($checkIteration == 0 && count($purchaseDetails) == 1 )
+                                        $removeClsBtn = 'display:none;';
+                                    elseif(count($purchaseDetails)-1 == $checkIteration )
+                                        $addClsBtn   = '';                                  
+                                    else
+                                        $addClsBtn   = 'display:none;';                                  
+                            ?>
+
+                                <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
+
+                                    <div class="card mb-2">
+                                        <div class="card-body alert-secondary">
+                                            <label for="">Select Item</label>
+                                            <select class="custom-select" id="transcationId_<?php echo $key; ?>" name="purchase_details[<?php echo $key; ?>][product_id]"   required>
+                                                <option value="">Select Item</option>
+                                                <?php foreach($purchaseOptionData as $tKey => $pValue) { ?>
+                                                    <option <?php echo ($value['product_id'] ==  $pValue['product_id'])?'selected':''; ?> value="<?php echo $pValue['product_id']; ?>" ><?php echo $pValue['product_name']." - " ; ?><?php echo $pValue['product_code']; ?></option>
+                                                <?php } ?>
+                                            </select>                                            
+                                        </div>
+                                    </div>
+                                    <p class="text-right fz12">
+                                        <a style="<?php echo $addClsBtn; ?>" class="addClass badge badge-success" id="addInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="addTranscation(0)" >Add </a> 
+                                        <a style="<?php echo $removeClsBtn; ?>" class="removeClass badge badge-danger" id="removeInx_<?php echo $key; ?>" href="javascript:void(0);" onclick="removeTranscation(<?php echo $key; ?>)" >  Remove</a>
+                                    </p>
+                                </div>
+                            <?php } ?>
+                        </div>
+
+                        <!-- Add and Remove purchase END-->
+
+                        
 
       
                         <div class="form-group text-right">
