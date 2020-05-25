@@ -135,6 +135,20 @@
             $executeQuery  = mysqli_query($this->connected,$sql);
              return mysqli_fetch_assoc($executeQuery)[$getRequest['field']];
          }
+
+         public function getCompanyOptions(){
+            $sql = "SELECT * FROM  company_master WHERE status != 'D'";
+            $executeQuery   = mysqli_query($this->connected ,$sql); 
+            $getData = [];
+        
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            } 
+            return $getData; 
+         }
     }
 
 

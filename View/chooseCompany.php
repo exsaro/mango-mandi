@@ -28,7 +28,10 @@
           
           $_SESSION['company_name']   = $commonData->getCompanyName($_POST['company']); 
           
-          header("Location:../View/dashboard.php");
+          if(isset($_POST['changeCompany']))
+            echo 'success';
+          else
+            header("Location:../View/dashboard.php");
       }else{
           header("Location:./chooseCompany.php");
       }

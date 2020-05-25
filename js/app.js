@@ -405,3 +405,16 @@ function uniqueValidation(
     });
 }
 /* Unique Validation Ajax Call  End*/
+
+
+function changeCompany(){
+    var companyId = $('#sideCompany').val();;
+    var postJson = {};
+    postJson['selectCompany'] = '';
+    postJson['company']  = companyId;
+    postJson['changeCompany']  = '';
+    $.post("../View/chooseCompany.php",postJson,
+    function(data,status){
+        window.location = "../View/dashboard.php";
+    });
+}
