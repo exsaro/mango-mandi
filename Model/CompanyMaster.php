@@ -29,6 +29,12 @@
                 if($storeCompanyData){
                     if($storeData['editId'] == ""){
                         $companyId                  = mysqli_insert_id($this->connected);
+                        $incSql = "insert into auto_increment_number(company_id,voucher,purchase,sales,payment,revived_payment) values('".$companyId."','0','0','0','0','0')";
+                        mysqli_query($this->connected,$incSql);
+
+                        $code = strtoupper(substr($storeData['company_name'],0,3));
+                        $addVoc = "insert into transaction_master(company_id,transaction_name,transaction_code,status) values('".$companyId."','Tractor/Auto','".$code."TA','A'),('".$companyId."','Commision','".$code."COM','A'),('".$companyId."','EC','".$code."EC','A'),('".$companyId."','Rent','".$code."Rent','A'),('".$companyId."','Unloading','".$code."UL','A'),('".$companyId."','Advance','".$code."ADV','A')";
+                        mysqli_query($this->connected,$addVoc);
                     }
                     $_SESSION['company_id']     = $companyId;
                     $_SESSION['company_name']   = $storeData['company_name'];

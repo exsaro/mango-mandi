@@ -78,7 +78,7 @@
         // Get Voucher List Data
         public function getVoucherListData(){
             
-            $sql = "SELECT * FROM voucher as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."'";
+            $sql = "SELECT * FROM voucher as vtd INNER JOIN farmer_master as fm ON vtd.farmer_id = fm.farmer_id WHERE fm.status != 'D' AND vtd.status != 'D' AND vtd.company_id = '".$_SESSION['company_id']."' AND fm.company_id = '".$_SESSION['company_id']."' AND vtd.purchase_id = '0'";
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 

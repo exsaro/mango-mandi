@@ -38,10 +38,27 @@
                         $sql ="update auto_increment_number set purchase='".$autoNumber."' where company_id='".$_SESSION['company_id']."' ";
                         
                         mysqli_query( $this->connected, $sql);
+
+                        $vocSql = "insert into voucher(company_id,farmer_id,purchase_id,voucher_date,voucher_no,payment_status ,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$purchase_id."','".$storeData['receipt_date']."', '".$storeData['receipt_number']."','B','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                        mysqli_query( $this->connected, $vocSql);
+                        $voucher_id  = mysqli_insert_id($this->connected);
+
                     }else{
                         $purchase_id  = $storeData['editId'];
+                        $selVoc = "SELECT voucher_id FROM voucher WHERE purchase_id = '".$purchase_id."'";
+                        $executeQuery  = mysqli_query($this->connected,$selVoc);
+                        $voucher_id =  mysqli_fetch_assoc($executeQuery)['voucher_id'];
                     }
+                    
+                    //voucher details
+                    $deleteVocSql = "DELETE FROM voucher_detail WHERE purchase_id = '".$purchase_id."'";
+                    $deleteVoc = mysqli_query( $this->connected, $deleteVocSql);
 
+                    $vocRowInsert = "insert into voucher_detail(voucher_id,purchase_id,transaction_id,amount,description,status ) values('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('Tractor/Auto')."',".$storeData['tractor_auto'].",'Tractor Auto','A'),('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('Commision')."',".$storeData['commission'].",'Commision','A'),('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('EC')."',".$storeData['e_c'].",'EC','A'),('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('Rent')."',".$storeData['rent'].",'Rent','A'),('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('Unloading')."',".$storeData['unloading'].",'Unloading','A'),('".$voucher_id."','".$purchase_id."','".$this->getTransactionId('Advance')."',".$storeData['advanced'].",'Advance','A')";
+
+                    mysqli_query($this->connected, $vocRowInsert);
+                   
+                    //purchase detail
                     $deleteSql = "DELETE FROM purchase_detail WHERE purchase_id = '".$purchase_id."'";
                     $deleteData = mysqli_query( $this->connected, $deleteSql);
                     
@@ -71,6 +88,13 @@
                 $_SESSION['alert']          = 'alert-danger';
                 header("Location:../View/addPurchase.php".$urlId);  
             }
+        }
+
+        public function getTransactionId($transaction_name){
+            $transSel = "SELECT transaction_id FROM transaction_master WHERE transaction_name ='".$transaction_name."' AND company_id='".$_SESSION['company_id']."'";
+            $transSelQuery  = mysqli_query($this->connected,$transSel);
+       
+            return mysqli_fetch_assoc($transSelQuery)['transaction_id'];
         }
     }
 

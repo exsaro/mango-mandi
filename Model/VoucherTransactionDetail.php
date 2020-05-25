@@ -23,7 +23,7 @@
                     $sql ="update voucher set farmer_id='".$storeData['farmer_id']."',voucher_date='".$storeData['voucher_date']."',voucher_no='".$storeData['voucher_no']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where voucher_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into voucher(company_id,farmer_id,voucher_date,voucher_no,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '".$storeData['voucher_date']."', '".$storeData['voucher_no']."','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                    $sql = "insert into voucher(company_id,farmer_id,purchase_id,voucher_date,voucher_no,payment_status ,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['farmer_id']."', '0','".$storeData['voucher_date']."', '".$storeData['voucher_no']."','B','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
                 $storeCompanyData = mysqli_query( $this->connected, $sql);
@@ -44,10 +44,10 @@
                     $deleteSql = "DELETE FROM voucher_detail WHERE voucher_id = '".$voucher_id."'";
                     $deleteData = mysqli_query( $this->connected, $deleteSql);
                     
-                    $multiRowInsert = "insert into voucher_detail(voucher_id,transaction_id,amount,description,status ) values";
+                    $multiRowInsert = "insert into voucher_detail(voucher_id,purchase_id,transaction_id,amount,description,status ) values";
                     $count = 1;
                     foreach($transcationDetail as $key => $value){
-                        $multiRowInsert .= "('".$voucher_id."','".$value['transaction_id']."', '".$value['amount']."', '".$value['description']."','A')";
+                        $multiRowInsert .= "('".$voucher_id."','0','".$value['transaction_id']."', '".$value['amount']."', '".$value['description']."','A')";
                         if(count($transcationDetail) != $count)
                             $multiRowInsert .= " , ";
                             $count++;
