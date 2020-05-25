@@ -14,7 +14,7 @@
                 <select class="custom-select" name="company" id="sideCompany" onchange="changeCompany()">
                     <option value="">Select Company</option>
                     <?php foreach($getData as $key => $value ){ ?> 
-                        <option value='<?php echo $value['company_id']; ?>' ><?php echo $value['company_name']; ?> </option>
+                        <option <?php echo $value['company_id'] == $_SESSION['company_id'] ? 'selected' : ''; ?> value='<?php echo $value['company_id']; ?>' ><?php echo $value['company_name']; ?> </option>
                     <?php } ?>
                 </select>
             </div>
