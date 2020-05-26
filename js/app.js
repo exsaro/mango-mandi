@@ -55,6 +55,9 @@ $(
 ).validate();
 
 $(document).ready(function () {
+
+    $('.multi').select2();
+
     $("#change-theme").click(function (e) {
         e.preventDefault();
         $(this).hide();

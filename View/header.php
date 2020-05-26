@@ -46,7 +46,7 @@
     <link rel="stylesheet" type="text/css" href="../css/responsive.bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker.min.css">
     <link rel="stylesheet" type="text/css" href="../css/bootstrap-datetimepicker-standalone.css">
-    
+    <link rel="stylesheet" type="text/css" href="../css/select2.min.css">
     <link rel="stylesheet" href="../css/style.css">
 
     

@@ -151,3 +151,16 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+.inline-table{
+    max-height: 300px;
+    overflow-y: auto;
+}
+.select2-selection__choice__display{
+    font-size: 11px;
+    font-weight: bold;
+    
+}
+.select2-container--default .select2-selection--multiple .select2-selection__choice{
+    background: var(--dark);
+    color: #fff;
+}

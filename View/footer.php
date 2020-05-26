@@ -80,6 +80,7 @@
     <script src="../js/jquery/dataTables.responsive.min.js"></script>
     <script src="../js/jquery/moment.js"></script>
     <script src="../js/jquery/bootstrap-datetimepicker.min.js"></script>
+    <script src="../js/jquery/select2.min.js"></script>
     <script src="../js/app.js"></script>
 
 
