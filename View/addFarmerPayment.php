@@ -1,4 +1,13 @@
-<?php include 'header.php';?>
+<?php 
+    include 'header.php';
+    $paymentNumberFormat1        = $commonModel->getAutoDate();
+    $paymentNumberFormat2        = $commonModel->getFinalRow('payment','auto_increment_number','auto_increment_number_id');
+    $paymentNumberFormat         = 'PE'.$paymentNumberFormat1.$paymentNumberFormat2;
+    $farmerOptionData = $commonModel->getData('farmer_master','list','','');
+
+    $paymentNo      = isset($editData['billing_number'])  ? $editData['billing_number']   : $paymentNumberFormat;
+    $farmer_id      = '';   
+?>
 <div class="container-fluid">
         <div class="row">
             <?php include 'sidebar.php';?>
@@ -18,7 +27,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Bill No</label>
-                                    <input type="text" class="form-control" name="payment_no" placeholder="Payment No" required />
+                                    <input type="text" class="form-control" name="payment_no" value="<?php echo $paymentNo; ?>" placeholder="Payment No" required readonly/>
                                 </div>
                             </div>
                             <div class="col">
@@ -33,32 +42,26 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Select Farmer</label>
-                                    <select name="select_farmer" class="custom-select" required>
-                                        <option value="">Please select</option>
-                                        <option value="1">Saravaan1</option>
-                                        <option value="2">Saravaan2</option>
-                                        <option value="3">Saravaan3</option>
+                                    <select name="farmer_id" id="payment_farmer_id" class="custom-select" required>
+                                        <option value="">Select Farmer</option>
+                                        <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
+                                            <option <?php echo ($farmer_id ==  $fValue['farmer_id'])?'selected':''; ?> value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
+                                        <?php } ?>
                                     </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Purchase No</label>
-                                    <select name="select_purchase" class="custom-select" required>
-                                        <option value="">Please select</option>
-                                        <option value="1">00001200</option>
-                                        <option value="2">00001201</option>
-                                        <option value="3">00001202</option>
+                                    <select name="purchase_id" id="payment_purchase_id" class="custom-select" required>
+                                        <option value="">select Purchase</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Voucher No</label>
-                                    <select name="select_purchase" class="custom-select multi" required multiple="multiple">
-                                        <option value="1">00001200</option>
-                                        <option value="2">00001201</option>
-                                        <option value="3">00001202</option>
+                                    <select name="voucher_id" id="payment_voucher_id" class="custom-select multi" required multiple="multiple">
                                     </select>
                                 </div>
                             </div>
@@ -206,6 +209,7 @@
                             </tbody>
                         </table>
                         </div>
+                        <p class="text-right h5">Total payment Amount: ₹ <strong>1500/-</strong></p>
                         <p class="text-right h5">Total Detection: ₹ <strong>1500/-</strong></p>
 
                         

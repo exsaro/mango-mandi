@@ -421,3 +421,43 @@ function changeCompany(){
         window.location = "../View/dashboard.php";
     });
 }
+
+
+/******** Farmer Payment Entry Start ********/
+
+$('#payment_farmer_id').change(function(){
+    var farmerId = $('#payment_farmer_id').val();
+    if(farmerId != ''){
+        var postJson = {};
+        postJson['getVoucherAndPurchase']  = '';
+        postJson['farmer_id']  = farmerId;
+        $.post("../Model/FarmerPayment.php",postJson,
+        function(data,status){
+           if(status == 'success'){
+                var data = JSON.parse(data);
+                $("#payment_purchase_id").empty();
+                if(data['purchase'].length > 0){
+                    var purchaseHtml = '<option value="">Select Purchase</option>';
+                    $.each( data['purchase'] , function( index, item ) {
+                        purchaseHtml += '<option value="'+item.purchase_id  +'">'+item.receipt_number+'</option>';
+                    });
+                    $("#payment_purchase_id").html(purchaseHtml);
+
+                }
+                $("#payment_voucher_id").empty();
+                if(data['voucher'].length > 0){
+                    var voucherHtml = '<option value="">Select Voucher</option>';
+                    $.each( data['voucher'] , function( index, item ) {
+                        voucherHtml += '<option value="'+item.voucher_id  +'">'+item.voucher_no+'</option>';
+                    });
+                    $("#payment_voucher_id").html(voucherHtml);
+
+                }
+                 
+           }
+        });
+    }
+    
+});
+
+/******** Farmer Payment Entry End **********/
