@@ -51,10 +51,10 @@
                     $deleteSql = "DELETE FROM sales_detail WHERE sales_id = '".$sales_id."'";
                     $deleteData = mysqli_query( $this->connected, $deleteSql);
                     
-                    $multiRowInsert = "insert into sales_detail(sales_id,farmer_id,product_id,quantity,amount,status ) values";
+                    $multiRowInsert = "insert into sales_detail(sales_id,farmer_id,product_id,quantity,amount,payment_status,status ) values";
                     $count = 1;
                     foreach($salesDetails as $key => $value){
-                        $multiRowInsert .= "('".$sales_id."','".$value['farmer_id']."','".$value['product_id']."','".$value['quantity']."','".$value['amount']."','A')";
+                        $multiRowInsert .= "('".$sales_id."','".$value['farmer_id']."','".$value['product_id']."','".$value['quantity']."','".$value['amount']."','B','A')";
                         if(count($salesDetails) != $count)
                             $multiRowInsert .= " , ";
                             $count++;

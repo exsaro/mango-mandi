@@ -81,8 +81,9 @@
             'u_m_p'        => 'user',
             'v_t_d_p'      => 'voucherTransaction',
             'pu_m_p'       => 'purchase',
-            's_t_p'        => 'sales'
-
+            's_t_p'        => 'sales',
+            //Faremer Payment Calculation
+            'farmer_payment_percentage' => 10
 
          ];
 

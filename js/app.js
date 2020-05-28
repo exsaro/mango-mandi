@@ -427,13 +427,19 @@ function changeCompany(){
 
 $('#payment_farmer_id').change(function(){
     var farmerId = $('#payment_farmer_id').val();
+    $("#payment_purchase_id").empty();
+    $("#payment_voucher_id").empty();
+    $("#paymentTable").html('');
+    $("#totalSale").html(0);
+    $("#totalDetection").html(0);
+    $('#totalPayAmount').html(0);
     if(farmerId != ''){
         var postJson = {};
         postJson['getVoucherAndPurchase']  = '';
         postJson['farmer_id']  = farmerId;
         $.post("../Model/FarmerPayment.php",postJson,
         function(data,status){
-           if(status == 'success'){
+            if(status == 'success'){
                 var data = JSON.parse(data);
                 $("#payment_purchase_id").empty();
                 if(data['purchase'].length > 0){
@@ -442,7 +448,6 @@ $('#payment_farmer_id').change(function(){
                         purchaseHtml += '<option value="'+item.purchase_id  +'">'+item.receipt_number+'</option>';
                     });
                     $("#payment_purchase_id").html(purchaseHtml);
-
                 }
                 $("#payment_voucher_id").empty();
                 if(data['voucher'].length > 0){
@@ -451,13 +456,99 @@ $('#payment_farmer_id').change(function(){
                         voucherHtml += '<option value="'+item.voucher_id  +'">'+item.voucher_no+'</option>';
                     });
                     $("#payment_voucher_id").html(voucherHtml);
-
                 }
-                 
-           }
+                if(data['sales_data'].length > 0){
+                    var paymentHtml = '';   
+                    var percentage = $('#percentage').val();
+                    var reduction = $('#totalDetection').text();
+                    var totalAmount = 0;
+                    var tableInx    = 0;
+                    $.each( data['sales_data'] , function( index, item ) {
+                        var perAmount = (parseFloat(percentage/100)*parseFloat(item.amount)).toFixed(2);
+                        var amount    = item.amount - perAmount;
+                        paymentHtml += '<tr>';
+                        paymentHtml += '<td>'+(index+1)+'</td>';
+                        paymentHtml += '<td>'+item.product_name+'('+item.product_code+')'+'</td>';
+                        paymentHtml += '<td>'+item.quantity+'</td>';
+                        paymentHtml += '<input type="hidden" id="quantity_'+index+'" value="'+item.quantity+'" aria-label="">';
+                        paymentHtml += '<td>';
+                        paymentHtml += '<div class="input-group mb-0">';
+                        paymentHtml += '<div class="input-group-prepend">';
+                        paymentHtml += '<span class="input-group-text">₹</span>';
+                        paymentHtml += '</div>';
+                        paymentHtml += '<input type="text" class="form-control" onkeyup="farmerPaymentAmountChange('+index+')" id="amount_'+index+'" value="'+amount+'" aria-label="">';
+                        paymentHtml += '</div>';
+                        paymentHtml += '</td>';
+                        paymentHtml += '<td>';
+                        paymentHtml += '<div class="input-group mb-0">';
+                        paymentHtml += '<div class="input-group-prepend">';
+                        paymentHtml += '<span class="input-group-text">₹</span>';
+                        paymentHtml += '</div>';
+                        paymentHtml += '<input type="text" class="form-control" id="net_amount_'+index+'" value="'+amount*item.quantity+'" aria-label="" readonly>';
+                        paymentHtml += '</div>';
+                        paymentHtml += '</td>';
+                        paymentHtml += '</tr>';
+                        totalAmount +=amount*item.quantity;
+                        paymentHtml += '<input type="hidden" id="index" value="'+index+'">';
+                    });
+                    $("#paymentTable").html(paymentHtml);
+                    $("#totalSale").html(totalAmount);
+                    $("#totalSaleAmt").val(totalAmount);
+                    $("#totalAmt").val(parseFloat(totalAmount) - parseFloat(reduction));
+                    $('#totalPayAmount').html(parseFloat(totalAmount) - parseFloat(reduction));
+                }
+            }
         });
     }
     
 });
+
+$('#payment_voucher_id').change(function(){
+    var voucherId = $('#payment_voucher_id').val();
+    var totalSale = $("#totalSale").text();
+    var reduction = 0;
+    $("#totalDetection").html(reduction);
+    $('#totalPayAmount').html(parseFloat(totalSale) - parseFloat(reduction));
+    if(voucherId != '' && voucherId.length > 0){
+        var postJson = {};
+        postJson['getReduction']  = '';
+        postJson['voucher_id']  = voucherId;
+        $.post("../Model/FarmerPayment.php",postJson,
+        function(data,status){
+            if(status == 'success'){
+                var data = JSON.parse(data);
+                $.each( data['reduction'] , function( index, item ) {
+                    reduction += parseFloat(item.amount);
+                });
+            }
+            $("#totalDetection").html(reduction);
+            $('#totalPayAmount').html(parseFloat(totalSale) - parseFloat(reduction));
+        });
+    }
+    
+});
+
+function farmerPaymentAmountChange(inx){
+    var qty     = $('#quantity_'+inx).val();
+    var amount  = $('#amount_'+inx).val();
+    $('#net_amount_'+inx).val(amount*qty);
+    farmerPaymentToatalAmount();
+}
+
+function farmerPaymentToatalAmount(){
+    var inx = $('#index').val();
+    var detection = $("#totalDetection").text();
+
+    var totalAmt = 0;
+    for(var i=0; i<=inx; i++){
+        var amt =   $('#net_amount_'+inx).val();
+        totalAmt += parseFloat(amt);        
+    }
+    $("#totalSale").html(totalAmt);
+    $("#totalSaleAmt").val(totalAmt);
+    var amtReduse = parseFloat(totalAmt)- parseFloat(detection);
+    $('#totalPayAmount').html(amtReduse);
+    $('#totalAmt').val(amtReduse);
+}
 
 /******** Farmer Payment Entry End **********/

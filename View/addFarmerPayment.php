@@ -7,6 +7,8 @@
 
     $paymentNo      = isset($editData['billing_number'])  ? $editData['billing_number']   : $paymentNumberFormat;
     $farmer_id      = '';   
+    $farmer_payment_percentage       = $language->getConfigData()['farmer_payment_percentage'];
+
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -20,7 +22,7 @@
                     <a href="farmerPayment.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form method="post" id="addPayment">
-                    
+                    <input type="hidden" id="percentage" name="percentage" value="<?php echo $farmer_payment_percentage; ?>"/>
                     <div class="card">
                     <div class="card-body">
                         <div class="row">
@@ -78,139 +80,14 @@
                                     <th width="200">Amount (per kg)</th>
                                     <th width="200">(₹) Net Amount</th>
                                 </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Malgova</td>
-                                    <td>450</td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="75" aria-label="">
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="input-group mb-0">
-                                            <div class="input-group-prepend">
-                                                <span class="input-group-text">₹</span>
-                                            </div>
-                                            <input type="text" class="form-control" value="18000" aria-label="" readonly>
-                                        </div>
-                                    </td>
-                                </tr>
+                            </thead>
+                            <tbody id="paymentTable">
                             </tbody>
                         </table>
                         </div>
-                        <p class="text-right h5">Total payment Amount: ₹ <strong>1500/-</strong></p>
-                        <p class="text-right h5">Total Detection: ₹ <strong>1500/-</strong></p>
+                        <p class="text-right h5">Total payment Amount: ₹ <strong><span id="totalSale">0</span>/-</strong></p>
+                        <p class="text-right h5">Total Detection: ₹ <strong><span id="totalDetection">0</span>/-</strong></p>
+                        <input type="hidden" id="totalSaleAmt" name="totalSaleAmt" value="0"/>
 
                         
                         
@@ -220,7 +97,8 @@
                         </div>
 
                         <p class="text-right h1 mb-5">
-                        <span>Total: </span><strong>₹ <span>8000</span>/-</strong>
+                        <span>Total: </span><strong>₹ <span id="totalPayAmount">0</span>/-</strong>
+                        <input type="hidden" id="totalAmt" name="totalAmt" value="0"/>
                         </p>
                         
                                 
