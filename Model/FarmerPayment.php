@@ -35,7 +35,7 @@
         }
 
         public function getOptionData($table,$field,$id){
-            $sql = "SELECT * FROM ".$table." WHERE ".$field."= '".$id."' AND company_id='".$_SESSION['company_id']."'";
+            $sql = "SELECT * FROM ".$table." WHERE ".$field."= '".$id."' AND payment_status = 'B' AND status = 'A' AND company_id='".$_SESSION['company_id']."'";
             $executeQuery = mysqli_query($this->connected,$sql);
             $getData = [];
             

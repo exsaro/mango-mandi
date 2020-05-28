@@ -46,7 +46,7 @@
                                     <label for="">Select Farmer</label>
                                     <select name="farmer_id" id="payment_farmer_id" class="custom-select" required>
                                         <option value="">Select Farmer</option>
-                                        <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
+                                        <?php foreach($farmerOptionData as $fKey => $fValue) {  ?>
                                             <option <?php echo ($farmer_id ==  $fValue['farmer_id'])?'selected':''; ?> value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
                                         <?php } ?>
                                     </select>
@@ -63,7 +63,7 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Voucher No</label>
-                                    <select name="voucher_id" id="payment_voucher_id" class="custom-select multi" required multiple="multiple">
+                                    <select name="voucher_id" id="payment_voucher_id" class="custom-select multi"  multiple="multiple">
                                     </select>
                                 </div>
                             </div>
@@ -71,7 +71,7 @@
                         
                         
                         <div class="inline-table mb-3">
-                        <table class="table table-bordered table-primary">
+                        <table class="table table-bordered table-primary d-none" id="payment_detail">
                             <thead>
                                 <tr>
                                     <th>S. No</th>
@@ -88,12 +88,11 @@
                         <p class="text-right h5">Total payment Amount: ₹ <strong><span id="totalSale">0</span>/-</strong></p>
                         <p class="text-right h5">Total Detection: ₹ <strong><span id="totalDetection">0</span>/-</strong></p>
                         <input type="hidden" id="totalSaleAmt" name="totalSaleAmt" value="0"/>
-
-                        
+                        <input type="hidden" id="reduceAmt" name="reduceAmt" value="0"/>
                         
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea class="form-control" id="" rows="3" autocomplete="off" spellcheck="false"></textarea>
+                            <textarea class="form-control" id="" rows="3" autocomplete="off" spellcheck="false" required></textarea>
                         </div>
 
                         <p class="text-right h1 mb-5">
@@ -102,7 +101,7 @@
                         </p>
                         
                                 
-                        <div class="form-group text-right"><button type="submit" name='payment_submit' class="btn btn-primary">Submit</button></div>
+                        <div class="form-group text-right d-none" id="pay_now"><button type="submit" name='payment_submit' class="btn btn-primary">PAY NOW</button></div>
                                 
                     </div>
                             
