@@ -18,7 +18,7 @@
                 
                     <div class="col-md-10">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1>Add Farmer Payment</h1>
+                    <h1>Farmer Payment Entry</h1>
                     <a href="farmerPayment.php" class="btn btn-secondary">Back</a>
                 </div>
                 <form method="post" id="addPayment">
@@ -85,7 +85,7 @@
                             </tbody>
                         </table>
                         </div>
-                        <p class="text-right h5">Total payment Amount: ₹ <strong><span id="totalSale">0</span>/-</strong></p>
+                        <p class="text-right h5">Total Sales Amount: ₹ <strong><span id="totalSale">0</span>/-</strong></p>
                         <p class="text-right h5">Total Detection: ₹ <strong><span id="totalDetection">0</span>/-</strong></p>
                         <input type="hidden" id="totalSaleAmt" name="totalSaleAmt" value="0"/>
                         <input type="hidden" id="reduceAmt" name="reduceAmt" value="0"/>

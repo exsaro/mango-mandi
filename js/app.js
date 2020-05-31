@@ -474,6 +474,9 @@ $('#payment_farmer_id').change(function(){
                         paymentHtml += '<td>'+item.product_name+'('+item.product_code+')'+'</td>';
                         paymentHtml += '<td>'+item.quantity+'</td>';
                         paymentHtml += '<input type="hidden" id="quantity_'+index+'" name="farmer_payment['+index+'][quantity]" value="'+item.quantity+'" aria-label="">';
+                        paymentHtml += '<input type="hidden" id="sales_id_'+index+'" name="farmer_payment['+index+'][sales_id]" value="'+item.sales_id+'" aria-label="">';
+                        paymentHtml += '<input type="hidden" id="sales_detail_id_'+index+'" name="farmer_payment['+index+'][sales_detail_id]" value="'+item.sales_detail_id+'" aria-label="">';
+                        paymentHtml += '<input type="hidden" id="quantity_'+index+'" name="farmer_payment['+index+'][quantity]" value="'+item.quantity+'" aria-label="">';
                         paymentHtml += '<input type="hidden" id="product_id_'+index+'" name="farmer_payment['+index+'][product_id]" value="'+item.product_id+'" aria-label="">';
                         paymentHtml += '<td>';
                         paymentHtml += '<div class="input-group mb-0">';
