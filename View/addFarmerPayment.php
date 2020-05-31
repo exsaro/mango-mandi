@@ -62,7 +62,7 @@
                             </div>
                             <div class="col">
                                 <div class="form-group">
-                                    <label for="">Voucher No</label>
+                                    <label for="">Select Voucher No</label>
                                     <select name="voucher_id" id="payment_voucher_id" class="custom-select multi"  multiple="multiple">
                                     </select>
                                 </div>

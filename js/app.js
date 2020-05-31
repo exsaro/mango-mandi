@@ -454,7 +454,7 @@ $('#payment_farmer_id').change(function(){
 
                 $("#payment_voucher_id").empty();
                 if(data['voucher'].length > 0 && data['purchase'].length > 0){
-                    var voucherHtml = '<option value="">Select Voucher</option>';
+                    var voucherHtml = '';
                     $.each( data['voucher'] , function( index, item ) {
                         voucherHtml += '<option value="'+item.voucher_id  +'">'+item.voucher_no+'</option>';
                     });
