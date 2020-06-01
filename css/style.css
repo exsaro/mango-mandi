@@ -164,3 +164,11 @@ input[type=number] {
     background: var(--dark);
     color: #fff;
 }
+
+.lock-section-parent{
+    cursor:no-drop;
+}
+
+.lock-section-pointer{
+    pointer-events:none;
+}

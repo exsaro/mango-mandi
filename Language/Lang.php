@@ -60,6 +60,7 @@
             'v_t_d'        => 'voucher',
             'pu_m'         => 'purchase',
             's_t'          => 'sales',
+            'f_p_e'        => 'farmer_payment',
 
             //Column Name
             'c_m_c'        => 'company_id',
@@ -71,6 +72,7 @@
             'v_t_d_c'      => 'voucher_id',
             'pu_m_c'       => 'purchase_id',
             's_t_c'        => 'sales_id',
+            'f_p_e_c'      => 'farmer_payment_id',
 
             // Page Name
             'c_m_p'        => 'company',
@@ -82,6 +84,8 @@
             'v_t_d_p'      => 'voucherTransaction',
             'pu_m_p'       => 'purchase',
             's_t_p'        => 'sales',
+            'f_p_e_p'      => 'farmerPayment',
+
             //Faremer Payment Calculation
             'farmer_payment_percentage' => 10
 

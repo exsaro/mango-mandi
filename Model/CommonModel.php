@@ -111,6 +111,7 @@
        
             return mysqli_fetch_assoc($executeQuery)[$fields];
         }
+
         public function getAutoDate(){
             $getDate            = getdate();
             $autoNumberFormat = strtoupper($getDate['month']).str_split($getDate['year'],2)[1];
@@ -130,13 +131,14 @@
             }
             return $getData;
         }
+
         public function getAmount($getRequest){
             $sql =  "SELECT ".$getRequest['field']." FROM ".$getRequest['table']. " WHERE company_id = '".$getRequest['company_id']."' AND ".$getRequest['column_name']." = '".$getRequest['column_value']."' AND status='A'";
             $executeQuery  = mysqli_query($this->connected,$sql);
              return mysqli_fetch_assoc($executeQuery)[$getRequest['field']];
-         }
+        }
 
-         public function getCompanyOptions(){
+        public function getCompanyOptions(){
             $sql = "SELECT * FROM  company_master WHERE status != 'D'";
             $executeQuery   = mysqli_query($this->connected ,$sql); 
             $getData = [];
@@ -148,7 +150,35 @@
                 }
             } 
             return $getData; 
-         }
+        }
+
+        public function getFarmerPaymentDetail($id){
+            $sql = "SELECT * FROM farmer_payment_detail as fpd INNER JOIN product_master as pm ON fpd.product_id = pm.product_id INNER JOIN farmer_payment as fp ON fpd.farmer_payment_id = fp.farmer_payment_id WHERE fpd.status != 'D' AND pm.status != 'D' AND fp.status != 'D' AND fpd.farmer_payment_id = '".$id."'" ;
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
+        public function getFarmerPaymentListData()
+        {
+            $sql = "SELECT * FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id WHERE fp.status != 'D' AND fm.status != 'D'" ;
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
     }
 
 

@@ -427,16 +427,20 @@ function changeCompany(){
 
 $('#payment_farmer_id').change(function(){
     var farmerId = $('#payment_farmer_id').val();
+    var editId       = $('#editId').val()!=''?$('#editId').val():0;
     $("#payment_purchase_id").empty();
     $("#payment_voucher_id").empty();
     $("#paymentTable").html('');
+    $("#payment_detail").addClass('d-none');
+    $("#pay_now").addClass('d-none');
     $("#totalSale").html(0);
     $("#totalDetection").html(0);
     $('#totalPayAmount').html(0);
     if(farmerId != ''){
         var postJson = {};
         postJson['getVoucherAndPurchase']  = '';
-        postJson['farmer_id']  = farmerId;
+        postJson['farmer_id']   = farmerId;
+        postJson['editId']      = editId;
         $.post("../Model/FarmerPayment.php",postJson,
         function(data,status){
             if(status == 'success'){
@@ -491,7 +495,7 @@ $('#payment_farmer_id').change(function(){
                         paymentHtml += '<div class="input-group-prepend">';
                         paymentHtml += '<span class="input-group-text">₹</span>';
                         paymentHtml += '</div>';
-                        paymentHtml += '<input type="text" class="form-control" name="farmer_payment['+index+'][net_amount]"  id="net_amount_'+index+'" value="'+amount*item.quantity+'" aria-label="" readonly>';
+                        paymentHtml += '<input type="text" class="form-control" name="farmer_payment['+index+'][sale_net_amount]"  id="net_amount_'+index+'" value="'+amount*item.quantity+'" aria-label="" readonly>';
                         paymentHtml += '</div>';
                         paymentHtml += '</td>';
                         paymentHtml += '</tr>';
@@ -513,13 +517,16 @@ $('#payment_farmer_id').change(function(){
 $('#payment_voucher_id').change(function(){
     var voucherId = $('#payment_voucher_id').val();
     var totalSale = $("#totalSale").text();
+    var editId       = $('#editId').val()!=''?$('#editId').val():0;
     var reduction = 0;
     $("#totalDetection").html(reduction);
     $('#totalPayAmount').html(parseFloat(totalSale) - parseFloat(reduction));
+    $('#totalAmt').val(parseFloat(totalSale) - parseFloat(reduction));
     if(voucherId != '' && voucherId.length > 0){
         var postJson = {};
         postJson['getReduction']  = '';
         postJson['voucher_id']  = voucherId;
+        postJson['editId']  = editId;
         $.post("../Model/FarmerPayment.php",postJson,
         function(data,status){
             if(status == 'success'){
@@ -531,6 +538,8 @@ $('#payment_voucher_id').change(function(){
             $("#totalDetection").html(reduction);
             $("#reduceAmt").val(reduction);            
             $('#totalPayAmount').html(parseFloat(totalSale) - parseFloat(reduction));
+            $('#totalAmt').val(parseFloat(totalSale) - parseFloat(reduction));
+
         });
     }
     
