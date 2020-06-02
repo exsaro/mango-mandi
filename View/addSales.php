@@ -14,7 +14,7 @@
     $salesData[0]['amount']    = '';
     $farmerOptionData = $commonModel->getData('farmer_master','list','','');
     $customerOptionData = $commonModel->getData('customer_master','list','','');
-    $salesOptionData = $commonModel->getData('product_master','list','','');
+   
 
     if(isset($_GET['id'])){
         $title      = 'Edit Sales';
@@ -23,6 +23,7 @@
         $editData   = isset($salesEditData[0]) ?  $salesEditData[0] : [] ;
         $submitType = 'update';
     }
+
     $id             = isset($editData['sales_id'])    ? $editData['sales_id'] : '';
     $salesNo      = isset($editData['billing_number'])  ? $editData['billing_number']   : $salesNumberFormat;
     $salesDate    = isset($editData['billing_date'])  ? $editData['billing_date']   : '';
@@ -147,7 +148,11 @@
                                     $qty    = $value['quantity']!=''&&$value['quantity'] != 0?$value['quantity']:1 ;
                                     $salAmt =$value['amount']!=''?$value['amount']:0;
                                     $totalItemAmt   = $qty*$salAmt;
-                                    $totalsales +=$totalItemAmt;                    
+                                    $totalsales +=$totalItemAmt;    
+                                    $salesOptionData = [];
+                                    if($value['farmer_id'] != '')
+                                        $salesOptionData = $commonModel->getSalesOptionData($value['farmer_id']);  
+                                           
                             ?>
                                 <div class="form-group identifyCls" id="identifyDiv_<?php echo $key; ?>" data-size="<?php echo $key; ?>">
                                     <div class="card mb-2">
@@ -155,7 +160,7 @@
                                             <div class="row mb-3">
                                                 <div class="col">
                                                     <label for="">Select Farmer</label>
-                                                    <select name="sales_details[<?php echo $key; ?>][farmer_id]" class="custom-select" required>
+                                                    <select id="sales_farmer_<?php  echo $key; ?>" name="sales_details[<?php echo $key; ?>][farmer_id]" class="custom-select" onchange="getFarmerProduct(<?php echo $key; ?>)" required>
                                                         <option value="">Select Farmer</option>
                                                         <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
                                                             <option <?php echo ($value['farmer_id'] ==  $fValue['farmer_id'])?'selected':''; ?> value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
@@ -166,9 +171,10 @@
                                                     <label for="">Select Item</label>
                                                     <select  name="sales_details[<?php echo $key; ?>][product_id]"  class="custom-select"  id="productId_<?php echo $key; ?>"onchange="getProductAmount(<?php echo $key; ?>)" required>
                                                         <option value="">Select Item</option>
-                                                        <?php foreach($salesOptionData as $sKey => $sValue) { ?>
+                                                        <?php foreach($salesOptionData as $sKey => $sValue) {
+                                                                if(($sValue['payment_status'] =='B') || ($sValue['farmer_id'] == $value['farmer_id'] && $sValue['product_id'] ==  $value['product_id'] && $sValue['payment_status'] == 'P' )) { ?>
                                                             <option <?php echo ($value['product_id'] ==  $sValue['product_id'])?'selected':''; ?> value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>
-                                                        <?php } ?>
+                                                        <?php } }?>
                                                     </select>
                                                 </div>
                                             
@@ -241,7 +247,7 @@
             <div class="row mb-3">
                 <div class="col">
                     <label for="">Select Farmer</label>
-                    <select name="sales_details[XXX][farmer_id]" class="custom-select" required>
+                    <select name="sales_details[XXX][farmer_id]" id="sales_farmer_XXX" class="custom-select" onchange="getFarmerProduct(XXX)" required>
                         <option value="">Select Farmer</option>
                         <?php foreach($farmerOptionData as $fKey => $fValue) { ?>
                             <option  value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
@@ -252,9 +258,6 @@
                     <label for="">Select Item</label>
                     <select  name="sales_details[XXX][product_id]" id="productId_XXX" onchange="getProductAmount(XXX)"class="custom-select" required>
                         <option value="">Select Item</option>
-                        <?php foreach($salesOptionData as $sKey => $sValue) { ?>
-                            <option  value="<?php echo $sValue['product_id']; ?>" ><?php echo $sValue['product_name']." - " ; ?><?php echo $sValue['product_code']; ?></option>
-                        <?php } ?>
                     </select>
                 </div>
            

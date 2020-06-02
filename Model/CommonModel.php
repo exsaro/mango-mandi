@@ -179,6 +179,35 @@
             }
             return $getData;
         }
+        public function getSalesOptionData($farmerId)
+        {
+            $sql = "SELECT * FROM purchase as p INNER JOIN purchase_detail as pd ON p.purchase_id = p.purchase_id WHERE p.status != 'D' AND pd.status != 'D' AND p.farmer_id = '".$farmerId."'" ;
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $row['product_name'] = $this->getProduct($row['product_id'])['product_name'];
+                    $row['product_code'] = $this->getProduct($row['product_id'])['product_code'];
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
+        public function getProduct($productId){
+            $sql = "SELECT product_name,product_code FROM product_master WHERE  product_id = '".$productId."' ORDER BY ".$productId." DESC LIMIT 1";
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData[0];
+        }
     }
 
 
@@ -210,5 +239,12 @@
         $amount = $commonObj->getAmount($_POST);
         $returnData['amount'] = $amount;
         echo json_encode($returnData);
+    }
+
+    // Get Farmer Product
+    if(isset($_REQUEST['selectFarmerProduct'])){
+        $commonObj       = new CommonModel();
+        $salesData['purchase'] = $commonObj->getSalesOptionData($_REQUEST['farmerId']);
+        echo json_encode($salesData);
     }
 ?>

@@ -368,6 +368,33 @@ function updatedSaleAmnt(indx){
     calculateSales();
 }
 
+function getFarmerProduct(index){
+    var companyId = $('#sideCompany').val();
+    var farmerId = $('#sales_farmer_'+index).val();
+    if(farmerId != ''){
+        var postJson = {};
+        postJson['selectFarmerProduct'] = '';
+        postJson['company']  = companyId;
+        postJson['farmerId']  = farmerId;
+        $("#productId_"+index).empty();
+
+        $.post("../Model/CommonModel.php",postJson,
+        function(data,status){
+            data = JSON.parse(data);
+            if(data['purchase'].length > 0){
+                var purchaseHtml = '<option value="" >Select Item</option>';
+                $.each( data['purchase'] , function( index, item ) {
+                    if(item.payment_status != 'P')
+                    purchaseHtml += '<option value="'+item.product_id  +'">'+item.product_name+' - '+item.product_code+'</option>';
+                });
+            }else{
+                var purchaseHtml = '<option value="" disabled>No Data Found</option>';
+            }
+            $("#productId_"+index).html(purchaseHtml);
+        });
+    }
+}
+
 /*  Sales Addition Details End*/
 
 
@@ -582,7 +609,5 @@ $('#payment_purchase_id').change(function(){
 });
 
 
-function printPage(){
-    window.print();
-}
+
 /******** Farmer Payment Entry End **********/

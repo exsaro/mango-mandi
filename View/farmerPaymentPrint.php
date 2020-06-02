@@ -74,96 +74,100 @@
 <body>
     
     <div class="container">
-        <header class="bg-dark p-2 text-center">
-            <h4 class="text-white">Farmer Payment Bill</h4>
-        </header>
-        <div class="container pt-2">
-            <div class="row">
-                <div class="col-md-6">
-                    <p><?php echo $farmerPaymentDetail['company_name']; ?></p>
-                    <p><?php echo $farmerPaymentDetail['company_address']; ?></p>
-                    <p><?php echo $farmerPaymentDetail['city']; ?></p>
-                    <p><?php echo $farmerPaymentDetail['state']; ?></p>
-                    <p><?php echo $farmerPaymentDetail['country']; ?></p>
-                    <p><?php echo $farmerPaymentDetail['pincode']; ?></p>
+        <div id="print_part">
+            <header class="bg-dark p-2 text-center">
+                <h4 class="text-white">Farmer Payment Bill</h4>
+            </header>
+            <div class="container pt-2">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p><?php echo $farmerPaymentDetail['company_name']; ?></p>
+                        <p><?php echo $farmerPaymentDetail['company_address']; ?></p>
+                        <p><?php echo $farmerPaymentDetail['city']; ?></p>
+                        <p><?php echo $farmerPaymentDetail['state']; ?></p>
+                        <p><?php echo $farmerPaymentDetail['country']; ?></p>
+                        <p><?php echo $farmerPaymentDetail['pincode']; ?></p>
+                    </div>
                 </div>
-            </div>
-            <h6 class="font-weight-bold">Farmer Detail</h6>
-            <table class="table">
-                <thead>
+                <h6 class="font-weight-bold">Farmer Detail</h6>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>S.No</th>
+                            <th>Farmer Name</th>
+                            <th>Farmer Code</th>
+                            <th>Address</th>
+                            <th>State</th>
+                            <th>Country</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                        <td>1</td>
+                            <td><?php echo $farmerPaymentDetail['farmer_name']; ?></td>
+                            <td><?php echo $farmerPaymentDetail['farmer_code']; ?></td>
+                            <td><?php echo $farmerPaymentDetail['farmer_address']; ?>,<br><?php echo $farmerPaymentDetail['farmer_city']; ?>,<br><?php echo $farmerPaymentDetail['farmer_district']; ?></td>
+                            <td><?php echo $farmerPaymentDetail['farmer_state']; ?></td>
+                            <td><?php echo $farmerPaymentDetail['farmer_country']; ?></td>
+                        </tr>
+                    </tbody>
+                </table>
+                    
+                <h6 class="font-weight-bold">Product Detail</h6>
+                <table class="table">
                     <tr>
                         <th>S.No</th>
-                        <th>Farmer Name</th>
-                        <th>Farmer Code</th>
-                        <th>Address</th>
-                        <th>State</th>
-                        <th>Country</th>
+                        <th>Product Name</th>
+                        <th>Product Code</th>
+                        <th>Quantity</th>
+                        <th>Amount(per Qty)(₹)</th>
+                        <th>Net Amount(₹)</th>
                     </tr>
-                </thead>
-                <tbody>
                     <tr>
-                       <td>1</td>
-                        <td><?php echo $farmerPaymentDetail['farmer_name']; ?></td>
-                        <td><?php echo $farmerPaymentDetail['farmer_code']; ?></td>
-                        <td><?php echo $farmerPaymentDetail['farmer_address']; ?>,<br><?php echo $farmerPaymentDetail['farmer_city']; ?>,<br><?php echo $farmerPaymentDetail['farmer_district']; ?></td>
-                        <td><?php echo $farmerPaymentDetail['farmer_state']; ?></td>
-                        <td><?php echo $farmerPaymentDetail['farmer_country']; ?></td>
+                        <?php 
+                            foreach($totalPaymentDetail as $key => $value) { ?>
+                                <tr>
+                                    <td><?php echo $pi; ?></td>
+                                    <td><?php echo $value['product_name']; ?></td>
+                                    <td><?php echo $value['product_code']; ?></td>
+                                    <td><?php echo $value['quantity']; ?></td>
+                                    <td><?php echo $value['amount']; ?></td>
+                                    <td><?php echo $value['sale_net_amount']; ?></td>
+                                </tr>
+                        <?php $pi++; } ?>
                     </tr>
-                </tbody>
-            </table>
+                </table>
+                <p class="text-right"><span class="font-weight-bold">Total Sale Amount: </span><?php echo $farmerPaymentDetail['total_sales_amount']; ?> /-</p>
+                <h6>Voucher Detail</h6>
+                <table class="table">
+                    <tr>
+                        <th>S.No</th>
+                        <th>Voucher No</th>
+                        <th>Voucher Date</th>
+                        <th>Amount(₹)</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <?php 
+                            foreach($voucherDetail as $key => $value) { ?>
+                                <tr>
+                                    <td><?php echo $vi; ?></td>
+                                    <td><?php echo $value['voucher_no']; ?></td>
+                                    <td><?php echo $value['voucher_date']; ?></td>
+                                    <td><?php echo $value['amount']; ?></td>
+                                    <td><?php echo $value['description']; ?></td>
+                                </tr>
+                        <?php $vi++; } ?>
+                    </tr>
+                </table>
+                <p class="text-right"><span class="font-weight-bold">Total Deduction Amount: </span><?php echo $farmerPaymentDetail['total_detection']; ?> /-</p>
+                <p class="text-right"><span class="font-weight-bold">Total Amount: </span><?php echo $farmerPaymentDetail['total_amount']; ?> /-</p>
                 
-            <h6 class="font-weight-bold">Product Detail</h6>
-            <table class="table">
-                <tr>
-                    <th>S.No</th>
-                    <th>Product Name</th>
-                    <th>Product Code</th>
-                    <th>Quantity</th>
-                    <th>Amount(per Qty)(₹)</th>
-                    <th>Net Amount(₹)</th>
-                </tr>
-                <tr>
-                    <?php 
-                        foreach($totalPaymentDetail as $key => $value) { ?>
-                            <tr>
-                                <td><?php echo $pi; ?></td>
-                                <td><?php echo $value['product_name']; ?></td>
-                                <td><?php echo $value['product_code']; ?></td>
-                                <td><?php echo $value['quantity']; ?></td>
-                                <td><?php echo $value['amount']; ?></td>
-                                <td><?php echo $value['sale_net_amount']; ?></td>
-                            </tr>
-                    <?php $pi++; } ?>
-                </tr>
-            </table>
-            <p class="text-right"><span class="font-weight-bold">Total Sale Amount: </span><?php echo $farmerPaymentDetail['total_sales_amount']; ?> /-</p>
-            <h6>Voucher Detail</h6>
-            <table class="table">
-                <tr>
-                    <th>S.No</th>
-                    <th>Voucher No</th>
-                    <th>Voucher Date</th>
-                    <th>Amount(₹)</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <?php 
-                        foreach($voucherDetail as $key => $value) { ?>
-                            <tr>
-                                <td><?php echo $vi; ?></td>
-                                <td><?php echo $value['voucher_no']; ?></td>
-                                <td><?php echo $value['voucher_date']; ?></td>
-                                <td><?php echo $value['amount']; ?></td>
-                                <td><?php echo $value['description']; ?></td>
-                            </tr>
-                    <?php $vi++; } ?>
-                </tr>
-            </table>
-            <p class="text-right"><span class="font-weight-bold">Total Deduction Amount: </span><?php echo $farmerPaymentDetail['total_detection']; ?> /-</p>
-            <p class="text-right"><span class="font-weight-bold">Total Amount: </span><?php echo $farmerPaymentDetail['total_amount']; ?> /-</p>
-            <button class="btn btn-primary" onclick="window.print()">print</button>
-            <button class="btn btn-secondary">Go Back</button>
+            </div>
+            
         </div>
+        <button class="btn btn-primary" onclick="printFarmerPayment()">print</button>
+                <button class="btn btn-secondary">Go Back</button>
     </div>
     <!-- Jquery  -->
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
