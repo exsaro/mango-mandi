@@ -17,13 +17,9 @@
   }
 
 
-  function printFarmerPayment(){
-    // var printContents = document.getElementById("print_part").innerHTML;
-    //     var originalContents = document.body.innerHTML;
-    //     document.body.innerHTML = printContents;
-    //     window.print();
-    //     document.body.innerHTML = originalContents
-    // $("#print_part").show();
-    // window.print();
-    // // $("#print_part").print();
+function printFarmerPayment(check){
+    if(check == 'printCheck')
+        window.print();
+        
+    window.location = "../View/farmerPayment.php";
 }

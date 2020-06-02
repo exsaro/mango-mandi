@@ -148,12 +148,15 @@
                    }
 
                     $_SESSION['alert']          = 'alert-success';
+                    $_SESSION['farmer_payment_id'] = $farmer_payment_id;
+                    header("Location:../View/farmerPaymentPrint.php");       
+
                 }else{
                     $_SESSION['message']        = 'Something went wrong!';
                     $_SESSION['alert']          = 'alert-danger';
+                    header("Location:../View/farmerPayment.php");       
                 }
 
-                header("Location:../View/farmerPayment.php");       
             }else{
                 if($storeData['editId'] != ""){
                     $urlId  = '?id='.$storeData['editId'];

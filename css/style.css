@@ -172,3 +172,6 @@ input[type=number] {
 .lock-section-pointer{
     pointer-events:none;
 }
+#printBtn{
+    display:none;
+}

@@ -1,6 +1,5 @@
 <?php  
     session_start(); 
-    $_SESSION['farmer_payment_id'] = 16;
 
     if(!isset($_SESSION['company_id'])){
         header("Location:./login.php");
@@ -68,7 +67,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/themes/bootstrap1.min.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/style.css" media="print">
     <title>Document</title>
 </head>
 <body>
@@ -79,17 +78,17 @@
                 <h4 class="text-white">Farmer Payment Bill</h4>
             </header>
             <div class="container pt-2">
-                <div class="row">
+                <div class="row pb-4">
                     <div class="col-md-6">
-                        <p><?php echo $farmerPaymentDetail['company_name']; ?></p>
-                        <p><?php echo $farmerPaymentDetail['company_address']; ?></p>
-                        <p><?php echo $farmerPaymentDetail['city']; ?></p>
-                        <p><?php echo $farmerPaymentDetail['state']; ?></p>
-                        <p><?php echo $farmerPaymentDetail['country']; ?></p>
-                        <p><?php echo $farmerPaymentDetail['pincode']; ?></p>
+                        <p class="font-weight-bold m-0 h4 text-primary"><?php echo $farmerPaymentDetail['company_name']; ?></p>
+                        <p class="m-0"><?php echo $farmerPaymentDetail['company_address']; ?></p>
+                        <p class="m-0"><?php echo $farmerPaymentDetail['city']; ?></p>
+                        <p class="m-0"><?php echo $farmerPaymentDetail['state']; ?></p>
+                        <p class="m-0"><?php echo $farmerPaymentDetail['country']; ?></p>
+                        <p class="m-0"><?php echo $farmerPaymentDetail['pincode']; ?></p>
                     </div>
                 </div>
-                <h6 class="font-weight-bold">Farmer Detail</h6>
+                <h6 class="font-weight-bold h5">Farmer Detail</h6>
                 <table class="table">
                     <thead>
                         <tr>
@@ -113,7 +112,7 @@
                     </tbody>
                 </table>
                     
-                <h6 class="font-weight-bold">Product Detail</h6>
+                <h6 class="font-weight-bold h5">Product Detail</h6>
                 <table class="table">
                     <tr>
                         <th>S.No</th>
@@ -137,8 +136,8 @@
                         <?php $pi++; } ?>
                     </tr>
                 </table>
-                <p class="text-right"><span class="font-weight-bold">Total Sale Amount: </span><?php echo $farmerPaymentDetail['total_sales_amount']; ?> /-</p>
-                <h6>Voucher Detail</h6>
+                <p class="text-right"><span class="font-weight-bold h5">Total Sale Amount: </span><span class="h5"><?php echo $farmerPaymentDetail['total_sales_amount']; ?> /-</span></p>
+                <h6  class="font-weight-bold h5">Voucher Detail</h6>
                 <table class="table">
                     <tr>
                         <th>S.No</th>
@@ -160,14 +159,16 @@
                         <?php $vi++; } ?>
                     </tr>
                 </table>
-                <p class="text-right"><span class="font-weight-bold">Total Deduction Amount: </span><?php echo $farmerPaymentDetail['total_detection']; ?> /-</p>
-                <p class="text-right"><span class="font-weight-bold">Total Amount: </span><?php echo $farmerPaymentDetail['total_amount']; ?> /-</p>
+                <p class="text-right"><span class="font-weight-bold h5">Total Deduction Amount: </span><span class="h5"><?php echo $farmerPaymentDetail['total_detection']; ?> /-</span></p>
+                <p class="text-right"><span class="font-weight-bold h4">Total Amount: </span><span class="h4"><?php echo $farmerPaymentDetail['total_amount']; ?> /-</span></p>
                 
             </div>
             
         </div>
-        <button class="btn btn-primary" onclick="printFarmerPayment()">print</button>
-                <button class="btn btn-secondary">Go Back</button>
+        <div id="printBtn" class="text-right pb-5">
+            <button class="btn btn-primary" onclick="printFarmerPayment('printCheck')">Print</button>
+            <button class="btn btn-secondary ml-3" onclick="printFarmerPayment('cancel')">Cancel</button>
+        </div>
     </div>
     <!-- Jquery  -->
     <script src="../js/jquery/jquery-3.3.1.min.js"></script>
