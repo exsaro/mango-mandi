@@ -580,4 +580,9 @@ $('#payment_purchase_id').change(function(){
     }
     farmerPaymentToatalAmount();
 });
+
+
+function printPage(){
+    window.print();
+}
 /******** Farmer Payment Entry End **********/

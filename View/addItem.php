@@ -15,7 +15,7 @@
     $id          = isset($editData['product_id'])       ? $editData['product_id']      : '';
     $productName = isset($editData['product_name'])     ? $editData['product_name']      : '';
     $productCode = isset($editData['product_code'])  ? $editData['product_code']   : '';
-    $unitOfMeasurement        = isset($editData['unit_of_measurement'])  ? $editData['unit_of_measurement']   : '';  
+    $unitOfMeasurement        = isset($editData['unit_of_measurement'])  ? $editData['unit_of_measurement']   : 'kg';  
     $price       = isset($editData['price'])  ? $editData['price']          : '';
     $status      = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';  
 ?>
@@ -51,7 +51,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="">Unit of measurement</label>
-                                    <input type="text" class="form-control" name="unit_of_measurement" placeholder="Unit of measurement" required minlength=1 maxlength=10 value='<?php echo $unitOfMeasurement; ?>' >
+                                    <input type="text" class="form-control" name="unit_of_measurement" placeholder="Unit of measurement" required minlength=1 maxlength=10 value='<?php echo $unitOfMeasurement; ?>' readOnly >
                                 </div>
                                 <div class="form-group">
                                     <label for="">(₹) Amount</label>
