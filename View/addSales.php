@@ -216,7 +216,11 @@
 
                         
                         
-						<div class="my-5">
+						<div class="my-5 d-flex align-items-center justify-content-between">
+                            <div class="form-group">
+                                <label class="d-block" for="">(₹) Advance Payment</label>
+                                <input type="number" class="form-control" value="0.00" />
+                            </div>
 							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$totalAddition); ?></span>/-</strong></p>
 						</div>
 

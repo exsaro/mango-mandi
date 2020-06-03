@@ -14,46 +14,79 @@
                     
                     <div class="card">
                     <div class="card-body">
-                        <div class="form-group">
-                            <label for="">Payment No</label>
-                            <input type="text" class="form-control" name="payment_no" placeholder="Payment No" required />
-                        </div>
-                        <div class="form-group">
-                            <label for="">Payment Date</label>
-                            <div class="input-group">
-                            <input type="text" name="payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" />
-                            <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
+
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Bill No</label>
+                                    <input type="text" class="form-control" name="payment_no" placeholder="Bill No" readonly required />
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Bill Date</label>
+                                    <div class="input-group">
+                                        <input type="text" name="payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" />
+                                        <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Select Customer</label>
+                                    <select name="select_customer" class="custom-select" required>
+                                        <option value="">Please select</option>
+                                        <option value="1">Saravaan1</option>
+                                        <option value="2">Saravaan2</option>
+                                        <option value="3">Saravaan3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Sale No</label>
+                                    <select name="select_customer" class="custom-select multi" multiple="multiple" required>
+                                        <option value="1">Saravaan1</option>
+                                        <option value="2">Saravaan2</option>
+                                        <option value="3">Saravaan3</option>
+                                    </select>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="">Select Customer</label>
-                            <select name="select_customer" class="custom-select" required>
-                                <option value="">Please select</option>
-                                <option value="1">Saravaan1</option>
-                                <option value="2">Saravaan2</option>
-                                <option value="3">Saravaan3</option>
-                            </select>
+
+                        <div class="inline-table mb-3">
+                            <table class="table table-bordered table-primary"  id="payment_detail">
+                                <thead>
+                                    <tr>
+                                        <th>S. No</th>
+                                        <th>Item</th>
+                                        <th>Qty (kg)</th>
+                                        <th width="200">Amount (per kg)</th>
+                                        <th width="200">(₹) Net Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <td>1</td>
+                                    <td>Malgova</td>
+                                    <td>250</td>
+                                    <td>80</td>
+                                    <td>1800</td>
+                                </tbody>
+                            </table>
                         </div>
-                        <div class="form-group">
-                            <label for="">Purpose</label>
-                            <input type="text" class="form-control" name="purpose" placeholder="Purpose" required />
-                        </div>
-                        <div class="form-group">
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <label for="">Payment mode</label>
-                                    <input type="text" class="form-control" name="payment_mode" placeholder="Payment mode" required />
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="">Amount (₹)</label>
-                                    <input type="number" min="0" class="form-control" name="amount" placeholder="Amount" required />
-                                </div>
-                            </div>    
-                        </div>
+
+                        <p class="text-right h5">Total Sales Amount: ₹ <strong><span>13500.00</span>/-</strong></p>
+                        <p class="text-right h5">Total Detection: ₹ <strong><span>9570.00</span>/-</strong></p>
+
                         <div class="form-group">
                             <label for="">Description</label>
                             <textarea class="form-control" id="" rows="3" autocomplete="off" spellcheck="false"></textarea>
                         </div>
+
+                        <p class="text-right h1 mb-5">
+                        <span>Total: </span><strong>₹ <span id="totalPayAmount">3930.00</span>/-</strong>
+                        <input type="hidden" id="totalAmt" name="total_amount" value="3930.00">
+                        </p>
                         
                                 
                         <div class="form-group text-right"><button type="submit" name='payment_submit' class="btn btn-primary">Submit</button></div>
