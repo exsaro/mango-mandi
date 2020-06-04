@@ -54,6 +54,52 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Account Number</label>
+                                    <div class="form-row">
+                                        <div class="col">
+                                        <input type="text" class="form-control" placeholder="From">
+                                        </div>
+                                        <div class="col">
+                                        <input type="text" class="form-control" placeholder="To">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">IFSC Code</label>
+                                    <div class="form-row">
+                                        <div class="col">
+                                        <input type="text" class="form-control" placeholder="From">
+                                        </div>
+                                        <div class="col">
+                                        <input type="text" class="form-control" placeholder="To">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Payment Type</label>
+                                    <select name="select_customer" class="custom-select" required>
+                                        <option value="">Please select</option>
+                                        <option value="1">Online</option>
+                                        <option value="2">Credit/Debit Card</option>
+                                        <option value="3">Cheque</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col">
+                                <div class="form-group">
+                                    <label for="">Cheque No</label>
+                                    <input type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="inline-table mb-3">
                             <table class="table table-bordered table-primary"  id="payment_detail">
                                 <thead>
@@ -75,8 +121,39 @@
                             </table>
                         </div>
 
-                        <p class="text-right h5">Total Sales Amount: ₹ <strong><span>13500.00</span>/-</strong></p>
-                        <p class="text-right h5">Total Detection: ₹ <strong><span>9570.00</span>/-</strong></p>
+                        <!-- <p class="text-right h5"> <strong><span>13500.00</span>/-</strong></p> -->
+
+                           
+                        <div class="d-flex justify-content-end">
+                        <table class="table table-bordered w-50">
+                            <tbody>
+                                <tr>
+                                    <td class="h5">Total Sales Amount</td>
+                                    <td class="h5">₹ <span>9570.00</span>/-</td>
+                                </tr>
+                                <tr>
+                                    <td class="h5">Customer Paid Amout</td>
+                                    <td>
+                                        <div class="input-group">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">₹</span>
+                                            </div>
+                                            <input type="text" name="" id="" class="form-control">
+                                            
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="h5">Balance Amount</td>
+                                    <td class="h5">₹ <span>9570.00</span>/-</td>
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        </div>
+                        
+                        
+                        
 
                         <div class="form-group">
                             <label for="">Description</label>
