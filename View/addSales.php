@@ -37,10 +37,10 @@
     $otherExpenses       = isset($editData['other_expenses'])  ? $editData['other_expenses']   : '';
     $status         = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';
     $salesDetails = isset($salesGroupData)   ? $salesGroupData : $salesData;
-    $totalAddition = ($hC!=''?$hC:0)+($mC!=''?$mC:0)+($colli!=''?$colli:0)+($packing!=''?$packing:0)+($lorryAdvance!=''?$lorryAdvance:0)+($otherExpenses!=''?$otherExpenses:0);
-    $totalAddition = sprintf("%.2f", $totalAddition);
+    // $totalAddition = ($hC!=''?$hC:0)+($mC!=''?$mC:0)+($colli!=''?$colli:0)+($packing!=''?$packing:0)+($lorryAdvance!=''?$lorryAdvance:0)+($otherExpenses!=''?$otherExpenses:0);
+    // $totalAddition = sprintf("%.2f", $totalAddition);
     $totalsales    = 0;
-
+    $other_addition_amount = isset($editData['other_addition_amount'])  ? $editData['other_addition_amount']   : '';
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -123,7 +123,8 @@
 									</div>
 								</div>
 								<div class="card-footer text-right">
-									<span>Total Addition: </span><strong>₹ <span id="salesTotalAddition"><?php echo $totalAddition; ?></span>/-</strong>
+									<span>Total Addition: </span><strong>₹ <span id="salesTotalAddition"><?php echo $other_addition_amount; ?></span>/-</strong>
+                                    <input type="hidden" id="other_addition_amount" name="other_addition_amount" value="<?php echo $other_addition_amount; ?>">
 								</div>
                             </div>
                         </div>
@@ -221,7 +222,7 @@
                                 <label class="d-block" for="">(₹) Advance Payment</label>
                                 <input type="number" class="form-control" value="0.00" />
                             </div>
-							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$totalAddition); ?></span>/-</strong></p>
+							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$other_addition_amount); ?></span>/-</strong></p>
 						</div>
 
                         <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button></div>

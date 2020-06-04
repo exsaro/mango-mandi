@@ -87,7 +87,15 @@
             'f_p_e_p'      => 'farmerPayment',
 
             //Faremer Payment Calculation
-            'farmer_payment_percentage' => 10
+            'farmer_payment_percentage' => 10,
+
+            //payment type
+            'payment_type' => [
+               'CASH' => 'cash',
+               'CHEQUE' => 'cheque',
+               'CARD' => 'card',
+               'Net Banking' => 'card',
+            ]
 
          ];
 

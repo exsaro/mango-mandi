@@ -310,6 +310,7 @@ $(".totalAddition").keyup(function () {
     var otherExpenses     = $('#other_expenses').val()!=''? $('#other_expenses').val():0;
     totalAddition      = parseFloat(hC)+parseFloat(mC)+parseFloat(colli)+parseFloat(packing)+parseFloat(lorryAdvance)+parseFloat(otherExpenses);
     $("#salesTotalAddition").html(totalAddition.toFixed(2));
+    $("#other_addition_amount").val(totalAddition.toFixed(2));
     calculateTotalSale();
 })
 function calculateSales() {
@@ -608,6 +609,51 @@ $('#payment_purchase_id').change(function(){
     farmerPaymentToatalAmount();
 });
 
-
-
 /******** Farmer Payment Entry End **********/
+
+
+/******** Customer Payment Entry Start ********/
+$('#customer_payment_customer_id').change(function(){
+    $("#payment_sales_id").empty();
+    $("#customerPaymentTable").html('');
+    $("#fromCustomerBank").val('');
+    $("#fromCustomerIFSC").val('');
+    $("#customer_sales_amount").html(0);
+    $("#hidden_customer_sales_amount").val(0);
+    $("#customer_paid_amount").val(0);
+    $("#custometBalanceAmount").html(0);
+    $("#customet_balance_amount").val(0);
+    $("#totalCustomerPayAmount").html(0);
+    $("#totalCustomerAmt").val(0);
+    $("#payment_detail").addClass('d-none');
+    $("#customer_pay_now").addClass('d-none');
+    
+    var customerId = $("#customer_payment_customer_id").val();
+    if(customerId != ''){
+        var postJson = {};
+        postJson['getSalesDetails']  = '';
+        postJson['customer_id']   = customerId;
+        $.post("../Model/CustomerPayment.php",postJson,
+        function(data,status){
+            if(status == 'success'){
+                var data = JSON.parse(data);
+                if(data['sales_data'].length > 0){
+                    var salesHtml = '<option value="" disabled>Select Sales No</option>';
+                    $.each( data['sales_data'] , function( index, item ) {
+                        salesHtml += '<option value="'+item.sales_id  +'">'+item.billing_number+'</option>';
+                    });
+                }else{
+                    var salesHtml = '<option value="">No Data Found</option>';
+                }
+                $("#payment_sales_id").html(salesHtml);
+            }
+        });
+    }
+
+});
+
+$("#payment_sales_id").change(function(){
+
+});
+
+/******** Customer Payment Entry End ********/

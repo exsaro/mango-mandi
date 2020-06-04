@@ -165,9 +165,10 @@
             }
             return $getData;
         }
+
         public function getFarmerPaymentListData()
         {
-            $sql = "SELECT * FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id WHERE fp.status != 'D' AND fm.status != 'D'" ;
+            $sql = "SELECT * FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id WHERE fp.status != 'D' AND fm.status != 'D' AND fp.company_id = '".$_SESSION['company_id']."'" ;
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 
@@ -179,9 +180,10 @@
             }
             return $getData;
         }
+
         public function getSalesOptionData($farmerId)
         {
-            $sql = "SELECT * FROM purchase as p INNER JOIN purchase_detail as pd ON p.purchase_id = p.purchase_id WHERE p.status != 'D' AND pd.status != 'D' AND p.farmer_id = '".$farmerId."'" ;
+            $sql = "SELECT * FROM purchase as p INNER JOIN purchase_detail as pd ON p.purchase_id = pd.purchase_id WHERE p.status != 'D' AND pd.status != 'D' AND p.farmer_id = '".$farmerId."'" ;
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 
@@ -195,6 +197,7 @@
             }
             return $getData;
         }
+
         public function getProduct($productId){
             $sql = "SELECT product_name,product_code FROM product_master WHERE  product_id = '".$productId."' ORDER BY ".$productId." DESC LIMIT 1";
             $executeQuery  = mysqli_query($this->connected,$sql);
@@ -207,6 +210,20 @@
                 }
             }
             return $getData[0];
+        }
+
+        public function getCustomerPaymentDetail($id){
+            $sql = "SELECT * FROM customer_payment_detail as cpd INNER JOIN product_master as pm ON cpd.product_id = pm.product_id INNER JOIN customer_payment as cp ON cpd.customer_payment_id = cp.customer_payment_id WHERE cpd.status != 'D' AND pm.status != 'D' AND cp.status != 'D' AND cpd.customer_payment_id = '".$id."'" ;
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
         }
     }
 

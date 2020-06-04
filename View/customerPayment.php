@@ -4,8 +4,8 @@
             <?php include 'sidebar.php';?>
             <div class="col-md-9 mt-5 ml-5">
                 <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h1>Customer Payment</h1>
-                    <a href="addCustomerPayment.php" class="btn btn-primary">Add Customer Payment</a>
+                    <h1>Customer Payment Entry</h1>
+                    <a href="addCustomerPayment.php" class="btn btn-primary">Pay Now</a>
                 </div>
                 
 
