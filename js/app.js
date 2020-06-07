@@ -47,7 +47,6 @@
             "../css/themes/" + localStorage.getItem("themeName") + ".min.css"
         );
     }
-    // console.log(pageName)
 })();
 
 $(
@@ -337,6 +336,7 @@ function calculateTotalSale() {
     var tsTotal = $("#totalSales").text() != '' ? $("#totalSales").text() :0;
     totalSalesAmount = parseFloat(sTotal) + parseFloat(tsTotal) ;
     $("#totalAmount").html(totalSalesAmount.toFixed(2));
+    $("#totalAmtForSales").val(totalSalesAmount.toFixed(2));
 }
 
 function getProductAmount(sInx){
@@ -620,13 +620,14 @@ $('#customer_payment_customer_id').change(function(){
     $("#fromCustomerIFSC").val('');
     $("#customer_sales_amount").html(0);
     $("#hidden_customer_sales_amount").val(0);
-    $("#customer_paid_amount").val(0);
+    $("#customer_paid_amount").val('');
     $("#custometBalanceAmount").html(0);
     $("#customet_balance_amount").val(0);
     $("#totalCustomerPayAmount").html(0);
     $("#totalCustomerAmt").val(0);
     $("#payment_detail").addClass('d-none');
     $("#customer_pay_now").addClass('d-none');
+    $("#paymentSection").addClass('d-none');
     
     var customerId = $("#customer_payment_customer_id").val();
     if(customerId != ''){
@@ -646,6 +647,11 @@ $('#customer_payment_customer_id').change(function(){
                     var salesHtml = '<option value="">No Data Found</option>';
                 }
                 $("#payment_sales_id").html(salesHtml);
+
+                if(data['customer_data'].length > 0){
+                    $("#fromCustomerBank").val(data['customer_data'][0].bank_account_number);
+                    $("#fromCustomerIFSC").val(data['customer_data'][0].bank_ifsc_code);
+                }
             }
         });
     }
@@ -653,7 +659,115 @@ $('#customer_payment_customer_id').change(function(){
 });
 
 $("#payment_sales_id").change(function(){
+    $("#customerPaymentTable").html('');
+    // $("#fromCustomerBank").val('');
+    // $("#fromCustomerIFSC").val('');
+    $("#customer_sales_amount").html(0);
+    $("#hidden_customer_sales_amount").val(0);
+    $("#customer_paid_amount").val('');
+    $("#custometBalanceAmount").html(0);
+    $("#customet_balance_amount").val(0);
+    $("#customer_total_addition_amount").html(0);
+    $("#hidden_customer_total_addition_amount").val(0);
+    $("#totalCustomerPayAmount").html(0);
+    $("#totalCustomerAmt").val(0);
+    $("#payment_detail").addClass('d-none');
+    $("#customer_pay_now").addClass('d-none');
+    $("#paymentSection").addClass('d-none');
+    
+    var salesId = $('#payment_sales_id').val();
+    var totalSalesAmt = 0;
+
+    if(salesId != '' && salesId.length > 0){
+        var postJson = {};
+        postJson['getSalesData']  = '';
+        postJson['sales_id']  = salesId;
+        $.post("../Model/CustomerPayment.php",postJson,
+        function(data,status){
+            if(status == 'success'){
+                var data = JSON.parse(data);
+                var totalAdition = {};
+                var salesHtml = '';
+                var totAdd = 0;
+                var cusHtmlHole = '';
+
+                if(data['sales_detail_data'].length > 0){
+                    $.each( data['sales_detail_data'] , function( index, item ) {
+                        var totSalAmt = (parseFloat(item.amount)*parseFloat(item.quantity)).toFixed(2);
+                        salesHtml +='<tr>'
+                        salesHtml += '<td>'+(index+1)+'</td>';
+                        salesHtml += '<td>'+item.billing_number+'</td>';
+                        salesHtml += '<td>'+item.payment_date+'</td>';
+                        salesHtml += '<td>'+item.amount+'</td>';
+                        salesHtml +='</tr>'
+                        salesHtml +='<input type="hidden" id="sales_id_"'+index+'" name="customer_payment_detail["'+index+'"][sales_id]" value="'+item.sales_id+'" >';
+                        salesHtml +='<input type="hidden" id="sales_no_"'+index+'" name="customer_payment_detail["'+index+'"][sales_no]" value="'+item.sales_no+'" >';
+                        salesHtml +='<input type="hidden" id="payment_date_"'+index+'" name="customer_payment_detail["'+index+'"][payment_date]" value=""'+item.payment_date+'" >';
+                        salesHtml +='<input type="hidden" id="amount_"'+index+'" name="customer_payment_detail["'+index+'"][amount]" value="'+item.amount+'" >';
+                        salesHtml +='<input type="hidden" id="net_amount_"'+index+'" name="customer_payment_detail["'+index+'"][customer_sales_net_amount]" value="'+item.customer_sales_net_amount+'" >';                        
+                        salesHtml +='<input type="hidden" id="index" value=""'+index+'"></input>';
+                        if(totalAdition[item.sales_id] == undefined){
+                            totalAdition[item.sales_id] = item.balance_amount;  
+                            cusHtmlHole += '<input type="hidden" id="cus_sales_no_'+item.sales_id+'" name="sales_payment_detail['+item.sales_id+'][sales_no]" value="'+item.billing_number+'" >';
+                        }
+                    });
+
+                    $.each( totalAdition , function( index, value ) {
+                        totAdd+=parseFloat(value);
+                    });                   
+                }   
+                if(data['sales_detail'].length > 0){
+                    $.each( data['sales_detail'] , function( index, item ) {
+                        if(totalAdition[item.sales_id] == undefined){
+                            totAdd += parseFloat(item.customer_net_amount);
+                            $("#customer_sales_net_amount_"+index).val(item.customer_net_amount);
+                        }
+                        cusHtmlHole += '<input type="hidden" id="customer_sales_net_amount_'+item.sales_id+'" name="sales_payment_detail['+item.sales_id+'][customer_sales_net_amount]" value="'+item.customer_net_amount+'" >';
+                        cusHtmlHole += '<input type="hidden" id="cus_sales_no_'+item.sales_id+'" name="sales_payment_detail['+item.sales_id+'][sales_no]" value="'+item.billing_number+'" >';
+                    });
+                }
+                $("#customer_net_amount_hole").html(cusHtmlHole);
+
+                if(data['sales_detail'].length > 0 || data['sales_detail_data'].length > 0){
+                    $("#customerPaymentTable").html(salesHtml);
+                    if(salesHtml != ''){
+                        $("#payment_detail").removeClass('d-none');
+                    }
+                    
+                    if(totAdd != 0){
+                        $("#paymentSection").removeClass('d-none');
+                        $("#customer_pay_now").removeClass('d-none');
+                    }
+                    $("#customer_sales_amount").html(totAdd);
+                    $("#hidden_customer_sales_amount").val(totAdd);
+                    $("#totalCustomerPayAmount").html(totAdd);
+                    $("#totalCustomerAmt").val(totAdd);
+                }
+
+            }
+        });
+    }
 
 });
 
+
+$("#payment_type").change(function(){
+    var paymentType = $('#payment_type').val();
+    if(paymentType != '' && paymentType == 'cheque'){
+        $('#payment_cheque').removeClass('d-none');
+    }else{
+        $('#payment_cheque').addClass('d-none');
+    }
+});
+
+$("#customer_paid_amount").keyup(function(){
+    var customerPaidAmount  = $('#customer_paid_amount').val();
+    var totalSale           = $('#totalCustomerPayAmount').text();
+    var balance             = 0;
+    if(customerPaidAmount != ''){
+        balance             = parseFloat(totalSale) - parseFloat(customerPaidAmount);
+    }
+    $("#custometBalanceAmount").html(balance);
+    $("#customet_balance_amount").val(balance);
+});
 /******** Customer Payment Entry End ********/

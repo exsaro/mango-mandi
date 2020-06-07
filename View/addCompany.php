@@ -20,6 +20,9 @@
     $country     = isset($editData['country'])  ? $editData['country']   : 'India';  
     $pincode     = isset($editData['pincode'])  ? $editData['pincode']   : '';  
     $status      = (isset($editData['status']) && $editData['status'] == 'IA')? 'IA': 'A';  
+    $company_bank_account_no     = isset($editData['company_bank_account_no'])  ? $editData['company_bank_account_no']   : '';  
+    $company_ifsc_code     = isset($editData['company_ifsc_code'])  ? $editData['company_ifsc_code']   : '';  
+
 ?>
 
 <div class="container-fluid">
@@ -67,6 +70,14 @@
                             <div class="form-group">
                                 <label for=""><?php echo $lang['pincode'];?></label>
                                 <input type="text" class="form-control" name="pincode" id="pincode" placeholder="Pincode" value='<?php echo $pincode; ?>' required minlength=3 maxlength=10>
+                            </div>
+                            <div class="form-group">
+                                <label for="">Account Number</label>
+                                <input type="text" class="form-control" name="company_bank_account_no" id="company_bank_account_no" placeholder="Account Number" value='<?php echo $company_bank_account_no; ?>' required >
+                            </div>
+                            <div class="form-group">
+                                <label for="">IFSC Code</label>
+                                <input type="text" class="form-control" name="company_ifsc_code" id="company_ifsc_code" placeholder="IFSC Code" value='<?php echo $company_ifsc_code; ?>' required >
                             </div>
                             
                             <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary"><?php echo $lang['submit'];?></button></div>

@@ -27,10 +27,10 @@
 
                 $date = date('Y-m-d H:i:s');
                 if($storeData['editId'] != ""){
-                    $sql ="update sales set customer_id='".$storeData['customer_id']."',billing_number='".$storeData['billing_number']."',billing_date='".$storeData['billing_date']."',vehicle_no='".$storeData['vehicle_no']."',h_c='".$storeData['h_c']."',m_c='".$storeData['m_c']."',colli='".$storeData['colli']."',packing='".$storeData['packing']."',lorry_advance='".$storeData['lorry_advance']."',other_expenses='".$storeData['other_expenses']."',other_addition_amount='".$storeData['other_addition_amount']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where sales_id='".$storeData['editId']."' ";
+                    $sql ="update sales set customer_id='".$storeData['customer_id']."',billing_number='".$storeData['billing_number']."',billing_date='".$storeData['billing_date']."',vehicle_no='".$storeData['vehicle_no']."',h_c='".$storeData['h_c']."',m_c='".$storeData['m_c']."',colli='".$storeData['colli']."',packing='".$storeData['packing']."',lorry_advance='".$storeData['lorry_advance']."',other_expenses='".$storeData['other_expenses']."',other_addition_amount='".$storeData['other_addition_amount']."',customer_net_amount='".$storeData['customer_net_amount']."',advance_amount='".$storeData['advance_amount']."', status='".$status."',updated_at='".$date."',updated_by='".$_SESSION['user_id']."' where sales_id='".$storeData['editId']."' ";
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $sql = "insert into sales(company_id,customer_id,billing_number,billing_date,vehicle_no,h_c,m_c,colli,packing,lorry_advance,other_expenses,other_addition_amount,payment_status,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['customer_id']."', '".$storeData['billing_number']."', '".$storeData['billing_date']."','".$storeData['vehicle_no']."','".$storeData['h_c']."','".$storeData['m_c']."','".$storeData['colli']."','".$storeData['packing']."','".$storeData['lorry_advance']."','".$storeData['other_expenses']."','".$storeData['other_addition_amount']."','B','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
+                    $sql = "insert into sales(company_id,customer_id,billing_number,billing_date,vehicle_no,h_c,m_c,colli,packing,lorry_advance,other_expenses,other_addition_amount,customer_net_amount,advance_amount,payment_status,status,created_at,updated_at,created_by,updated_by) values('".$_SESSION['company_id']."','".$storeData['customer_id']."', '".$storeData['billing_number']."', '".$storeData['billing_date']."','".$storeData['vehicle_no']."','".$storeData['h_c']."','".$storeData['m_c']."','".$storeData['colli']."','".$storeData['packing']."','".$storeData['lorry_advance']."','".$storeData['other_expenses']."','".$storeData['other_addition_amount']."','".$storeData['customer_net_amount']."','".$storeData['advance_amount']."','B','$status','".$date."','".$date."','".$_SESSION['user_id']."','".$_SESSION['user_id']."')";
                     $_SESSION['message']        = 'You have successfully added the record'; 
                 }
                 $storesalesData = mysqli_query( $this->connected, $sql);
@@ -61,7 +61,9 @@
                     }
 
                    mysqli_query($this->connected, $multiRowInsert);
-
+                    if($storeData['advance_amount'] == 0){
+                       
+                    }
                     $_SESSION['alert']          = 'alert-success';
                 }else{
                     $_SESSION['message']        = 'Something went wrong!';

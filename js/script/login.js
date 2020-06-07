@@ -23,3 +23,10 @@ function printFarmerPayment(check){
         
     window.location = "../View/farmerPayment.php";
 }
+
+function printCustomerPayment(check){
+    if(check == 'printCheck')
+        window.print();
+        
+    window.location = "../View/customerPayment.php";
+}

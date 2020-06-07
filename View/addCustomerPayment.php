@@ -4,10 +4,12 @@
     $paymentNumberFormat2        = $commonModel->getFinalRow('revived_payment','auto_increment_number','auto_increment_number_id');
     $paymentNumberFormat         = 'CP'.$paymentNumberFormat1.$paymentNumberFormat2;
     $customerOptionData          = $commonModel->getData('customer_master','list','','');
+    $companyData                 = $commonModel->getData('company_master','list','','')[0];
     $paymnetTypeOption           = $language->getConfigData()['payment_type'];
     $editData                    = [];
     $salesOptionData             = [];
     $customerPaymentDetailEditData = [];
+    $customerPaymentEditData     = [];
     $submitType                  = 'store';
     $tableDisp                   = 'd-none';
     $payDisp                     = 'd-none';
@@ -25,23 +27,24 @@
         $lockSection                   = 'lock-section-parent';
         $lockSectionPointer            = 'lock-section-pointer';
     }
+
     $id                         = isset($editData['customer_payment_id'])       ? $editData['customer_payment_id']      : '';
     $customer_id                = isset($editData['customer_id'])  ? $editData['customer_id']   :'';
     $paymentNo                  = isset($editData['customer_payment_number'])  ? $editData['customer_payment_number']   : $paymentNumberFormat;
     $paymentDate                = isset($editData['customer_payment_date'])  ? $editData['customer_payment_date']   : $paymentNumberFormat;
-    $sales_id                   = isset($editData['sales_id'])  ? explode(',',$editData['sales_id'])  : [];
-    $payment_type               = isset($editData['payment_type'])  ? explode(',',$editData['payment_type'])  : '';
-    $payment_bank_account_no    = isset($editData['payment_bank_account_no'])  ? explode(',',$editData['payment_bank_account_no'])  : '';
-    $payment_ifsc_code          = isset($editData['payment_ifsc_code'])  ? explode(',',$editData['payment_ifsc_code'])  : '';
-    $payment_cheque             = isset($editData['payment_cheque'])  ? explode(',',$editData['payment_cheque'])  : ''; 
-    $company_bank_account_no    = isset($editData['company_bank_account_no'])  ? explode(',',$editData['company_bank_account_no'])  : ''; 
-    $company_ifsc_code          = isset($editData['company_ifsc_code'])  ? explode(',',$editData['company_ifsc_code'])  : ''; 
-    $balance_amount             = isset($editData['balance_amount'])  ? explode(',',$editData['balance_amount'])  : 0; 
-    $sales_amount               = isset($editData['sales_amount'])  ? explode(',',$editData['sales_amount'])  : 0; 
-    $customer_paid_amount       = isset($editData['customer_paid_amount'])  ? explode(',',$editData['customer_paid_amount'])  : 0; 
-    $total_amount               = isset($editData['total_amount'])  ? explode(',',$editData['total_amount'])  : 0; 
-    $description                = isset($editData['description'])  ? explode(',',$editData['description'])  : ''; 
-    
+    $sales_id                   = isset($editData['edit_sales_id'])  ? explode(',',$editData['edit_sales_id'])  : [];
+    $payment_type               = isset($editData['payment_type'])  ? $editData['payment_type']  : '';
+    $payment_bank_account_no    = isset($editData['payment_bank_account_no'])  ? $editData['payment_bank_account_no']  : '';
+    $payment_ifsc_code          = isset($editData['payment_ifsc_code'])  ? $editData['payment_ifsc_code']  : '';
+    $payment_cheque             = isset($editData['payment_cheque'])  ? $editData['payment_cheque']  : ''; 
+    $company_bank_account_no    = isset($editData['company_bank_account_no'])  ? $editData['company_bank_account_no']  : $companyData['company_bank_account_no']; 
+    $company_ifsc_code          = isset($editData['company_ifsc_code'])  ? $editData['company_ifsc_code']  : $companyData['company_ifsc_code']; 
+    $balance_amount             = isset($editData['balance_amount'])  ? $editData['balance_amount']  : 0; 
+    $sales_amount               = isset($editData['sales_amount'])  ? $editData['sales_amount']  : 0; 
+    $customer_paid_amount       = isset($editData['customer_paid_amount'])  ? $editData['customer_paid_amount']  : 0; 
+    $total_amount               = isset($editData['total_amount'])  ? $editData['total_amount']  : 0; 
+    $description                = isset($editData['description'])  ? $editData['description']  : ''; 
+    // $hidden_sales_id            = [];
     $chequeDisp                 = $payment_cheque!='cheque'?'d-none':'';
     $i = 1;
 ?>
@@ -56,8 +59,17 @@
                     <h1>Customer Payment Entry</h1>
                     <a href="customerPayment.php" class="btn btn-secondary">Back</a>
                 </div>
-                <form method="post" id="addPayment">
-                    
+                <form method="post" action="../Model/CustomerPayment.php" id="addPayment">
+                    <div id="customer_net_amount_hole">
+                        <?php foreach($customerPaymentDetailEditData as $cpKey => $cpValue){ ?>
+                            <input type="hidden" id="cus_sales_no_<?php echo $cpValue['sales_id']; ?>" name="sales_payment_detail[<?php echo $cpValue['sales_id']; ?>][sales_no]" value="<?php echo $cpValue['sales_no']; ?>" >
+                            <input type="hidden" id="customer_sales_net_amount_<?php echo $cpValue['sales_id']; ?>" name="sales_payment_detail[<?php echo $cpValue['sales_id']; ?>][customer_sales_net_amount]" value="<?php echo $cpValue['customer_sales_net_amount']; ?>" >
+                        <?php }  ?>
+                    </div>
+                    <input type="hidden" id="hidden_sales_id" name="hidden_sales_id" value="<?php echo implode(',',$sales_id); ?>" />
+
+                    <input type="hidden" id="editId" name="editId" value='<?php echo $id; ?>' />
+                    <input type="hidden" id="autoIncNumber" name="autoIncNumber" value='<?php echo $paymentNumberFormat2; ?>' />
                     <div class="card">
                     <div class="card-body">
 
@@ -72,7 +84,7 @@
                                 <div class="form-group">
                                     <label for="">Bill Date</label>
                                     <div class="input-group">
-                                        <input type="text" name="customer_payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" />
+                                        <input type="text" name="customer_payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" required/>
                                         <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
                                     </div>
                                 </div>
@@ -109,10 +121,10 @@
                                     <label for="">Account Number</label>
                                     <div class="form-row">
                                         <div class="col">
-                                        <input type="text" class="form-control" name="payment_bank_account_no" id="fromCustomerBank"  value="<?php echo $payment_bank_account_no; ?>" placeholder="From">
+                                        <input type="text" class="form-control" name="payment_bank_account_no" id="fromCustomerBank"  value="<?php echo $payment_bank_account_no; ?>" placeholder="From" required minlength=3 maxlength=100 >
                                         </div>
                                         <div class="col">
-                                        <input type="text" class="form-control" name="company_bank_account_no" placeholder="To" value="<?php echo $company_bank_account_no; ?>" >
+                                        <input type="text" class="form-control" name="company_bank_account_no" placeholder="To" value="<?php echo $company_bank_account_no; ?>" required minlength=3 maxlength=100>
                                         </div>
                                     </div>
                                 </div>
@@ -122,10 +134,10 @@
                                     <label for="">IFSC Code</label>
                                     <div class="form-row">
                                         <div class="col">
-                                        <input type="text" class="form-control" id="fromCustomerIFSC"  name="payment_ifsc_code" value="<?php echo $payment_ifsc_code; ?>" placeholder="From">
+                                        <input type="text" class="form-control" id="fromCustomerIFSC"  name="payment_ifsc_code" value="<?php echo $payment_ifsc_code; ?>" placeholder="From" required minlength=3 maxlength=100>
                                         </div>
                                         <div class="col">
-                                        <input type="text" class="form-control" placeholder="To" name="company_ifsc_code" value="<?php echo $company_ifsc_code; ?>" >
+                                        <input type="text" class="form-control" placeholder="To" name="company_ifsc_code" value="<?php echo $company_ifsc_code; ?>" required minlength=3 maxlength=100>
                                         </div>
                                     </div>
                                 </div>
@@ -133,18 +145,18 @@
                             <div class="col">
                                 <div class="form-group">
                                     <label for="">Select Payment Type</label>
-                                    <select name="payment_type" class="custom-select" required>
+                                    <select name="payment_type" id="payment_type" class="custom-select" required>
                                         <option value="">payment Type</option>
                                         <?php foreach($paymnetTypeOption as $pKey => $pValue) {  ?>
-                                                <option <?php echo ($payment_type ==  $pValue)?'selected':''; ?> value="<?php echo $fValue; ?>"> <?php echo $pKey; ?> </option>
+                                                <option <?php echo ($payment_type ==  $pValue)?'selected':''; ?> value="<?php echo $pValue; ?>"> <?php echo $pKey; ?> </option>
                                             <?php } ?>
                                     </select>
                                 </div>
                             </div>
-                            <div class="col <?php echo $chequeDisp; ?>">
+                            <div class="col <?php echo $chequeDisp; ?>" id="payment_cheque">
                                 <div class="form-group">
                                     <label for="">Cheque No</label>
-                                    <input type="text" value class="form-control" name="payment_cheque" value="<?php echo $payment_cheque; ?>" required minlength=3 maxlength=100 />
+                                    <input type="text" value class="form-control"  name="payment_cheque" value="<?php echo $payment_cheque; ?>" required minlength=3 maxlength=100 />
                                 </div>
                             </div>
                         </div>
@@ -154,27 +166,24 @@
                                 <thead>
                                     <tr>
                                         <th>S. No</th>
-                                        <th>Item</th>
-                                        <th>Qty (kg)</th>
-                                        <th width="200">Amount (per kg)</th>
-                                        <th width="200">(₹) Net Amount</th>
+                                        <th>Sales NO</th>
+                                        <th>Payment Date</th>
+                                        <th width="200">(₹) Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody id="customerPaymentTable">
-                                    <?php foreach($customerPaymentDetailEditData as $key => $value) { ?>
+                                    <?php foreach($customerPaymentDetailEditData as $key => $value) {   ?>
                                         <tr>
                                             <td><?php echo $i; ?></td>
-                                            <td><?php echo $value['product_name'].' ('.$value['product_code'].' )'; ?></td>
-                                            <td><?php echo $value['quantity']; ?></td>
+                                            <td><?php echo $value['sales_no']; ?></td>
+                                            <td><?php echo $value['payment_date']; ?></td>
                                             <td><?php echo $value['amount']; ?></td>
-                                            <td><?php echo $value['sale_net_amount']; ?></td>
                                         </tr>
-                                        <input type="hidden" id="quantity_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][quantity]" value="<?php echo $value['quantity']; ?>" >
-                                        <input type="hidden" id="sales_detail_id_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][sales_detail_id]" value="<?php echo $value['sales_detail_id']; ?>" aria-label="">
                                         <input type="hidden" id="sales_id_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][sales_id]" value="<?php echo $value['sales_id']; ?>" >
-                                        <input type="hidden" id="product_id_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][product_id]" value="<?php echo $value['product_id']; ?>" aria-label="">
+                                        <input type="hidden" id="sales_no_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][sales_no]" value="<?php echo $value['sales_no']; ?>" >
+                                        <input type="hidden" id="payment_date_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][payment_date]" value="<?php echo $value['payment_date']; ?>" aria-label="">
                                         <input type="hidden" id="amount_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][amount]" value="<?php echo $value['amount']; ?>" >
-                                        <input type="hidden" id="sale_net_amount_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][sale_net_amount]" value="<?php echo $value['sale_net_amount']; ?>" >
+                                        <input type="hidden" id="net_amount_<?php echo $key; ?>" name="customer_payment_detail[<?php echo $key; ?>][customer_sales_net_amount]" value="<?php echo $value['customer_sales_net_amount']; ?>" >
                                         <input type="hidden" id="index" value="<?php echo $key; ?>">
                                     <?php $i++; }  ?>
                                 </tbody>
@@ -199,7 +208,7 @@
                                             <div class="input-group-prepend">
                                                 <span class="input-group-text">₹</span>
                                             </div>
-                                            <input type="text" name="customer_paid_amount" id="customer_paid_amount" value="<?php echo $customer_paid_amount; ?>" class="form-control">
+                                            <input type="text" name="customer_paid_amount" id="customer_paid_amount" value="<?php echo $customer_paid_amount; ?>" class="form-control" required  >
                                         </div>
                                     </td>
                                 </tr>
@@ -218,7 +227,7 @@
 
                         <div class="form-group">
                             <label for="">Description</label>
-                            <textarea class="form-control" id="" rows="3" name="description" autocomplete="off" spellcheck="false"><?php echo $description; ?></textarea>
+                            <textarea class="form-control" id="" rows="3" name="description" autocomplete="off" spellcheck="false" required><?php echo $description; ?></textarea>
                         </div>
 
                         <p class="text-right h1 mb-5">
@@ -244,4 +253,4 @@
             </div>
         </div>
     </div>
-<?php include 'footer.php';?>
+<?php include 'footer.php'; ?>

@@ -17,13 +17,13 @@
             $status = isset($storeData['status']) ? 'A' : 'IA' ;
             $urlId  = '';
             
-            if(isset($storeData['company_name']) && $storeData['company_name'] != '' && isset($storeData['company_address']) && $storeData['company_address'] != '' && isset($storeData['city']) && $storeData['city'] != '' && isset($storeData['state']) && $storeData['state'] != '' && isset($storeData['country']) && $storeData['country'] != '' && isset($storeData['pincode']) && $storeData['pincode'] != ''){
+            if(isset($storeData['company_name']) && $storeData['company_name'] != '' && isset($storeData['company_address']) && $storeData['company_address'] != '' && isset($storeData['city']) && $storeData['city'] != '' && isset($storeData['state']) && $storeData['state'] != '' && isset($storeData['country']) && $storeData['country'] != '' && isset($storeData['pincode']) && $storeData['pincode'] != '' && isset($storeData['company_ifsc_code']) && $storeData['company_ifsc_code'] != '' && isset($storeData['company_bank_account_no']) && $storeData['company_bank_account_no'] != ''){
                 if($storeData['editId'] != ""){
                     $companyId = $storeData['editId'];
-                    $storeCompanyData = mysqli_query( $this->connected, "update company_master set company_name='".$storeData['company_name']."',company_address='".$storeData['company_address']."',city='".$storeData['city']."',state='".$storeData['state']."',country='".$storeData['country']."',pincode='".$storeData['pincode']."', status='".$status."' where company_id='".$storeData['editId']."' ");
+                    $storeCompanyData = mysqli_query( $this->connected, "update company_master set company_name='".$storeData['company_name']."',company_address='".$storeData['company_address']."',city='".$storeData['city']."',state='".$storeData['state']."',country='".$storeData['country']."',pincode='".$storeData['pincode']."',company_bank_account_no='".$storeData['company_bank_account_no']."',company_ifsc_code='".$storeData['company_ifsc_code']."', status='".$status."' where company_id='".$storeData['editId']."' ");
                     $_SESSION['message']        = 'You have successfully updated the record';
                 }else{
-                    $storeCompanyData = mysqli_query( $this->connected, "insert into company_master(company_name,company_address,city,state,country,pincode,status) values('".$storeData['company_name']."', '".$storeData['company_address']."','".$storeData['city']."', '".$storeData['state']."','".$storeData['country']."','".$storeData['pincode']."','$status')");
+                    $storeCompanyData = mysqli_query( $this->connected, "insert into company_master(company_name,company_address,city,state,country,pincode,company_bank_account_no,company_ifsc_code,status) values('".$storeData['company_name']."', '".$storeData['company_address']."','".$storeData['city']."', '".$storeData['state']."','".$storeData['country']."','".$storeData['pincode']."','".$storeData['company_bank_account_no']."','".$storeData['company_ifsc_code']."','$status')");
                     $_SESSION['message']        = 'You have successfully added the record';
                 }
                 if($storeCompanyData){

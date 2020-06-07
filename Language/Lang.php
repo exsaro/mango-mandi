@@ -61,6 +61,7 @@
             'pu_m'         => 'purchase',
             's_t'          => 'sales',
             'f_p_e'        => 'farmer_payment',
+            'c_p'          => 'customer_payment',
 
             //Column Name
             'c_m_c'        => 'company_id',
@@ -73,7 +74,7 @@
             'pu_m_c'       => 'purchase_id',
             's_t_c'        => 'sales_id',
             'f_p_e_c'      => 'farmer_payment_id',
-
+            'c_p_c'        => 'customer_payment_id',
             // Page Name
             'c_m_p'        => 'company',
             'p_m_p'        => 'item',
@@ -85,6 +86,7 @@
             'pu_m_p'       => 'purchase',
             's_t_p'        => 'sales',
             'f_p_e_p'      => 'farmerPayment',
+            'c_p_p'        => 'customerPayment',
 
             //Faremer Payment Calculation
             'farmer_payment_percentage' => 10,

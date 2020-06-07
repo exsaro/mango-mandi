@@ -213,7 +213,7 @@
         }
 
         public function getCustomerPaymentDetail($id){
-            $sql = "SELECT * FROM customer_payment_detail as cpd INNER JOIN product_master as pm ON cpd.product_id = pm.product_id INNER JOIN customer_payment as cp ON cpd.customer_payment_id = cp.customer_payment_id WHERE cpd.status != 'D' AND pm.status != 'D' AND cp.status != 'D' AND cpd.customer_payment_id = '".$id."'" ;
+            $sql = "SELECT * FROM customer_payment_detail as cpd INNER JOIN customer_payment as cp ON cpd.customer_payment_id = cp.customer_payment_id WHERE cpd.status != 'D'  AND cp.status != 'D' AND cpd.customer_payment_id = '".$id."'" ;
             $executeQuery  = mysqli_query($this->connected,$sql);
             $getData = [];
 
@@ -225,6 +225,22 @@
             }
             return $getData;
         }
+
+        public function getCustomerPaymentListData()
+        {
+            $sql = "SELECT * FROM customer_payment as cp INNER JOIN customer_master as cm ON cp.customer_id = cm.customer_id WHERE cp.status != 'D' AND cm.status != 'D' AND cp.company_id = '".$_SESSION['company_id']."'" ;
+            $executeQuery  = mysqli_query($this->connected,$sql);
+            $getData = [];
+
+            if($executeQuery != '' && $executeQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($executeQuery)){
+                    $getData[] = $row ;
+                }
+            }
+            return $getData;
+        }
+        
     }
 
 

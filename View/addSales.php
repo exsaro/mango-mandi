@@ -39,8 +39,10 @@
     $salesDetails = isset($salesGroupData)   ? $salesGroupData : $salesData;
     // $totalAddition = ($hC!=''?$hC:0)+($mC!=''?$mC:0)+($colli!=''?$colli:0)+($packing!=''?$packing:0)+($lorryAdvance!=''?$lorryAdvance:0)+($otherExpenses!=''?$otherExpenses:0);
     // $totalAddition = sprintf("%.2f", $totalAddition);
-    $totalsales    = 0;
-    $other_addition_amount = isset($editData['other_addition_amount'])  ? $editData['other_addition_amount']   : '';
+    $totalsales             = 0;
+    $other_addition_amount  = isset($editData['other_addition_amount'])  ? $editData['other_addition_amount']   : '';
+    $customer_net_amount    = isset($editData['customer_net_amount'])  ? $editData['customer_net_amount']   : 0;
+    $advance_amount         = isset($editData['advance_amount'])  ? $editData['advance_amount']   : 0;
 ?>
 <div class="container-fluid">
         <div class="row">
@@ -220,9 +222,10 @@
 						<div class="my-5 d-flex align-items-center justify-content-between">
                             <div class="form-group">
                                 <label class="d-block" for="">(₹) Advance Payment</label>
-                                <input type="number" class="form-control" value="0.00" />
+                                <input type="number" name="advance_amount" class="form-control" value='<?php echo $advance_amount; ?>' />
                             </div>
 							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$other_addition_amount); ?></span>/-</strong></p>
+                            <input type="hidden" id="totalAmtForSales" name="customer_net_amount" value="<?php echo sprintf("%.2f",$customer_net_amount); ?>" />
 						</div>
 
                         <div class="form-group text-right"><button type="submit" name='<?php echo $submitType; ?>' class="btn btn-primary">Submit</button></div>

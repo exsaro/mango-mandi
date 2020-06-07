@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="">Bill Date</label>
                                     <div class="input-group">
-                                        <input type="text" name="farmer_payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" />
+                                        <input type="text" name="farmer_payment_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" required/>
                                         <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
                                     </div>
                                 </div>
