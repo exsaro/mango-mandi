@@ -17,16 +17,10 @@
   }
 
 
-function printFarmerPayment(check){
+/* Print the Page */
+function printPage(check,page){
     if(check == 'printCheck')
         window.print();
         
-    window.location = "../View/farmerPayment.php";
-}
-
-function printCustomerPayment(check){
-    if(check == 'printCheck')
-        window.print();
-        
-    window.location = "../View/customerPayment.php";
+    window.location = "../View/"+page+".php";
 }

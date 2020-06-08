@@ -187,7 +187,7 @@
                             foreach($storeData['sales_id'] as $key => $value){
 
                                 if((count($storeData['sales_id'])-1) == $key){
-                                    $updateSaleseSql = "update sales set payment_status ='B' ,where customer_id='".$storeData['customer_id']."' AND sales_id = '".$value."'";
+                                    $updateSaleseSql = "update sales set payment_status ='B' where customer_id='".$storeData['customer_id']."' AND sales_id = '".$value."'";
                                 }else{
                                     $updateSaleseSql = "update sales set payment_status ='P' where customer_id='".$storeData['customer_id']."' AND sales_id = '".$value."'";
                                 }
@@ -199,7 +199,6 @@
                     $_SESSION['alert']          = 'alert-success';
                     $_SESSION['customer_payment_id'] = $customer_payment_id;
                     header("Location:../View/customerPaymentPrint.php");
-                    // header("Location:../View/customerPayment.php");
                 }else{
                     $_SESSION['message']        = 'Something went wrong!';
                     $_SESSION['alert']          = 'alert-danger';

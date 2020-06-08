@@ -72,14 +72,16 @@
                     }
 
                    mysqli_query($this->connected, $multiRowInsert);
+                   $_SESSION['purchase_id'] = $purchase_id;
 
                     $_SESSION['alert']          = 'alert-success';
+                    header("Location:../View/purchasePrint.php"); 
                 }else{
                     $_SESSION['message']        = 'Something went wrong!';
                     $_SESSION['alert']          = 'alert-danger';
+                    header("Location:../View/purchase.php");       
                 }
 
-                header("Location:../View/purchase.php");       
             }else{
                 if($storeData['editId'] != ""){
                     $urlId  = '?id='.$storeData['editId'];

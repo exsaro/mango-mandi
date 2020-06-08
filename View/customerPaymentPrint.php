@@ -105,9 +105,8 @@
                         <th>Sales No</th>
                         <th>Payment Date</th>
                         <th>Paid Amount(₹)</th>
-                        <th>Sales Amount Amount(₹)</th>
+                        <th>Sales Amount (₹)</th>
                     </tr>
-                    <tr>
                         <?php 
                             foreach($totalPaymentDetail as $key => $value) { ?>
                                 <tr>
@@ -118,7 +117,6 @@
                                     <td><?php echo $value['customer_sales_net_amount']; ?></td>
                                 </tr>
                         <?php $pi++; } ?>
-                    </tr>
                 </table>
                 <p class="text-right"><span class="font-weight-bold h5">Sales Amount: </span><span class="h5"><?php echo $customerPaymentDetail['sales_amount']; ?> /-</span></p>
                 <p class="text-right"><span class="font-weight-bold h5">Customer Paid Amount: </span><span class="h5"><?php echo $customerPaymentDetail['customer_paid_amount']; ?> /-</span></p>
@@ -129,8 +127,8 @@
             
         </div>
         <div id="printBtn" class="text-right pb-5">
-            <button class="btn btn-primary" onclick="printCustomerPayment('printCheck')">Print</button>
-            <button class="btn btn-secondary ml-3" onclick="printCustomerPayment('cancel')">Cancel</button>
+            <button class="btn btn-primary" onclick="printPage('printCheck','customerPayment')">Print</button>
+            <button class="btn btn-secondary ml-3" onclick="printPage('cancel','customerPayment')">Cancel</button>
         </div>
     </div>
     <!-- Jquery  -->

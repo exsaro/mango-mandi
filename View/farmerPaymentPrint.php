@@ -166,8 +166,8 @@
             
         </div>
         <div id="printBtn" class="text-right pb-5">
-            <button class="btn btn-primary" onclick="printFarmerPayment('printCheck')">Print</button>
-            <button class="btn btn-secondary ml-3" onclick="printFarmerPayment('cancel')">Cancel</button>
+            <button class="btn btn-primary" onclick="printPage('printCheck','farmerPayment')">Print</button>
+            <button class="btn btn-secondary ml-3" onclick="printPage('cancel','farmerPayment')">Cancel</button>
         </div>
     </div>
     <!-- Jquery  -->
