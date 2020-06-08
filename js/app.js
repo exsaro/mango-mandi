@@ -706,9 +706,12 @@ $("#payment_sales_id").change(function(){
                         salesHtml +='<input type="hidden" id="amount_"'+index+'" name="customer_payment_detail["'+index+'"][amount]" value="'+item.amount+'" >';
                         salesHtml +='<input type="hidden" id="net_amount_"'+index+'" name="customer_payment_detail["'+index+'"][customer_sales_net_amount]" value="'+item.customer_sales_net_amount+'" >';                        
                         salesHtml +='<input type="hidden" id="index" value=""'+index+'"></input>';
+                        
                         if(totalAdition[item.sales_id] == undefined){
                             totalAdition[item.sales_id] = item.balance_amount;  
                             cusHtmlHole += '<input type="hidden" id="cus_sales_no_'+item.sales_id+'" name="sales_payment_detail['+item.sales_id+'][sales_no]" value="'+item.billing_number+'" >';
+                        }else{
+                            totalAdition[item.sales_id] = item.balance_amount;  
                         }
                     });
 
