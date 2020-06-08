@@ -40,7 +40,7 @@
     // $totalAddition = ($hC!=''?$hC:0)+($mC!=''?$mC:0)+($colli!=''?$colli:0)+($packing!=''?$packing:0)+($lorryAdvance!=''?$lorryAdvance:0)+($otherExpenses!=''?$otherExpenses:0);
     // $totalAddition = sprintf("%.2f", $totalAddition);
     $totalsales             = 0;
-    $other_addition_amount  = isset($editData['other_addition_amount'])  ? $editData['other_addition_amount']   : '';
+    $other_addition_amount  = isset($editData['other_addition_amount'])  ? $editData['other_addition_amount']   : 0;
     $customer_net_amount    = isset($editData['customer_net_amount'])  ? $editData['customer_net_amount']   : 0;
     $advance_amount         = isset($editData['advance_amount'])  ? $editData['advance_amount']   : 0;
 ?>
@@ -70,7 +70,7 @@
                         <div class="form-group">
                             <label for="">Billing Date</label>
                             <div class="input-group">
-                            <input type="text" name="billing_date" id="date_picker" value="<?php echo $salesDate; ?>" data-datepicker="separateRange" class="form-control datetimepicker" />
+                            <input type="text" name="billing_date" id="date_picker" value="<?php echo $salesDate; ?>" data-datepicker="separateRange" class="form-control datetimepicker" required />
                             <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
                             </div>
                         </div>

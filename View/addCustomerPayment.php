@@ -122,9 +122,11 @@
                                     <div class="form-row">
                                         <div class="col">
                                         <input type="text" class="form-control" name="payment_bank_account_no" id="fromCustomerBank"  value="<?php echo $payment_bank_account_no; ?>" placeholder="From" required minlength=3 maxlength=100 >
+                                        <small class="form-text text-muted">From Account No.</small>
                                         </div>
                                         <div class="col">
                                         <input type="text" class="form-control" name="company_bank_account_no" placeholder="To" value="<?php echo $company_bank_account_no; ?>" required minlength=3 maxlength=100>
+                                        <small class="form-text text-muted">To Account No.</small>
                                         </div>
                                     </div>
                                 </div>
@@ -135,9 +137,11 @@
                                     <div class="form-row">
                                         <div class="col">
                                         <input type="text" class="form-control" id="fromCustomerIFSC"  name="payment_ifsc_code" value="<?php echo $payment_ifsc_code; ?>" placeholder="From" required minlength=3 maxlength=100>
+                                        <small class="form-text text-muted">From</small>
                                         </div>
                                         <div class="col">
                                         <input type="text" class="form-control" placeholder="To" name="company_ifsc_code" value="<?php echo $company_ifsc_code; ?>" required minlength=3 maxlength=100>
+                                        <small class="form-text text-muted">From</small>
                                         </div>
                                     </div>
                                 </div>

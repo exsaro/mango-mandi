@@ -53,7 +53,7 @@
                         <div class="form-group">
                             <label for="">Voucher Date</label>
                             <div class="input-group">
-                                <input type="text" name="voucher_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" value="<?php echo $voucherDate; ?>" />
+                                <input type="text" name="voucher_date" id="date_picker" data-datepicker="separateRange" class="form-control datetimepicker" value="<?php echo $voucherDate; ?>" required />
                                 <div class="input-group-append" >
                                     <span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span>
                                 </div>

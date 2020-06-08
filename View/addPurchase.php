@@ -59,7 +59,7 @@
                         <div class="form-group">
                             <label for="">Purchase Date</label>
                             <div class="input-group">
-                            <input type="text" name="receipt_date" id="date_picker" data-datepicker="separateRange" value="<?php echo  $purchaseDate; ?>"  class="form-control datetimepicker" />
+                            <input type="text" name="receipt_date" id="date_picker" data-datepicker="separateRange" value="<?php echo  $purchaseDate; ?>"  class="form-control datetimepicker" required />
                             <div class="input-group-append"><span class="input-group-text"><span class="material-icons text-primary">calendar_today</span></span></div>
                             </div>
                         </div>

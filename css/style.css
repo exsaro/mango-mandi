@@ -175,3 +175,7 @@ input[type=number] {
 #printBtn{
     display:none;
 }
+#date_picker-error{
+    position: absolute;
+    bottom: -23px;
+}
