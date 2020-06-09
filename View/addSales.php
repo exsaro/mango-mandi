@@ -14,7 +14,8 @@
     $salesData[0]['amount']    = '';
     $farmerOptionData = $commonModel->getData('farmer_master','list','','');
     $customerOptionData = $commonModel->getData('customer_master','list','','');
-   
+    $lockSection                 = '';
+    $lockSectionPointer          = '';
 
     if(isset($_GET['id'])){
         $title      = 'Edit Sales';
@@ -22,6 +23,8 @@
         $salesGroupData = $commonModel->getData('sales_detail','edit',$_GET['id'],'sales_id');
         $editData   = isset($salesEditData[0]) ?  $salesEditData[0] : [] ;
         $submitType = 'update';
+        $lockSection                 = 'lock-section-parent';
+        $lockSectionPointer          = 'lock-section-pointer';
     }
 
     $id             = isset($editData['sales_id'])    ? $editData['sales_id'] : '';
@@ -220,9 +223,9 @@
                         
                         
 						<div class="my-5 d-flex align-items-center justify-content-between">
-                            <div class="form-group">
+                            <div class="form-group <?php echo $lockSection; ?>">
                                 <label class="d-block" for="">(₹) Advance Payment</label>
-                                <input type="number" name="advance_amount" class="form-control" value='<?php echo $advance_amount; ?>' />
+                                <input type="number" name="advance_amount" class="form-control <?php echo $lockSectionPointer; ?>" value='<?php echo $advance_amount; ?>' />
                             </div>
 							<p class="text-right h1"><span class="h3">Total Amount: </span><strong>₹ <span id="totalAmount"><?php echo sprintf("%.2f",$totalsales+$other_addition_amount); ?></span>/-</strong></p>
                             <input type="hidden" id="totalAmtForSales" name="customer_net_amount" value="<?php echo sprintf("%.2f",$customer_net_amount); ?>" />
