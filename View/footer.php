@@ -5,7 +5,10 @@
         $display        ='d-none';
         $displayMessage = '';
     }
+    $farmerOptionData   = $commonModel->getData('farmer_master','list','','');
+    $customerOptionData = $commonModel->getData('customer_master','list','','');
 
+    
 ?> 
 
 
@@ -20,16 +23,47 @@
         <form action="" id="printReport">
         <div class="modal-body">
             <div class="form-group">
-                <select class="custom-select" required>
-                    <option value="">Select Report</option>
-                    <option value="Voucher Report">Voucher Report</option>
-                    <option value="Purchase Report">Purchase Report</option>
-                    <option value="Sales Report">Sales Report</option>
-                    <option value="Payment Report">Payment Report</option>
-                    <option value="Payment Receive Report">Payment Receive Report</option>
-                    <option value="Day Book">Day Book</option>
-                    <option value="Farmer payment Pending">Farmer payment Pending</option>
-                    <option value="Customer Payment Pending">Customer Payment Pending</option>
+                <label for="">Select Report Type</label>
+                <select class="custom-select" id="report_type" name="report_type" required>
+                    <option value="" disabled>Select Report</option>
+                    <option value="purchase">Purchase Report</option>
+                    <option value="voucher">Voucher Report</option>
+                    <option value="sales">Sales Report</option>
+                    <option value="farmer_payment">Farmer payment Report</option>
+                    <option value="payment_receive">Payment Receive Report</option>
+                    <option value="ledger">Ledger Report</option>
+                </select>
+            </div>
+            <div class="form-group row m-2">
+                <div class="col">
+                    <input class="form-check-input" type="radio" name="selectType" id="all" value="all" onclick="selectReportUserType()" checked>
+                    <label class="form-check-label" for="allsss">
+                        ALL
+                    </label>
+                </div>
+                <div class="col">
+                    <input class="form-check-input" type="radio" name="selectType" id="specific" value="specific"  onclick="selectReportUserType()" >
+                    <label class="form-check-label" for="specific">
+                        Specific
+                    </label>
+                </div>
+            </div>
+            <div class="form-group d-none" id='farmer'>
+                <label for="">Select Farmer</label>
+                <select name="farmer_id" id="farmer_id" class="custom-select" required>
+                    <option value="" disable>Select Farmer</option>
+                    <?php foreach($farmerOptionData as $fKey => $fValue) {  ?>
+                        <option  value="<?php echo $fValue['farmer_id']; ?>"> <?php echo $fValue['farmer_name']." - " ; ?><?php echo $fValue['farmer_code']; ?> </option>
+                    <?php } ?>
+                </select>
+            </div>
+            <div class="form-group d-none" id='customer'>
+                <label for="">Select Customer</label>
+                <select  name="customer_id" id="customer_id" class="custom-select" required>
+                    <option value="" disable>Select Customer</option>
+                        <?php foreach($customerOptionData as $fKey => $fValue) {  ?>
+                            <option value="<?php echo $fValue['customer_id']; ?>"> <?php echo $fValue['customer_name']." - " ; ?><?php echo $fValue['customer_code']; ?> </option>
+                        <?php } ?>
                 </select>
             </div>
             <div class="form-group row">
@@ -40,10 +74,16 @@
                     <input type="text" name="to_date" id="report_picker2" data-datepicker="separateRange" class="form-control datetimepicker reportpicker" placeholder="To Date" required />
                 </div>
             </div>
+            <div class="form-group row ml-4 d-none"  id="summary">
+                <input class="form-check-input" type="checkbox" value="summary" name="summary" >
+                <label class="form-check-label" for="defaultCheck1">
+                    Summary
+                </label>
+            </div>
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Print</button>
+            <button type="submit" class="btn btn-primary">Preview</button>
         </div>
         </form>
         </div>

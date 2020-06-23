@@ -774,3 +774,53 @@ $("#customer_paid_amount").keyup(function(){
     $("#customet_balance_amount").val(balance);
 });
 /******** Customer Payment Entry End ********/
+
+
+/* All Report */
+$('#report_type').change(function(){
+    var report_type = $('#report_type').val();    
+    var selectType  = $("input[name='selectType']:checked").val();
+    
+    if(report_type!='')
+        reportHideShow(report_type,selectType)
+})
+
+function selectReportUserType(){
+    var report_type = $('#report_type').val();    
+    var selectType = $("input[name='selectType']:checked").val();
+    
+    if(report_type!='')
+        reportHideShow(report_type,selectType)
+}
+
+function reportHideShow(report_type,selectType){
+    if((report_type == 'purchase' || report_type == 'voucher' || report_type == 'farmer_payment') && selectType == 'specific'){
+        $('#farmer').removeClass('d-none');
+        $('#farmer').addClass('d-block');
+        $('#customer').addClass('d-none');
+        $('#customer').removeClass('d-block');
+        $('#summary').addClass('d-none');
+        $('#summary').removeClass('d-block');
+    }else if((report_type == 'sales' || report_type == 'payment_receive') && selectType == 'specific'){
+        $('#customer').removeClass('d-none');
+        $('#customer').addClass('d-block');
+        $('#farmer').addClass('d-none');
+        $('#farmer').removeClass('d-block');
+        $('#summary').addClass('d-none');
+        $('#summary').removeClass('d-block');
+    }else if(report_type == 'ledger'){
+        $('#farmer').addClass('d-none');
+        $('#farmer').removeClass('d-block');
+        $('#customer').addClass('d-none');
+        $('#customer').removeClass('d-block');
+        $('#summary').removeClass('d-none');
+        $('#summary').addClass('d-block');
+    }else if(selectType == 'all'){
+        $('#farmer').addClass('d-none');
+        $('#farmer').removeClass('d-block');
+        $('#customer').addClass('d-none');
+        $('#customer').removeClass('d-block');
+        $('#summary').addClass('d-none');
+        $('#summary').removeClass('d-block');
+    }
+}
