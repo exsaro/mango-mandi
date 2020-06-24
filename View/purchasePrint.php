@@ -13,8 +13,7 @@
         
         unset($_SESSION['purchase_id']);
         
-        $purchaseSql = "SELECT * FROM purchase as p INNER JOIN farmer_master as fm ON p.farmer_id = fm.farmer_id INNER JOIN company_master as cm ON  p.company_id = cm.company_id WHERE p.status != 'D' AND fm.status != 'D' AND cm.status != 'D' AND cm.company_id = '".$_SESSION['company_id']."' AND p.purchase_id = '".
-        $id."'";
+        $purchaseSql = "SELECT * FROM purchase as p INNER JOIN farmer_master as fm ON p.farmer_id = fm.farmer_id INNER JOIN company_master as cm ON  p.company_id = cm.company_id WHERE p.status != 'D' AND fm.status != 'D' AND cm.status != 'D' AND cm.company_id = '".$_SESSION['company_id']."' AND p.purchase_id = '".$id."'";
         
         $executeQuery  = mysqli_query($connection,$purchaseSql);
         
@@ -53,7 +52,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/themes/bootstrap1.min.css">
     <link rel="stylesheet" href="../css/style.css" media="print">
-    <title>Document</title>
+    <title>purchase Preview</title>
 </head>
 <body>
     

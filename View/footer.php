@@ -18,9 +18,9 @@
     <div class="modal-dialog">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="reportModalLabel">Print Report</h5>
+            <h5 class="modal-title" id="reportModalLabel">Preview Report</h5>
         </div>
-        <form action="" id="printReport">
+        <form action="./allReport.php" method="post" id="printReport">
         <div class="modal-body">
             <div class="form-group">
                 <label for="">Select Report Type</label>
@@ -83,7 +83,7 @@
         </div>
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary">Preview</button>
+            <button type="submit" name="printPage" class="btn btn-primary">Preview</button>
         </div>
         </form>
         </div>
