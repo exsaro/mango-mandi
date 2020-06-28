@@ -34,7 +34,7 @@
                     <option value="ledger">Ledger Report</option>
                 </select>
             </div>
-            <div class="form-group row m-2">
+            <div class="form-group row m-2 d-none" id="userType">
                 <div class="col">
                     <input class="form-check-input" type="radio" name="selectType" id="all" value="all" onclick="selectReportUserType()" checked>
                     <label class="form-check-label" for="allsss">

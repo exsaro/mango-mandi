@@ -63,6 +63,15 @@
              
             $title  = 'Farmer Payment Report';
             $title1 = 'Farmer Payment Report Result';
+        }else if($_POST['report_type'] == 'ledger'){
+            $sql .= "SELECT * FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id INNER JOIN farmer_payment_detail as fpd ON fpd.farmer_payment_id = fp.farmer_payment_id  WHERE fp.status != 'D' AND fm.status != 'D' AND fp.company_id = '".$_SESSION['company_id']."'";
+            if($_POST['selectType'] == 'specific'){
+                $sql .= " AND fp.farmer_id = '".$_POST['farmer_id']."'";
+            }  
+            $sql .= " AND fp.farmer_payment_date BETWEEN '" . $_POST['from_date'] . "' AND  '" . $_POST['to_date'] . "'";
+             
+            $title  = 'Ledger Report';
+            $title1 = 'Ledger Report Result';
         }
         // echo $sql;
         // exit;
@@ -272,7 +281,8 @@
 
                 <?php
                     $balance = $totalAmount - $paid;
-                }?>
+                }else if($_POST['report_type'] == 'ledger') {?>
+                <?php } ?>
                     <p class="text-right"><span class="font-weight-bold h4">Total Amount: </span><span class="h4"><?php echo $totalAmount; ?> /-</span></p>
                     <?php if($_POST['report_type'] != 'payment_receive') { ?>
                     <p class="text-right"><span class="font-weight-bold h4">Paid Amount: </span><span class="h4 text-success"><?php echo $paid; ?> /-</span></p>

@@ -780,6 +780,8 @@ $("#customer_paid_amount").keyup(function(){
 $('#report_type').change(function(){
     var report_type = $('#report_type').val();    
     var selectType  = $("input[name='selectType']:checked").val();
+    if(report_type != 'ledger')
+    $('#userType').removeClass('d-none');        
     
     if(report_type!='')
         reportHideShow(report_type,selectType)
@@ -801,6 +803,7 @@ function reportHideShow(report_type,selectType){
         $('#customer').removeClass('d-block');
         $('#summary').addClass('d-none');
         $('#summary').removeClass('d-block');
+        $('#userType').removeClass('d-none');        
     }else if((report_type == 'sales' || report_type == 'payment_receive') && selectType == 'specific'){
         $('#customer').removeClass('d-none');
         $('#customer').addClass('d-block');
@@ -808,6 +811,7 @@ function reportHideShow(report_type,selectType){
         $('#farmer').removeClass('d-block');
         $('#summary').addClass('d-none');
         $('#summary').removeClass('d-block');
+        $('#userType').removeClass('d-none');
     }else if(report_type == 'ledger'){
         $('#farmer').addClass('d-none');
         $('#farmer').removeClass('d-block');
@@ -815,6 +819,7 @@ function reportHideShow(report_type,selectType){
         $('#customer').removeClass('d-block');
         $('#summary').removeClass('d-none');
         $('#summary').addClass('d-block');
+        $('#userType').addClass('d-none');
     }else if(selectType == 'all'){
         $('#farmer').addClass('d-none');
         $('#farmer').removeClass('d-block');
@@ -822,5 +827,6 @@ function reportHideShow(report_type,selectType){
         $('#customer').removeClass('d-block');
         $('#summary').addClass('d-none');
         $('#summary').removeClass('d-block');
+        $('#userType').removeClass('d-none');
     }
 }
