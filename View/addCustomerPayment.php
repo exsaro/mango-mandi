@@ -141,7 +141,7 @@
                                         </div>
                                         <div class="col">
                                         <input type="text" class="form-control" placeholder="To" name="company_ifsc_code" value="<?php echo $company_ifsc_code; ?>" required minlength=3 maxlength=100>
-                                        <small class="form-text text-muted">From</small>
+                                        <small class="form-text text-muted">To</small>
                                         </div>
                                     </div>
                                 </div>

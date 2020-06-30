@@ -216,11 +216,25 @@
                                         $paidStatus = 'Pending';
                                         $color='class= "text-danger font-weight-bold"';
                                     }
+                                    if(isset($value['receipt_date'])){
+                                        $date = $value['receipt_date'];
+                                    }else if(isset($value['billing_date'])){
+                                        $date = $value['billing_date'];
+                                    }else{
+                                        $date = $value['farmer_payment_date'];
+                                    }
+                                    if(isset($value['receipt_number'])){
+                                        $billNo = $value['receipt_number'];
+                                    }else if(isset($value['billing_number'])){
+                                        $billNo = $value['billing_number'];
+                                    }else{
+                                        $billNo = $value['farmer_payment_number'];
+                                    }
                                     ?>
                                     <tr>
                                         <td><?php echo $mi; ?></td>
-                                        <td><?php echo isset($value['receipt_date'])?$value['receipt_date']:isset($value['billing_date'])?$value['billing_date']:$value['farmer_payment_date'];  ?></td>
-                                        <td><?php echo isset($value['receipt_number'])?$value['receipt_number']:isset($value['billing_number'])?$value['billing_number']:$value['farmer_payment_number']; ?></td>
+                                        <td><?php echo $date;  ?></td>
+                                        <td><?php echo $billNo; ?></td>
                                         <td><?php echo isset($value['farmer_name'])?$value['farmer_name']:$value['customer_name']; ?></td>
                                         <td><?php echo isset($value['farmer_code'])?$value['farmer_code']:$value['customer_code']; ?></td>
                                         <td><?php echo $product[$value['product_id']]['product_name']; ?></td>
