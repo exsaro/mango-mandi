@@ -63,6 +63,50 @@
              
             $title  = 'Farmer Payment Report';
             $title1 = 'Farmer Payment Report Result';
+        }else if($_POST['report_type'] == 'ledger'){
+            if(isset($_POST['summary'])){
+                $fpSql = "SELECT farmer_payment_date,farmer_name,farmer_code,description, sum(total_amount) as total_amount FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id  WHERE fp.status != 'D' AND fm.status != 'D' AND fp.company_id = '".$_SESSION['company_id']."'  AND fp.farmer_payment_date BETWEEN '" . $_POST['from_date'] . "' AND  '" . $_POST['to_date'] . "' group by farmer_code";
+                $cpSql = "SELECT customer_payment_date,customer_name,customer_code,description, sum(customer_paid_amount) as customer_paid_amount FROM customer_payment as cp INNER JOIN customer_master as cm ON cp.customer_id = cm.customer_id  WHERE cp.status != 'D' AND cm.status != 'D' AND cp.company_id = '".$_SESSION['company_id']."' AND cp.customer_payment_date BETWEEN '" . $_POST['from_date'] . "' AND  '" . $_POST['to_date'] . "' group by customer_code";
+            }else{
+                $fpSql = "SELECT * FROM farmer_payment as fp INNER JOIN farmer_master as fm ON fp.farmer_id = fm.farmer_id  WHERE fp.status != 'D' AND fm.status != 'D' AND fp.company_id = '".$_SESSION['company_id']."'  AND fp.farmer_payment_date BETWEEN '" . $_POST['from_date'] . "' AND  '" . $_POST['to_date'] . "'";
+                $cpSql = "SELECT * FROM customer_payment as cp INNER JOIN customer_master as cm ON cp.customer_id = cm.customer_id  WHERE cp.status != 'D' AND cm.status != 'D' AND cp.company_id = '".$_SESSION['company_id']."' AND cp.customer_payment_date BETWEEN '" . $_POST['from_date'] . "' AND  '" . $_POST['to_date'] . "'";
+
+            }
+            $fpExecuteQuery           = mysqli_query($connection,$fpSql);
+
+            if($fpExecuteQuery != '' && $fpExecuteQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($fpExecuteQuery)){  
+                    $tempData           = [];
+                    $tempData['date']   = $row['farmer_payment_date'];
+                    $tempData['name']   = $row['farmer_name'];
+                    $tempData['code']   = $row['farmer_code'];
+                    $tempData['type']   = 'Payment';
+                    $tempData['description']= $row['description'];
+                    $tempData['credit'] = '0.00';
+                    $tempData['debit']  = $row['total_amount'];
+                    $mainDetails[]      = $tempData;
+                }
+            }
+            
+            
+            $cpExecuteQuery           = mysqli_query($connection,$cpSql);
+            if($cpExecuteQuery != '' && $cpExecuteQuery->num_rows > 0)
+            {
+                while($row = mysqli_fetch_assoc($cpExecuteQuery)){  
+                    $tempData           = [];
+                    $tempData['date']   = $row['customer_payment_date'];
+                    $tempData['name']   = $row['customer_name'];
+                    $tempData['code']   = $row['customer_code'];
+                    $tempData['type']   = 'Receive';
+                    $tempData['description']= $row['description'];
+                    $tempData['credit'] = $row['customer_paid_amount'];
+                    $tempData['debit']  = '0.00';
+                    $mainDetails[]      = $tempData;
+                }
+            }
+            $title  = 'Ledger Report';
+            $title1 = 'Ledger Report Result';
         }
         // echo $sql;
         // exit;
@@ -269,10 +313,43 @@
                             <?php $mi++; } ?>
                         </tr>
                     </table>      
-
                 <?php
                     $balance = $totalAmount - $paid;
-                }?>
+                }else if($_POST['report_type'] == 'ledger') {?>
+                    <table class="table">
+                        <tr>
+                            <th>S.No</th>
+                            <th>Date</th>
+                            <th>Name</th>
+                            <th>code</th>
+                            <th>Payment Type</th>
+                            <th>description</th>
+                            <th>credit (₹)</th>
+                            <th>debit (₹)</th>
+                        </tr>
+                        <tr>
+                            <?php foreach($mainDetails as $key => $value) { 
+
+                                    if($value['credit'] > 0){
+                                        $totalAmount +=$value['credit'];
+                                    }else{
+                                        $paid +=  $value['debit'];
+                                    }
+                                    ?>
+                                    <tr>
+                                        <td><?php echo $mi; ?></td>
+                                        <td><?php echo $value['date']; ?></td>
+                                        <td><?php echo $value['name']; ?></td>
+                                        <td><?php echo $value['code']; ?></td>
+                                        <td><?php echo $value['type']; ?></td>
+                                        <td><?php echo $value['description']; ?></td>
+                                        <td><span <?php echo $value['credit'] > 0 ? 'class="text-success"':'' ?> ><?php echo $value['credit']; ?></sapn></td>
+                                        <td><span <?php echo $value['debit'] > 0 ? 'class="text-danger"':'' ?> ><?php echo $value['debit']; ?></sapn></td>
+                                    </tr>
+                            <?php $mi++; } $balance = $totalAmount - $paid;  ?>
+                        </tr>
+                    </table>      
+                <?php } ?>
                     <p class="text-right"><span class="font-weight-bold h4">Total Amount: </span><span class="h4"><?php echo $totalAmount; ?> /-</span></p>
                     <?php if($_POST['report_type'] != 'payment_receive') { ?>
                     <p class="text-right"><span class="font-weight-bold h4">Paid Amount: </span><span class="h4 text-success"><?php echo $paid; ?> /-</span></p>

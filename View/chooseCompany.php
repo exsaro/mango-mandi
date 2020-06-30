@@ -81,7 +81,5 @@
 
 <div class="modal-backdrop fade show"></div>
 
-<?php include 'footer.php';?>
-
 </body>
 </html>
